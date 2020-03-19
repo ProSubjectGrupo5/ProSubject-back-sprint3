@@ -19,7 +19,7 @@ import com.prosubject.prosubject.backend.apirest.service.CursoService;
 
 @RestController
 @RequestMapping("/api/cursos")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
 public class CursoController {
 
 	

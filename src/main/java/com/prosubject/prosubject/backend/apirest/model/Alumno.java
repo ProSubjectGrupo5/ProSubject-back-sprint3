@@ -63,7 +63,6 @@ public class Alumno implements Serializable {
 	private String telefono;
 	
 
-
 	public Long getId() {
 		return id;
 	}

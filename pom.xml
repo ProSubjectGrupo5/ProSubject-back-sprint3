@@ -28,6 +28,15 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+<<<<<<< HEAD
+=======
+		<dependency>
+  			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<version>4.13</version>
+	</dependency>
+
+>>>>>>> 16c8bc4856cbc3a7197a32700318cc8648a8daf4
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -56,6 +65,12 @@
 	    <artifactId>spring-boot-starter-jdbc</artifactId>
 	</dependency>
 			
+		<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+    <version>1.4.194</version>
+	</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

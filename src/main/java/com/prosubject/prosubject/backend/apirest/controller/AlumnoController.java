@@ -19,7 +19,7 @@ import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 
 @RestController
 @RequestMapping("/api/alumnos")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
 public class AlumnoController {
 	
 	@Autowired
