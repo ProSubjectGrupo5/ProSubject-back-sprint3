@@ -24,8 +24,12 @@ public class AdministradorService {
 		return this.administradorRepository.findAll();
 	}
 	
-	public Administrador findOne(final long administradorId) {
-		return this.administradorRepository.findById(administradorId).get();
+	public Administrador findOne(final Long administradorId) {
+		return this.administradorRepository.findById(administradorId).orElse(null);
+	}
+	
+	public Administrador findByUserAccount(final Long userAccountId) {
+		return this.administradorRepository.findAdministradorByUserAccountId(userAccountId);
 	}
 	
 

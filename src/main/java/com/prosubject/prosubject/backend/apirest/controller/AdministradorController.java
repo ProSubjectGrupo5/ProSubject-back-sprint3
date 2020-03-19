@@ -1,8 +1,13 @@
 package com.prosubject.prosubject.backend.apirest.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +21,7 @@ import com.prosubject.prosubject.backend.apirest.service.AdministradorService;
 
 @RestController
 @RequestMapping("/api/administradores")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
 public class AdministradorController{
 	
 	@Autowired
@@ -28,14 +33,42 @@ public class AdministradorController{
 	}
 	
 	@GetMapping("/{id}")
-	public Administrador findOne(@PathVariable Long id) {
-		return this.administradorService.findOne(id);
+	public ResponseEntity<?> findOne(@PathVariable Long id) {
+		Administrador administrador = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			administrador = this.administradorService.findOne(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(administrador == null) {
+			response.put("mensaje",	 "El administrador con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<Administrador>(administrador, HttpStatus.OK);
+		
 	}
 
 	@PostMapping("")
-	public Administrador crearAdministrador(@RequestBody Administrador administrador ) {
-		administrador = administradorService.save(administrador);
-		return administrador;
+	public ResponseEntity<?> crearAdministrador(@RequestBody Administrador administrador ) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Administrador administradorNuevo = null;
+		
+		try {
+			administradorNuevo = administradorService.save(administrador);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		return new ResponseEntity<Administrador>(administradorNuevo, HttpStatus.CREATED); 
 	}
 
 

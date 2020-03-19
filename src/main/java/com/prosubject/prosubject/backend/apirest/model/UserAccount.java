@@ -32,10 +32,21 @@ public class UserAccount implements Serializable {
 	@NotBlank
 	@NotNull
 	private String password;
+	
+	@NotNull
+	private Authority autoridad;
 
 	
 	
 	
+	public Authority getAutoridad() {
+		return autoridad;
+	}
+
+	public void setAutoridad(Authority autoridad) {
+		this.autoridad = autoridad;
+	}
+
 	public Long getId() {
 		return id;
 	}

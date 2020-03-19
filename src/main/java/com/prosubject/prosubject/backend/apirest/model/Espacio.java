@@ -26,13 +26,11 @@ public class Espacio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ManyToMany
-	private Collection<Alumno> alumnos;
+
 	
 	
 	@Valid
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "asignatura_id")
 	private Asignatura asignatura;
 	
@@ -53,13 +51,8 @@ public class Espacio implements Serializable {
 	@Min(0)
 	private Double precio;
 	
-	@NotNull
-	@Min(0)
-	private Long capacidad;
 	
-	@Valid
-	@ManyToMany
-	private Collection<Horario> horarios;
+	
 
 
 	public Long getId() {
@@ -71,14 +64,6 @@ public class Espacio implements Serializable {
 	}
 
 	
-
-	public Collection<Alumno> getAlumnos() {
-		return alumnos;
-	}
-
-	public void setAlumnos(Collection<Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
 
 	public Asignatura getAsignatura() {
 		return asignatura;
@@ -112,22 +97,10 @@ public class Espacio implements Serializable {
 		precio = prec;
 	}
 
-	public Long getCapacidad() {
-		return capacidad;
-	}
 
-	public void setCapacidad(Long capacidad) {
-		this.capacidad = capacidad;
-	}
 	
 	
-	public Collection<Horario> getHorarios() {
-		return horarios;
-	}
 
-	public void setHorarios(Collection<Horario> horarios) {
-		this.horarios = horarios;
-	}
 	
 
 	

@@ -23,8 +23,12 @@ public class AlumnoService {
 		return this.alumnoRepository.findAll();
 	}
 	
-	public Alumno findOne(final long alumnoId) {
-		return this.alumnoRepository.findById(alumnoId).get();
+	public Alumno findOne(final Long alumnoId) {
+		return this.alumnoRepository.findById(alumnoId).orElse(null);
+	}
+	
+	public Alumno findByUserAccount(final Long userAccountId) {
+		return this.alumnoRepository.findAlumnoByUserAccountId(userAccountId);
 	}
 	
 
