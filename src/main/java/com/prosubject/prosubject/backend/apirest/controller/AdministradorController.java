@@ -55,9 +55,20 @@ public class AdministradorController{
 	}
 
 	@PostMapping("")
-	public Administrador crearAdministrador(@RequestBody Administrador administrador ) {
-		administrador = administradorService.save(administrador);
-		return administrador;
+	public ResponseEntity<?> crearAdministrador(@RequestBody Administrador administrador ) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Administrador administradorNuevo = null;
+		
+		try {
+			administradorNuevo = administradorService.save(administrador);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		return new ResponseEntity<Administrador>(administradorNuevo, HttpStatus.CREATED); 
 	}
 
 

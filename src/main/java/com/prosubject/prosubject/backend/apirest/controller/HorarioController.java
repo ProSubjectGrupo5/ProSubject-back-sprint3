@@ -120,6 +120,7 @@ public class HorarioController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
+		
 		if(horario.getAlumnos().contains(alumno)) {
 			response.put("mensaje",	 "El alumno ya se encuentra inscrito en el horario.");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
