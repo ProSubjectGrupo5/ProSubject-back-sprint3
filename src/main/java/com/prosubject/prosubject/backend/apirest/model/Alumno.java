@@ -30,33 +30,31 @@ public class Alumno implements Serializable {
 	
 	
 	@Valid
-	@NotNull
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "useraccount_id")
+	@JoinColumn(name = "useraccount_id",nullable = false, unique=true)
 	private UserAccount useraccount;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String nombre;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String apellido1;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String apellido2;
 	
 	@NotBlank
-	@NotNull
 	@Pattern(regexp = "^(\\d{8})([A-Z])$",message = "Debe tener 8 numeros y 1 letra")
-	@Column(unique = true)
+	@Column(unique = true , nullable = false)
 	private String dni;
 	
 	@NotBlank
 	@NotNull
 	@Email
-	@Column(unique = true)
+	@Column(unique = true ,  nullable = false)
 	private String email;
 	
 	@Pattern(regexp="^([+][1-9]\\d{0,3})?([ ])?([(][1-9]\\d{0,4}[)])?([ ])?\\d{6,10}|^$",message = "Debe introducir un numero de telefono correcto")

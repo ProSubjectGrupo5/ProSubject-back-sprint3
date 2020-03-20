@@ -2,6 +2,7 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Grado implements Serializable{
 	private Long id;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String nombre;
 	
 	@Valid
@@ -32,7 +33,7 @@ public class Grado implements Serializable{
 	private Facultad facultad;
 	
 	@Range(min=1, max=5)
-	@NotNull
+	@Column(nullable = false)
 	private Long numerocursos;
 	
 	
