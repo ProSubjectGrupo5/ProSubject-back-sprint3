@@ -4,8 +4,6 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,14 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -46,7 +40,7 @@ public class Respuesta implements Serializable {
 	
 	@Valid
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "userAccount_id",nullable = false, unique=true)
+	@JoinColumn(name = "userAccount_id",nullable = false)
 	private UserAccount user;
 
 	public String getContenido() {
