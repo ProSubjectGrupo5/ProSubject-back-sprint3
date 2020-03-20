@@ -155,12 +155,12 @@ public class Profesor implements Serializable {
 		this.expendiente = expendiente;
 	}
 
-	public UserAccount getUseraccount() {
-		return useraccount;
+	public UserAccount getUserAccount() {
+		return userAccount;
 	}
 
-	public void setUseraccount(UserAccount useraccount) {
-		this.useraccount = useraccount;
+	public void setUseraccount(UserAccount userAccount) {
+		this.useraccount = userAccount;
 	}
 
 
