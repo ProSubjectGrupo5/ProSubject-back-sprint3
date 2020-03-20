@@ -71,6 +71,7 @@ INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Fundamentos de program
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Análisis y diseño de datos y algoritmo', '2');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Diseño y pruebas 1', '3');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Diseño y pruebas 2', '3');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Complemento de Bases de Datos', '4');
 
 
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('1', '1');
@@ -80,6 +81,7 @@ INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('2', '1
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('2', '4');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('3', '1');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('4', '1');
+INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('5', '1');
 
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Prueba', 'Prueba','47543228A','profesorprueba@gmail.com', 'Prueba','123436385', '5', 0, 0);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Romero ', 'Organvidez','47543218R','drorganvidez@gmail.com', 'David', '123436485', '6', 0, '0);
@@ -122,20 +124,19 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `tele
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '21562321U', 'juanje_chus@gmail.com', 'Mario', '678886247', '36');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Ruiz', 'Castilla', '12523211T', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
 
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Fundamentos de programación');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Análisis y diseño de datos y algoritmo');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 1');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 2');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Análisis y diseño de datos y algoritmo');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 1');
-INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 2');
+
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Fundamentos de programación');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Análisis y Diseño de Datos y Algoritmos');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Diseño y pruebas 1');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Diseño y pruebas 2');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Complemento de Bases de Datos');
+
 
 INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('1', '1','1','8.0');
 INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio` ) VALUES ('2', '2','2','8.5');
 INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('3', '3','3','9.0');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('2', '5','5','9.5');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio` ) VALUES ('3', '6','7','8');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('4', '7','7','8');
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('4', '4','5','9.5');
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('5', '5','5','8');
 
 
 INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`) VALUES ('1','11:00:00','12:00:00','1',2);
@@ -144,21 +145,20 @@ INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad
 INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('5','12:00:00','13:00:00','1',6);
 INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('2','20:00:00','21:00:00','2',12);
 INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','2',12);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('3','14:00:00','15:00:00','6',3);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('5','14:30:00','15:30:00','6',3);
+INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','5',4);
 
 
 
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '1');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '2');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('3', '3');
-
-INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '11:00:00', '4');
-INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '11:40:00', '7');
-
+INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('7', '3');
+INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('7', '4');
 
 
 
-INSERT INTO `foros` ( `contenido`, `fecha_creacion`, `titulo`) VALUES ( 'Loquesea', '2020-03-20', 'Title');
-INSERT INTO `foros_respuestas` ( `foros_id`, `respuestas_id`) VALUES ( '1', '1');
+INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00', '4', '5');
+INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00', '7', '5');
+
+
 

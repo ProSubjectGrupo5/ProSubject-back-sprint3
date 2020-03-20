@@ -36,9 +36,9 @@ public class RespuestaService {
 	public Respuesta save(final Respuesta r) {
 		Date hoy = new Date();
 		r.setCreacionRespuesta(hoy);
-	   Respuesta saved = this.RespuestaRepository.save(r);
+		return this.RespuestaRepository.save(r);
 
-		return saved;
+		 
 	}
 
 	

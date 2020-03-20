@@ -34,14 +34,37 @@ public class Respuesta implements Serializable {
 	private String contenido;
 	
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date creacionRespuesta;
 	
 	@Valid
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "userAccount_id",nullable = false)
+	@JoinColumn(name = "userAccount_id")
 	private UserAccount user;
+	
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "foro_id")
+	private Foro foro;
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Foro getForo() {
+		return foro;
+	}
+
+	public void setForo(Foro foro) {
+		this.foro = foro;
+	}
 
 	public String getContenido() {
 		return contenido;
