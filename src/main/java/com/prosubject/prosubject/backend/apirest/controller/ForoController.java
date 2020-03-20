@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Foro;
+import com.prosubject.prosubject.backend.apirest.model.Respuesta;
+import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
 
 @RestController
@@ -26,6 +28,9 @@ public class ForoController {
 
 	@Autowired
 	private ForoService foroService;
+	
+	//@Autowired
+	//private AnswerService answerService;
 	
 	@GetMapping("")
 	public List<Foro> findAll(){
@@ -56,17 +61,26 @@ public class ForoController {
 	}
 	
 	@PostMapping("")
-	public Foro crearEspacio(@RequestBody Foro foro ) {
-		Foro f = new Foro();
+	public ResponseEntity<?> crearForo(@RequestBody Foro foro) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Foro foroNuevo = null;
+		//Respuesta respuesta = null;
+		
 		try {
-			f = this.foroService.save(foro);
 			
-		}catch(Exception ex){
+			foroNuevo = foroService.save(foro);
+			//respuesta = answerService.save(respuesta)
 			
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
-		return f;
 		
+		return new ResponseEntity<Foro>(foroNuevo, HttpStatus.CREATED); 
 	}
+	
+
 	
 }

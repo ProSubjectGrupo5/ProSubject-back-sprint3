@@ -1,6 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,6 @@ public class EspacioService {
 			Foro f = new Foro();
 			f.setTitulo("Foro "+e.getAsignatura().getNombre());			
 			Foro fSaved= this.foroService.save(f);
-			
 			e.setForo(fSaved);
 			
 		}
