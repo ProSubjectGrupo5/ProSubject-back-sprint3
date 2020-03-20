@@ -159,7 +159,9 @@ public class Profesor implements Serializable {
 		return useraccount;
 	}
 
-	public void setUseraccount(UserAccount userAccount) {
+
+
+	public void setUserAccount(UserAccount userAccount) {
 		this.useraccount = userAccount;
 	}
 
