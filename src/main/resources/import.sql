@@ -84,7 +84,7 @@ INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('4', '1
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Prueba', 'Prueba','47543228A','profesorprueba@gmail.com', 'Prueba','123436385', '5');
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Romero ', 'Organvidez','47543218R','drorganvidez@gmail.com', 'David', '123436485', '6');
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Rojas', 'Gutierrez','47546231T', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789',  '7');
-INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Carillo', 'Mirando', '47546221Z','fcarmir@gmail.com', 'Fernando','47546221Z',  '8');
+INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Carillo', 'Mirando', '47546221Z','fcarmir@gmail.com', 'Fernando','652314129',  '8');
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Cano', 'Caldero', '47546227Z','alejandrocano.caldero@gmail.com', 'Alejandro','123426719', '12');
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Cantero', 'Garcia', '47546347A','martacanterogarcia@gmail.com', 'Marta', '127656283','13');
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`) VALUES ('Meca', 'Sanchez', '47546343S','andmecsan@alum.us.es', 'Andrea', '695073140','14');
@@ -102,7 +102,6 @@ INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `t
 
 
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Prueba', 'Prueba', '47546221N', 'alumnoprueba@gmail.com', 'Prueba', '123456722', '2');
-INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Carillo', 'Mirando', '47546221Z', 'fcarmir@gmail.com', 'Fernando', '123456749', '28');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Rojas', 'Gutierrez', '47546231T', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789', '3');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Romero', 'Caceres', '47546251Y', 'anaromcac@alum.us.es', 'Ana', '603552740', '4');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Squen', 'Saavedra', '47546223R', 'lizesqsaa@alum.us.es', 'Lizseth Katherine', '653552740', '9');
@@ -152,7 +151,6 @@ INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '1');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '2');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('3', '3');
-
 
 
 

@@ -3,6 +3,7 @@ package com.prosubject.prosubject.backend.apirest.model;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class Asignatura implements Serializable{
 	private Long id;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String nombre;
 	
 	@Valid
