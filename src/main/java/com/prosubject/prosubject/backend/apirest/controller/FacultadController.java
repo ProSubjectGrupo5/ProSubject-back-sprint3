@@ -20,7 +20,7 @@ import com.prosubject.prosubject.backend.apirest.service.FacultadService;
 
 @RestController
 @RequestMapping("/api/facultades")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
 public class FacultadController {
 
 	@Autowired

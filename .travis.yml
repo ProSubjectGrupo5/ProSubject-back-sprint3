@@ -1,5 +1,16 @@
+dist: precise
 languaje: java
-jdk:
-- openjdk8
+jdk: 
 - openjdk10
+services:
+- mysql
+install:
+- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+before_install:
+- chmod +x mvnw 
+- sudo mysql -e 'CREATE DATABASE db_springboot_backend;'
+on:
+    branch: master
+
+
 

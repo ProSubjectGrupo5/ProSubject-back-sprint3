@@ -2,7 +2,9 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +27,7 @@ public class Espacio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ManyToMany
-	private Collection<Alumno> alumnos;
+
 	
 	
 	@Valid
@@ -48,17 +48,13 @@ public class Espacio implements Serializable {
 	private Profesor profesor;
 	
 	
-	@NotNull
+	@Column(nullable = false)
 	@Min(0)
 	private Double precio;
 	
-	@NotNull
-	@Min(0)
-	private Long capacidad;
 	
-	@Valid
-	@ManyToMany
-	private Collection<Horario> horarios;
+	
+
 
 	public Long getId() {
 		return id;
@@ -68,14 +64,7 @@ public class Espacio implements Serializable {
 		this.id = id;
 	}
 
-
-	public Collection<Alumno> getAlumnos() {
-		return alumnos;
-	}
-
-	public void setAlumnos(Collection<Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
+	
 
 	public Asignatura getAsignatura() {
 		return asignatura;
@@ -109,30 +98,10 @@ public class Espacio implements Serializable {
 		precio = prec;
 	}
 
-	public Long getCapacidad() {
-		return capacidad;
-	}
 
-	public void setCapacidad(Long capacidad) {
-		this.capacidad = capacidad;
-	}
-
-	public Collection<Horario> getHorarios() {
-		return horarios;
-	}
-
-	public void setHorarios(Collection<Horario> horarios) {
-		this.horarios = horarios;
-	}
 	
 	
-	public Collection<Horario> getHorarios() {
-		return horarios;
-	}
 
-	public void setHorarios(Collection<Horario> horarios) {
-		this.horarios = horarios;
-	}
 	
 
 	
