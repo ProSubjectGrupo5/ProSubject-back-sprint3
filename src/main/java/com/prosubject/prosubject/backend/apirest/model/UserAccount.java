@@ -55,14 +55,7 @@ public class UserAccount implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsurname() {
-		return username;
-	}
-
-	public void setUsurname(String user) {
-		username = user;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -70,6 +63,15 @@ public class UserAccount implements Serializable {
 	public void setPassword(String pass) {
 		password = pass;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	
 	
 
