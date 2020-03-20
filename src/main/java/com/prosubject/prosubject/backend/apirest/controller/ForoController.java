@@ -69,4 +69,26 @@ public class ForoController {
 		
 	}
 	
+	@GetMapping("/espacio/{espacioId}")
+	public ResponseEntity<?> foroPorEspacioId(@PathVariable Long espacioId){
+		Foro foro = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			foro = this.foroService.foroPorEspacioId(espacioId);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(foro == null) {
+			response.put("mensaje",	 "No se ha encontrado ningun foro con espacioId: ".concat(espacioId.toString()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<Foro>(foro, HttpStatus.OK);
+		
+	}
+	
 }

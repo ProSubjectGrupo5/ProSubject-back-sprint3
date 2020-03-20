@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.repository.ForoRepository;
 
@@ -30,5 +31,9 @@ public class ForoService {
 	
 	public void delete(final Foro c) { 
 		 this.foroRepository.delete(c);	
+	}
+	
+	public Foro foroPorEspacioId(final Long espacioId) { 
+		return  this.foroRepository.foroPorEspacioId(espacioId);
 	}
 }

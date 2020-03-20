@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
@@ -39,15 +40,23 @@ public class EspacioService {
 	
 	public Espacio save(final Espacio e) throws Exception {
 		
-		
+		Foro f = new Foro();
 		if(e.getId()==null) {
 			
-			Foro f = new Foro();
+			
 			f.setTitulo("Foro "+e.getAsignatura().getNombre());			
 			Foro fSaved= this.foroService.save(f);
 			
 			e.setForo(fSaved);
 			
+		}else {
+			Assert.isTrue(e.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
+					" no puede ser modificado, debido al draftMode");
+			f=this.foroService.foroPorEspacioId(e.getId());
+			e.setForo(f);
+			
+			
+		
 		}
 		
 		

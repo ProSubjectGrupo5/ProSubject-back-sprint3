@@ -130,12 +130,12 @@ INSERT INTO `foros` (`titulo`) VALUES ('Foro Análisis y diseño de datos y algo
 INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 1');
 INSERT INTO `foros` (`titulo`) VALUES ('Foro Diseño y pruebas 2');
 
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('1', '1','1','8.0');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio` ) VALUES ('2', '2','2','8.5');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('3', '3','3','9.0');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('2', '5','5','9.5');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio` ) VALUES ('3', '6','7','8');
-INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`) VALUES ('4', '7','7','8');
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode`) VALUES ('1', '1','1','8.0',0);
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode` ) VALUES ('2', '2','2','8.5',1);
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode`) VALUES ('3', '3','3','9.0',0);
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode`) VALUES ('2', '5','5','9.5',1);
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode` ) VALUES ('3', '6','7','8',1);
+INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`, `draft_mode`) VALUES ('4', '7','7','8',1);
 
 
 INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`) VALUES ('1','11:00:00','12:00:00','1',2);
