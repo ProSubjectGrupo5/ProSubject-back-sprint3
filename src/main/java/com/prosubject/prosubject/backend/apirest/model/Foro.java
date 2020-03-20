@@ -1,6 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -31,7 +32,7 @@ public class Foro {
     private Date fechaCreacion;
 
    
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
     public Long getId() {
