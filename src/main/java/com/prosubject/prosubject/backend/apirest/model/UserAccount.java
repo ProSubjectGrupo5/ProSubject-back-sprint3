@@ -25,15 +25,14 @@ public class UserAccount implements Serializable {
 	private Long id;
 	
 	@NotBlank
-	@NotNull
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String username;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String password;
 	
-	@NotNull
+	@Column(nullable = false)
 	private Authority autoridad;
 
 	

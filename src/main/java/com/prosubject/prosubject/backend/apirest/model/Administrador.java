@@ -31,7 +31,7 @@ public class Administrador implements Serializable {
 	
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "useraccount_id")
+	@JoinColumn(name = "useraccount_id",nullable = false, unique=true)
 	private UserAccount useraccount;
 	
 	@NotBlank
