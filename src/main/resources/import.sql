@@ -157,4 +157,6 @@ INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`) 
 
 
 
+INSERT INTO `foros` ( `contenido`, `fecha_creacion`, `titulo`) VALUES ( 'Loquesea', '2020-03-20', 'Title');
+INSERT INTO `foros_respuestas` ( `foros_id`, `respuestas_id`) VALUES ( '1', '1');
 

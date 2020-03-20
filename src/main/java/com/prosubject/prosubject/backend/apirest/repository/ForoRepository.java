@@ -7,5 +7,6 @@ import com.prosubject.prosubject.backend.apirest.model.Foro;
 
 @Repository
 public interface ForoRepository extends JpaRepository<Foro, Long>{
-
+	
+	
 }
