@@ -152,6 +152,7 @@ INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '1');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '2');
 INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('3', '3');
 
+INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`) VALUES ('Me falla al calcular la ecu...', '11:00:00', '4');
 
 
 
