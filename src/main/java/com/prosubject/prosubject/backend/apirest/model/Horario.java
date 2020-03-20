@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,17 +36,18 @@ private static final long serialVersionUID = 1L;
 	@ManyToMany
 	private Collection<Alumno> alumnos;
 
-	@NotNull
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date fechaInicio;
-	
-	@NotNull
+
+
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date fechaFin;
 	
-	@NotNull
+	@Column(nullable = false)
 	private DiaSemana dia;
 	
 	@Valid
@@ -53,11 +55,19 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "espacio_id")
 	private Espacio espacio;
 	
-	@NotNull
+	@Column(nullable = false)
 	@Min(0)
 	private Long capacidad;
 
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getCapacidad() {
 		return capacidad;
 	}

@@ -19,6 +19,8 @@ public class HorarioService {
 	private HorarioRepository horarioRepository;
 	@Autowired
 	private EspacioService espacioService;
+	@Autowired
+	private AlumnoService alumnoService;
 	
 	
 	public Horario create() {
@@ -72,6 +74,24 @@ public class HorarioService {
 			return this.horarioRepository.horariosDeUnEspacio(espacioId);
 		}
 		
+	
+		//Metodo para inscribir un alumno en un horario
+		public Horario añadirAlumno(Long horarioId, Long alumnoId) throws Exception{
+		
+			Alumno alumno = this.alumnoService.findOne(alumnoId);
+			Horario horario = this.findOne(horarioId);
+			horario.getAlumnos().add(alumno);
+			return this.horarioRepository.save(horario);
+		}
+		
+		public List<Horario> horariosDeAlumno(Long alumnoId) throws Exception{
+		
+			return this.horarioRepository.horariosDeAlumno(alumnoId);
+		}
+		
+		public List<Horario> horariosDeProfesor(Long profesorId) throws Exception{
+			return this.horarioRepository.horariosDeProfesor(profesorId);
+		}
 	
 		
 		

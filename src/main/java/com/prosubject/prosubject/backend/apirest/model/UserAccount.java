@@ -25,15 +25,14 @@ public class UserAccount implements Serializable {
 	private Long id;
 	
 	@NotBlank
-	@NotNull
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String username;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String password;
 	
-	@NotNull
+	@Column(nullable = false)
 	private Authority autoridad;
 
 	
@@ -55,14 +54,7 @@ public class UserAccount implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsurname() {
-		return username;
-	}
-
-	public void setUsurname(String user) {
-		username = user;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -70,6 +62,15 @@ public class UserAccount implements Serializable {
 	public void setPassword(String pass) {
 		password = pass;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	
 	
 

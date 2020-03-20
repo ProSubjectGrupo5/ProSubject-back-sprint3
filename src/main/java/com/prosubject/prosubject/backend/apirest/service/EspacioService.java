@@ -1,14 +1,11 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
@@ -28,8 +25,11 @@ public class EspacioService {
 	}
 	
 	public List<Espacio> findDisponibles(String universidad, 
-			String facultad, String curso, String asignatura){
-		return this.espacioRepository.findDisponibles(universidad, facultad, curso, asignatura);
+			String facultad, String grado,String curso, String asignatura){
+		 List<Espacio> espaciosFiltrados =this.espacioRepository.findDisponibles(universidad, facultad, grado,curso, asignatura);
+		 List<Espacio> espacioDisponible = this.espacioRepository.espaciosConHorarioConCapacidad();
+		 boolean intersacion  = espacioDisponible.retainAll(espaciosFiltrados);
+		 return espacioDisponible;
 	}
 	
 	public Espacio findOne(final long espacioId){
@@ -82,6 +82,10 @@ public class EspacioService {
 	//Listado de espacios en los que estas inscrito un alumno
 		public List<Espacio> espaciosDeUnAlumno(Long id){
 			return this.espacioRepository.espaciosDeUnAlumno(id);
+		}
+		
+		public List<Espacio> espaciosConCapacidad(){
+			return this.espacioRepository.espaciosConHorarioConCapacidad();
 		}
 	
 	

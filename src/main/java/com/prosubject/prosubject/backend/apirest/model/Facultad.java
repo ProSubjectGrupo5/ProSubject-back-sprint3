@@ -2,6 +2,7 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Facultad implements Serializable{
 	private Long id;
 	
 	@NotBlank
-	@NotNull
+	@Column(nullable = false)
 	private String nombre;
 	
 	@Valid

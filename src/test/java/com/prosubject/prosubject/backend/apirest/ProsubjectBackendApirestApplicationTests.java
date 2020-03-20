@@ -8,9 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
@@ -100,7 +98,8 @@ class ProsubjectBackendApirestApplicationTests {
 			String facultad = "Escuela Técnica Superior de Ingeniería Informática";
 			String grado = "Ingeniería del Software";
 			String curso = "PRIMERO";
-			List<Espacio> res = espRep.findDisponibles(uni, facultad, grado, curso);
+			String asignatura ="Fundamentos de programación";
+			List<Espacio> res = espRep.findDisponibles(uni, facultad, grado, curso, asignatura);
 			assertThat(res).isNotNull();
 		
 		}

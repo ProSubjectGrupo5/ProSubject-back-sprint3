@@ -15,18 +15,19 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 			+ "inner join asig.grados gra "
 			+ "inner join gra.facultad facul "
 			+ "inner join facul.universidad uni "
-			+ "where uni.nombre=?1 AND facul.nombre=?2 AND cur.nombre=?3 AND asig.nombre=?4")
-	List<Espacio> findDisponibles(String universidad, String facultad, String curso, String asignatura);
+			+ "where uni.nombre=?1 AND facul.nombre=?2 AND gra.nombre=?3 AND cur.nombre=?4 AND asig.nombre=?5 ")
+	List<Espacio> findDisponibles(String universidad, String facultad, String grado, String curso, String asignatura);
 	
 	
 	
 	@Query("select e from espacios e where e.profesor.id=?1")
 	List<Espacio> espaciosDeUnProfesor(Long id);
 	
-	//Jesus:Query comentada debido a los cambios en el modelo 
+	
 	@Query("select h.espacio from horario h  join h.alumnos alum where alum.id=?1")
 	List<Espacio> espaciosDeUnAlumno(Long id);
-	
-	
+
+	@Query("select distinct(h.espacio) from horario h  where h.capacidad > h.alumnos.size")
+	List<Espacio> espaciosConHorarioConCapacidad();
 	
 }
