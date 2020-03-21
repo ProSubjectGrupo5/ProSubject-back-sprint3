@@ -96,7 +96,9 @@ public class EspacioService {
 		public List<Espacio> espaciosConCapacidad(){
 			return this.espacioRepository.espaciosConHorarioConCapacidad();
 		}
-	
+	public List<Espacio> espaciosDeUnProfesorEnDraftMode(Long id){
+			return this.espacioRepository.espaciosDeUnProfesorEnDraftMode(id);
+		}
 	
 	
 }
