@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
@@ -66,10 +67,50 @@ public class HorarioController{
 	}
 	
 	@PostMapping("")
-	public void crearHorario(@RequestBody Collection<Horario> horario ) throws Exception {
-		 horarioService.save(horario);
+	public ResponseEntity<?> crearHorario(@RequestBody Collection<Horario> horario ) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		List<Horario> horariosGuardados = null;
+		try {
+			horariosGuardados = horarioService.save(horario);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		return new ResponseEntity<List<Horario>>(horariosGuardados,HttpStatus.CREATED); 
+		
+		
 		
 	}
+	
+	
+	@PutMapping("")
+	public ResponseEntity<?> modificarHorario(@RequestBody Collection<Horario> horario ) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		List<Horario> horariosGuardados = null;
+		try {
+			horariosGuardados=horarioService.save(horario);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+		}catch(Exception e) {
+			response.put("mensaje", " Ha ocurrido un error:");
+			response.put("error", e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+			
+		}
+		
+		return new ResponseEntity<List<Horario>>(horariosGuardados,HttpStatus.CREATED); 
+		
+		
+		
+	}
+	
+
 	
 	@GetMapping("espacio/{id}")
 	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id) {
@@ -79,7 +120,7 @@ public class HorarioController{
 		
 		try {
 			horarios = this.horarioService.horariosDeUnEspacio(id);
-		}catch(DataAccessException e) {
+		}catch(DataAccessException e ) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 

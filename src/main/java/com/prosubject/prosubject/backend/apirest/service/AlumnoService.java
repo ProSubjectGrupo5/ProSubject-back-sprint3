@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 
@@ -37,6 +38,24 @@ public class AlumnoService {
 	   Alumno saved = this.alumnoRepository.save(a);
 
 		return saved;
+	}
+	
+	public Alumno edit(Long id, Alumno alumno) {
+
+		Alumno alumn = findOne(id);
+
+		alumn.setApellido1(alumno.getApellido1());
+		alumn.setApellido2(alumno.getApellido2());
+		alumn.setDni(alumno.getDni());
+		alumn.setEmail(alumno.getEmail());
+		alumn.setNombre(alumno.getNombre());
+		alumn.setTelefono(alumno.getTelefono());
+		alumn.getUserAccount().setUsername((alumno.getUserAccount().getUsername()));
+		alumn.getUserAccount().setPassword((alumno.getUserAccount().getPassword()));
+		
+		Alumno alumnoEditado = save(alumn);
+
+		return alumnoEditado;
 	}
 	
 }

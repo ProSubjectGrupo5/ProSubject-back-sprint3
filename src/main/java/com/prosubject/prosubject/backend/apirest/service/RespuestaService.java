@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 import com.prosubject.prosubject.backend.apirest.repository.RespuestaRepository;
 
@@ -36,9 +38,13 @@ public class RespuestaService {
 	public Respuesta save(final Respuesta r) {
 		Date hoy = new Date();
 		r.setCreacionRespuesta(hoy);
-	   Respuesta saved = this.RespuestaRepository.save(r);
+		return this.RespuestaRepository.save(r);
 
-		return saved;
+		 
+	}
+	
+	public List<Respuesta> respuestaPorForoId(final Long foroId) { 
+		return  this.RespuestaRepository.respuestaPorForoId(foroId);
 	}
 
 	

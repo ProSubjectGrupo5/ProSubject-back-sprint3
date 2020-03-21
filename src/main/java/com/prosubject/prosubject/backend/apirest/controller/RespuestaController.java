@@ -8,20 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 
 import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
 
 @RestController
 @RequestMapping("/api/respuestas")
-
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
 public class RespuestaController{
 	
 	@Autowired
@@ -71,6 +71,28 @@ public class RespuestaController{
 		return new ResponseEntity<Respuesta>(respuestaNueva, HttpStatus.CREATED); 
 	}
 
+
+	@GetMapping("/foro/{foroId}")
+	public ResponseEntity<?> respuestaPorForoId(@PathVariable Long foroId){
+		List<Respuesta> respuesta = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			respuesta = this.respuestaService.respuestaPorForoId(foroId);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(respuesta == null) {
+			response.put("mensaje",	 "No se ha encontrado ningun foro con espacioId: ".concat(foroId.toString()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Respuesta>>(respuesta, HttpStatus.OK);
+		
+	}
 
 
 }

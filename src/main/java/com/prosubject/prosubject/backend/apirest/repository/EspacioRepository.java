@@ -23,6 +23,10 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	@Query("select e from espacios e where e.profesor.id=?1")
 	List<Espacio> espaciosDeUnProfesor(Long id);
 	
+	@Query("select e from espacios e where e.profesor.id=?1 AND e.draftMode=1")
+	List<Espacio> espaciosDeUnProfesorEnDraftMode(Long id);
+	
+	
 	
 	@Query("select h.espacio from horario h  join h.alumnos alum where alum.id=?1")
 	List<Espacio> espaciosDeUnAlumno(Long id);

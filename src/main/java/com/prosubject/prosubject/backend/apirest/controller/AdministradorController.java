@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,6 +70,23 @@ public class AdministradorController{
 		
 		
 		return new ResponseEntity<Administrador>(administradorNuevo, HttpStatus.CREATED); 
+	}
+	
+	@PutMapping("/edit/{id}")
+	public ResponseEntity<?> editarAdministrador(@RequestBody Administrador administrador, @PathVariable Long id ) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Administrador administradorEditado = null;
+		
+		try {
+			administradorEditado = administradorService.edit(id,administrador);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el edit en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		return new ResponseEntity<Administrador>(administradorEditado, HttpStatus.OK); 
 	}
 
 
