@@ -67,7 +67,7 @@ public class HorarioController{
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> crearHorario(@RequestBody Collection<Horario> horario ) throws Exception {
+	public ResponseEntity<?> crearHorarios(@RequestBody Collection<Horario> horario ) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		List<Horario> horariosGuardados = null;
 		try {
@@ -84,7 +84,51 @@ public class HorarioController{
 		
 	}
 	
+	@PostMapping("/crearUnHorario")
+	public ResponseEntity<?> crearHorario(@RequestBody Horario horario ) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Horario horarioGuardado = null;
+		try {
+			horarioGuardado  = horarioService.saveOne(horario);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		return new ResponseEntity<Horario>(horarioGuardado,HttpStatus.CREATED); 
+		
+		
+		
+	}
 	
+	@PutMapping("/modificarUnHorario")
+	public ResponseEntity<?> modificarHorario(@RequestBody Horario horario ) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Horario horarioGuardado = null;
+		try {
+			horarioGuardado =horarioService.saveOne(horario);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+		}catch(Exception e) {
+			response.put("mensaje", " Ha ocurrido un error:");
+			response.put("error", e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+			
+		}
+		
+		return new ResponseEntity<Horario>(horarioGuardado,HttpStatus.CREATED); 
+		
+		
+		
+	}
+	
+	
+	//Modificar collection de horarios , si en un futuro no se utiliza borrar
 	@PutMapping("")
 	public ResponseEntity<?> modificarHorario(@RequestBody Collection<Horario> horario ) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();

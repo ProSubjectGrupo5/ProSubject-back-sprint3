@@ -50,10 +50,12 @@ public class EspacioService {
 			e.setForo(fSaved);
 			
 		}else {
-			Assert.isTrue(e.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
+			Espacio espacioAntiguo=this.findOne(e.getId());
+			Assert.isTrue(espacioAntiguo.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
 					" no puede ser modificado, debido al draftMode");
 			f=this.foroService.foroPorEspacioId(e.getId());
 			e.setForo(f);
+			
 			
 			
 		
@@ -63,26 +65,7 @@ public class EspacioService {
 		return this.espacioRepository.save(e);
 }
 		
-	//Metodo para inscribir un alumno en un espacio
-//	public Espacio añadirAlumno(Long espacioId, Long alumnoId) throws Exception{
-//		/*
-//		Alumno a = this.alumnoService.findOne(alumnoId);
-//		Espacio e = this.findOne(espacioId);
-//		Collection<Alumno> alumnos = e.getAlumnos();
-//		Assert.isTrue(!(alumnos.contains(a)));
-//		Assert.isTrue(e.getCapacidad()>e.getAlumnos().size());
-//		alumnos.add(a);
-//		e.setAlumnos(alumnos);
-//		this.save(e);
-//		
-//		return e;
-//		*/
-//		Alumno alumno = this.alumnoService.findOne(alumnoId);
-//		Espacio espacio = this.findOne(espacioId);
-//	//	espacio.getAlumnos().add(alumno);
-//		return this.save(espacio);
-//	}
-	
+
 	//Listado de espacios creados por un profesor
 	public List<Espacio> espaciosDeUnProfesor(Long id){
 		return this.espacioRepository.espaciosDeUnProfesor(id);
