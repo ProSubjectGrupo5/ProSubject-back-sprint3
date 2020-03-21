@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 
@@ -30,6 +29,10 @@ public class AlumnoService {
 	
 	public Alumno findByUserAccount(final Long userAccountId) {
 		return this.alumnoRepository.findAlumnoByUserAccountId(userAccountId);
+	}
+	
+	public Alumno findByUsername(final String username) {
+		return this.alumnoRepository.findAlumnoByUsername(username);
 	}
 	
 
