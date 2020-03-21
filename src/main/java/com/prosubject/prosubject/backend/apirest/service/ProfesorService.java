@@ -27,6 +27,10 @@ public class ProfesorService {
 	public Profesor findByUserAccount(final Long userAccountId) {
 		return this.profesorRepository.findProfesorByUserAccountId(userAccountId);
 	}
+	
+	public Profesor findByUsername(final String username) {
+		return this.profesorRepository.findProfesorByUsername(username);
+	}
 
 	
 	public Profesor save(final Profesor p) { 
