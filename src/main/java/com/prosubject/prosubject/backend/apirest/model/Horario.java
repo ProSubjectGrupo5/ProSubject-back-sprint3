@@ -1,3 +1,4 @@
+
 package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
@@ -16,11 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "horario")
 public class Horario implements Serializable{
@@ -58,6 +57,8 @@ private static final long serialVersionUID = 1L;
 	@Column(nullable = false)
 	@Min(0)
 	private Long capacidad;
+	
+	
 
 
 	
@@ -118,5 +119,10 @@ private static final long serialVersionUID = 1L;
 	}
 
 
+	
+	
+
+
 		 
 }
+
