@@ -86,7 +86,7 @@ public class RespuestaController{
 		}
 		
 		if(respuesta == null) {
-			response.put("mensaje",	 "No se ha encontrado ningun foro con espacioId: ".concat(foroId.toString()));
+			response.put("mensaje",	 "No se ha encontrado ninguna respuesta con foroId: ".concat(foroId.toString()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
