@@ -79,6 +79,34 @@ public class HorarioService {
 		return this.horariosDeUnEspacio(eSaved.getId());
 	
 	}
+	
+	
+	public Horario saveOne(Horario h) throws Exception{
+		
+		Espacio e = h.getEspacio();
+		Espacio eSaved = this.espacioService.save(e);
+		
+		if (h.getId()==null) {
+			Collection<Alumno> alumnos = new HashSet<Alumno>();
+			h.setEspacio(eSaved);
+			h.setAlumnos(alumnos);
+				
+		}else{
+				Horario horarioAntiguo=this.findOne(h.getId());
+				h.setAlumnos(horarioAntiguo.getAlumnos());	
+			}
+			
+			
+			if(checkHoraInicioValid(h)&& checkHoraFinValid(h)) {
+				h = this.horarioRepository.save(h);
+			}
+			
+		
+				
+		return h;
+	
+	}
+		
 		
 	
 		public List<Horario> horariosDeUnEspacio(long espacioId) {
