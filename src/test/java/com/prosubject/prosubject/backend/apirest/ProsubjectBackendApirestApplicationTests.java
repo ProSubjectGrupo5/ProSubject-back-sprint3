@@ -47,7 +47,7 @@ class ProsubjectBackendApirestApplicationTests {
 	 @Autowired
 	 private EspacioRepository espRep;
 	
-	
+//	
 //	@Test
 //    public void adminControllerTest() {
 //		assertThat(adminController).isNotNull();
