@@ -26,12 +26,12 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	@Query("select e from espacios e where e.profesor.id=?1 AND e.draftMode=1")
 	List<Espacio> espaciosDeUnProfesorEnDraftMode(Long id);
 	
-	
-	
-	@Query("select h.espacio from horario h  join h.alumnos alum where alum.id=?1")
-	List<Espacio> espaciosDeUnAlumno(Long id);
-
-	@Query("select distinct(h.espacio) from horario h  where h.capacidad > h.alumnos.size")
-	List<Espacio> espaciosConHorarioConCapacidad();
+//	
+//	
+//	@Query("select h.espacio from horario h  join h.alumnos alum where alum.id=?1")
+//	List<Espacio> espaciosDeUnAlumno(Long id);
+//
+//	@Query("select distinct(h.espacio) from horario h  where h.capacidad > h.alumnos.size")
+//	List<Espacio> espaciosConHorarioConCapacidad();
 	
 }

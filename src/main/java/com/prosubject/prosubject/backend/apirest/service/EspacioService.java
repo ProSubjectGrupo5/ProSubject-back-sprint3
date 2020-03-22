@@ -26,13 +26,13 @@ public class EspacioService {
 		return this.espacioRepository.findAll();
 	}
 	
-	public List<Espacio> findDisponibles(String universidad, 
-			String facultad, String grado,String curso, String asignatura){
-		 List<Espacio> espaciosFiltrados =this.espacioRepository.findDisponibles(universidad, facultad, grado,curso, asignatura);
-		 List<Espacio> espacioDisponible = this.espacioRepository.espaciosConHorarioConCapacidad();
-		 boolean intersacion  = espacioDisponible.retainAll(espaciosFiltrados);
-		 return espacioDisponible;
-	}
+//	public List<Espacio> findDisponibles(String universidad, 
+//			String facultad, String grado,String curso, String asignatura){
+//		 List<Espacio> espaciosFiltrados =this.espacioRepository.findDisponibles(universidad, facultad, grado,curso, asignatura);
+//		 List<Espacio> espacioDisponible = this.espacioRepository.espaciosConHorarioConCapacidad();
+//		 boolean intersacion  = espacioDisponible.retainAll(espaciosFiltrados);
+//		 return espacioDisponible;
+//	}
 	
 	public Espacio findOne(final long espacioId){
 		return this.espacioRepository.findById(espacioId).orElse(null);
@@ -71,14 +71,14 @@ public class EspacioService {
 		return this.espacioRepository.espaciosDeUnProfesor(id);
 	}
 	
-	//Listado de espacios en los que estas inscrito un alumno
-		public List<Espacio> espaciosDeUnAlumno(Long id){
-			return this.espacioRepository.espaciosDeUnAlumno(id);
-		}
-		
-		public List<Espacio> espaciosConCapacidad(){
-			return this.espacioRepository.espaciosConHorarioConCapacidad();
-		}
+//	//Listado de espacios en los que estas inscrito un alumno
+//		public List<Espacio> espaciosDeUnAlumno(Long id){
+//			return this.espacioRepository.espaciosDeUnAlumno(id);
+//		}
+//		
+//		public List<Espacio> espaciosConCapacidad(){
+//			return this.espacioRepository.espaciosConHorarioConCapacidad();
+//		}
 	public List<Espacio> espaciosDeUnProfesorEnDraftMode(Long id){
 			return this.espacioRepository.espaciosDeUnProfesorEnDraftMode(id);
 		}
