@@ -21,7 +21,7 @@ import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
 
 @RestController
 @RequestMapping("/api/respuestas")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
 public class RespuestaController{
 	
 	@Autowired

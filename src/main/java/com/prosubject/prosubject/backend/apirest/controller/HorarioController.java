@@ -29,7 +29,7 @@ import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 
 @RestController
 @RequestMapping("/api/horarios")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
 public class HorarioController{
 	
 	@Autowired

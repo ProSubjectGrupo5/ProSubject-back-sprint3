@@ -20,7 +20,7 @@ import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
 public class SignUpController {
 	
 	@Autowired
