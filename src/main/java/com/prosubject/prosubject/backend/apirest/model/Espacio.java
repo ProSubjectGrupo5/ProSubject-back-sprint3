@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity(name = "espacios")
 public class Espacio implements Serializable {
@@ -47,9 +50,12 @@ public class Espacio implements Serializable {
 	private Profesor profesor;
 	
 	
-	@NotNull
+	@Column(nullable = false)
 	@Min(0)
 	private Double precio;
+	
+	@Range(min = 0, max = 1)
+	private int draftMode;
 	
 	
 	
@@ -96,6 +102,16 @@ public class Espacio implements Serializable {
 	public void setPrecio(Double prec) {
 		precio = prec;
 	}
+
+	public int getDraftMode() {
+		return draftMode;
+	}
+
+	public void setDraftMode(int draftMode) {
+		this.draftMode = draftMode;
+	}
+	
+	
 
 
 	

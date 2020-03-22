@@ -1,9 +1,11 @@
+
 package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,11 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "horario")
 public class Horario implements Serializable{
@@ -35,18 +35,18 @@ private static final long serialVersionUID = 1L;
 	@ManyToMany
 	private Collection<Alumno> alumnos;
 
-	@NotNull
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date fechaInicio;
 
 
-	@NotNull
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date fechaFin;
 	
-	@NotNull
+	@Column(nullable = false)
 	private DiaSemana dia;
 	
 	@Valid
@@ -54,9 +54,11 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "espacio_id")
 	private Espacio espacio;
 	
-	@NotNull
+	@Column(nullable = false)
 	@Min(0)
 	private Long capacidad;
+	
+	
 
 
 	
@@ -117,5 +119,10 @@ private static final long serialVersionUID = 1L;
 	}
 
 
+	
+	
+
+
 		 
 }
+

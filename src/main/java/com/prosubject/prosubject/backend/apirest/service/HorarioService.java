@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
@@ -52,22 +53,60 @@ public class HorarioService {
 		return true;
 	}
 
-	public void save(Collection<Horario> h) throws Exception{
+	public List<Horario> save(Collection<Horario> h) throws Exception{
 		
 		Espacio e = h.stream().findFirst().get().getEspacio();
-		Espacio eSaved = this.espacioService.save(e);
+		Espacio eSaved = this.espacioService.save(e);	
 		
 		for (Horario horario : h) {
-			Collection<Alumno> alumnos = new HashSet<Alumno>();
-			horario.setEspacio(eSaved);
-			horario.setAlumnos(alumnos);
+			if (horario.getId()==null) {
+				Collection<Alumno> alumnos = new HashSet<Alumno>();
+				horario.setEspacio(eSaved);
+				horario.setAlumnos(alumnos);
+				
+			}else{
+				Horario horarioAntiguo=this.findOne(horario.getId());
+				horario.setAlumnos(horarioAntiguo.getAlumnos());	
+			}
+			
 			
 			if(checkHoraInicioValid(horario)&& checkHoraFinValid(horario)) {
 				horario = this.horarioRepository.save(horario);
 			}
 			
 		}
+				
+		return this.horariosDeUnEspacio(eSaved.getId());
+	
 	}
+	
+	
+	public Horario saveOne(Horario h) throws Exception{
+		
+		Espacio e = h.getEspacio();
+		Espacio eSaved = this.espacioService.save(e);
+		
+		if (h.getId()==null) {
+			Collection<Alumno> alumnos = new HashSet<Alumno>();
+			h.setEspacio(eSaved);
+			h.setAlumnos(alumnos);
+				
+		}else{
+				Horario horarioAntiguo=this.findOne(h.getId());
+				h.setAlumnos(horarioAntiguo.getAlumnos());	
+			}
+			
+			
+			if(checkHoraInicioValid(h)&& checkHoraFinValid(h)) {
+				h = this.horarioRepository.save(h);
+			}
+			
+		
+				
+		return h;
+	
+	}
+		
 		
 	
 		public List<Horario> horariosDeUnEspacio(long espacioId) {

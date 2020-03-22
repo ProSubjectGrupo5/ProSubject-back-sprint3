@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
+import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
@@ -95,6 +96,31 @@ public class EspacioController{
 		
 	}
 	
+	@PutMapping("")
+	public ResponseEntity<?> modificarHorario(@RequestBody Espacio espacio) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Espacio espacioGuardado = null;
+		try {
+			espacioGuardado  =espacioService.save(espacio);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+		}catch(Exception e) {
+			response.put("mensaje", " Ha ocurrido un error:");
+			response.put("error", e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+			
+		}
+		
+		return new ResponseEntity<Espacio>(espacioGuardado,HttpStatus.CREATED); 
+		
+		
+		
+	}
+	
 	
 	
 	@GetMapping("/espaciosProfesor/{id}")
@@ -118,7 +144,7 @@ public class EspacioController{
 		
 		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
 	}
-	//Jesus:metodo comentado debido a los cambios en el modelo
+	
 	@GetMapping("/espaciosAlumno/{id}")
 	public ResponseEntity<?> espaciosDeUnAlumno(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<String, Object>();
@@ -144,6 +170,28 @@ public class EspacioController{
 	@GetMapping("/capacidad")
 	public List<Espacio> espaciosConCapacidad(){
 		return this.espacioService.espaciosConCapacidad();
+	}
+	
+	@GetMapping("/draftModeProfesor/{id}")
+	public ResponseEntity<?> espaciosDeUnProfesorEnDraftMode(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		List<Espacio> espacios = new ArrayList<>();
+		Profesor profesor = this.profesorService.findOne(id);
+			
+		try {
+			espacios = this.espacioService.espaciosDeUnProfesorEnDraftMode(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(profesor == null) {
+			response.put("mensaje",	 "El profesor con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
 	}
 	
 	

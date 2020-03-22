@@ -12,56 +12,55 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
-import com.prosubject.prosubject.backend.apirest.service.AdministradorService;
+import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
 
 @RestController
-@RequestMapping("/api/administradores")
+@RequestMapping("/api/respuestas")
 @CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
-public class AdministradorController{
+public class RespuestaController{
 	
 	@Autowired
-	private AdministradorService administradorService;
+	private RespuestaService respuestaService;
 	
 	@GetMapping("")
-	public List<Administrador> findAll(){
-		return this.administradorService.findAll();
+	public List<Respuesta> findAll(){
+		return this.respuestaService.findAll();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
-		Administrador administrador = null;
+		Respuesta respuesta = null;
 		Map<String, Object> response = new HashMap<String, Object>();
 		
 		try {
-			administrador = this.administradorService.findOne(id);
+			respuesta = this.respuestaService.findOne(id);
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
-		if(administrador == null) {
-			response.put("mensaje",	 "El administrador con ID: ".concat(id.toString()).concat(" no existe"));
+		if(respuesta == null) {
+			response.put("mensaje",	 "La respuesta con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
-		return new ResponseEntity<Administrador>(administrador, HttpStatus.OK);
+		return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		
 	}
 
 	@PostMapping("")
-	public ResponseEntity<?> crearAdministrador(@RequestBody Administrador administrador ) {
+	public ResponseEntity<?> crearRespuesta(@RequestBody Respuesta respuesta) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		Administrador administradorNuevo = null;
+		Respuesta respuestaNueva = null;
 		
 		try {
-			administradorNuevo = administradorService.save(administrador);
+			respuestaNueva = this.respuestaService.save(respuesta);
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -69,26 +68,31 @@ public class AdministradorController{
 		}
 		
 		
-		return new ResponseEntity<Administrador>(administradorNuevo, HttpStatus.CREATED); 
+		return new ResponseEntity<Respuesta>(respuestaNueva, HttpStatus.CREATED); 
 	}
-	
-	@PutMapping("/edit/{id}")
-	public ResponseEntity<?> editarAdministrador(@RequestBody Administrador administrador, @PathVariable Long id ) {
+
+
+	@GetMapping("/foro/{foroId}")
+	public ResponseEntity<?> respuestaPorForoId(@PathVariable Long foroId){
+		List<Respuesta> respuesta = null;
 		Map<String, Object> response = new HashMap<String, Object>();
-		Administrador administradorEditado = null;
 		
 		try {
-			administradorEditado = administradorService.edit(id,administrador);
+			respuesta = this.respuestaService.respuestaPorForoId(foroId);
 		}catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el edit en la base de datos");
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
+		if(respuesta == null) {
+			response.put("mensaje",	 "No se ha encontrado ninguna respuesta con foroId: ".concat(foroId.toString()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
 		
-		return new ResponseEntity<Administrador>(administradorEditado, HttpStatus.OK); 
+		return new ResponseEntity<List<Respuesta>>(respuesta, HttpStatus.OK);
+		
 	}
-
 
 
 }
