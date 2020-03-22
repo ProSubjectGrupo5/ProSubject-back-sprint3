@@ -1,5 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>  {
 	Alumno findAlumnoByUserAccountId(Long id);
 	
 	@Query("select r.alumno from rangos r where r.horario.id=?1")
-	Alumno alumnosDeUnHorario(Long id);
+	List<Alumno> alumnosDeUnHorario(Long id);
 	
 	
 	

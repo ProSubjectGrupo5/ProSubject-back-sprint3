@@ -58,4 +58,8 @@ public class AlumnoService {
 		return alumnoEditado;
 	}
 	
+	public List<Alumno> alumnosDeUnHorario(Long id) {
+		return this.alumnoRepository.alumnosDeUnHorario(id);
+	}
+	
 }
