@@ -167,10 +167,7 @@ public class EspacioController{
 		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
 	}
 	
-	@GetMapping("/capacidad")
-	public List<Espacio> espaciosConCapacidad(){
-		return this.espacioService.espaciosConCapacidad();
-	}
+
 	
 	@GetMapping("/draftModeProfesor/{id}")
 	public ResponseEntity<?> espaciosDeUnProfesorEnDraftMode(@PathVariable Long id) {
@@ -192,6 +189,11 @@ public class EspacioController{
 		}
 		
 		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
+	}
+	
+	@GetMapping("/espaciosConCapacidad")
+	public List<Espacio> espaciosConCapacidad() throws Exception{
+		return this.espacioService.espaciosConHorarioConCapacidad();
 	}
 	
 	

@@ -74,5 +74,28 @@ public class AlumnoController {
 	}
 	
 	
+	@GetMapping("/horario/{id}")
+	public ResponseEntity<?> alumnosDeUnHorario(@PathVariable Long id) {
+		List<Alumno> alumno = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			alumno = this.alumnoService.alumnosDeUnHorario(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(alumno == null) {
+			response.put("mensaje",	 "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Alumno>>(alumno, HttpStatus.OK);
+		
+	}
+	
+	
 
 }

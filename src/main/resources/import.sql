@@ -141,22 +141,21 @@ INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`,`dra
 
 
 
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`) VALUES ('1','11:00:00','12:00:00','1',2);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`) VALUES ('3','11:00:00','12:00:00','1',2);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('3','18:30:00','19:30:00','2',6);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('5','12:00:00','13:00:00','2',6);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('2','20:00:00','21:00:00','3',12);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','4',12);
-INSERT INTO `horario` (`dia`,`fecha_inicio`,`fecha_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','5',4);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`) VALUES ('1','11:00:00','12:00:00','1',2);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`) VALUES ('3','11:00:00','12:00:00','1',2);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)  VALUES ('3','18:30:00','19:30:00','2',6);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)  VALUES ('5','12:00:00','13:00:00','2',6);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)  VALUES ('2','20:00:00','21:00:00','3',12);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','4',12);
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)  VALUES ('4','15:00:00','16:00:00','5',4);
 
 
 
-INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '1');
-INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('1', '2');
-INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('3', '3');
-INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('7', '3');
-INSERT INTO `horario_alumnos` (`horario_id`, `alumnos_id`) VALUES ('7', '4');
-
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '1','2020-03-20','2020-04-20');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '2','2020-03-20','2020-04-20');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('3', '3','2020-03-20','2020-04-20');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '3','2020-03-20','2020-04-20');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '4','2020-03-20','2020-04-20');
 
 
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00', '4', '5');

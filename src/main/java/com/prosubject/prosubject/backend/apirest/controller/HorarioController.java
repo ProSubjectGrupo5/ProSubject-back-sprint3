@@ -126,36 +126,36 @@ public class HorarioController{
 		
 		
 	}
-	
-	
-	//Modificar collection de horarios , si en un futuro no se utiliza borrar
-	@PutMapping("")
-	public ResponseEntity<?> modificarHorario(@RequestBody Collection<Horario> horario ) throws Exception {
-		Map<String, Object> response = new HashMap<String, Object>();
-		List<Horario> horariosGuardados = null;
-		try {
-			horariosGuardados=horarioService.save(horario);
-		}catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el insert en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
-				
-		}catch(Exception e) {
-			response.put("mensaje", " Ha ocurrido un error:");
-			response.put("error", e.getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
-				
-			
-		}
-		
-		return new ResponseEntity<List<Horario>>(horariosGuardados,HttpStatus.CREATED); 
-		
-		
-		
-	}
-	
-
-	
+//	
+//	
+//	//Modificar collection de horarios , si en un futuro no se utiliza borrar
+//	@PutMapping("")
+//	public ResponseEntity<?> modificarHorario(@RequestBody Collection<Horario> horario ) throws Exception {
+//		Map<String, Object> response = new HashMap<String, Object>();
+//		List<Horario> horariosGuardados = null;
+//		try {
+//			horariosGuardados=horarioService.save(horario);
+//		}catch(DataAccessException e) {
+//			response.put("mensaje", "Error al realizar el insert en la base de datos");
+//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+//				
+//		}catch(Exception e) {
+//			response.put("mensaje", " Ha ocurrido un error:");
+//			response.put("error", e.getMessage());
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+//				
+//			
+//		}
+//		
+//		return new ResponseEntity<List<Horario>>(horariosGuardados,HttpStatus.CREATED); 
+//		
+//		
+//		
+//	}
+//	
+//
+//	
 	@GetMapping("espacio/{id}")
 	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id) {
 		List<Horario> horarios = null;
@@ -194,6 +194,7 @@ public class HorarioController{
 		
 		Horario horario = this.horarioService.findOne(horarioId);
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
+		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horarioId);
 		
 		if(horario == null) {
 			response.put("mensaje",	 "El horario con ID: ".concat(horarioId.toString()).concat(" no existe"));
@@ -206,12 +207,12 @@ public class HorarioController{
 		}
 		
 		
-		if(horario.getAlumnos().contains(alumno)) {
+		if(alumnos.contains(alumno)) {
 			response.put("mensaje",	 "El alumno ya se encuentra inscrito en el horario.");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
-		if(horario.getCapacidad().equals((long)horario.getAlumnos().size())) {
+		if(horario.getCapacidad().equals((long)alumnos.size())) {
 			response.put("mensaje",	 "El horario ya tiene aforo completo.");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
@@ -227,7 +228,7 @@ public class HorarioController{
 		return new ResponseEntity<Horario>(horarioModificado, HttpStatus.OK);	
 	}
 	
-	
+//	
 	
 	@GetMapping("/alumno/{alumnoId}")
 	public ResponseEntity<?> horariosDeAlumno(@PathVariable Long alumnoId) throws Exception {
@@ -272,6 +273,8 @@ public class HorarioController{
 		
 		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}
+	
+	
 
 
 
