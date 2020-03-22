@@ -229,26 +229,26 @@ public class HorarioController{
 //	
 //	
 	
-//	@GetMapping("/alumno/{alumnoId}")
-//	public ResponseEntity<?> horariosDeAlumno(@PathVariable Long alumnoId) throws Exception {
-//		List<Horario> horarios = null;
-//		Map<String, Object> response = new HashMap<String, Object>();
-//		
-//		try {
-//		horarios = this.horarioService.horariosDeAlumno(alumnoId);
-//		}catch(DataAccessException e) {
-//			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
-//		}
-//		
-//		if(horarios.isEmpty()) {
-//			response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no tiene horarios en ese espacio"));
-//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-//		}
-//		
-//		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
-//	}
+	@GetMapping("/alumno/{alumnoId}")
+	public ResponseEntity<?> horariosDeAlumno(@PathVariable Long alumnoId) throws Exception {
+		List<Horario> horarios = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+		horarios = this.horarioService.horariosDeAlumno(alumnoId);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(horarios.isEmpty()) {
+			response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no tiene horarios en ese espacio"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
+	}
 	
 	
 	//CRISTIAN
