@@ -12,6 +12,9 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>  {
 	@Query("select p from alumnos p join p.useraccount u where u.id=?1")
 	Alumno findAlumnoByUserAccountId(Long id);
 	
+	@Query("select r.alumno from rangos r where r.horario.id=?1")
+	Alumno alumnosDeUnHorario(Long id);
+	
 	
 	
 

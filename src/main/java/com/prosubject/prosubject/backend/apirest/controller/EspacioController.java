@@ -49,14 +49,14 @@ public class EspacioController{
 		return this.espacioService.findAll();
 	}
 	
-//	@GetMapping("/espaciosDisponibles")
-//	public List<Espacio> findDisponibles(@RequestParam(value="universidad") String universidad, 
-//			@RequestParam(value="facultad") String facultad,
-//			@RequestParam(value="grado") String grado,
-//			@RequestParam(value="curso") String curso,
-//			@RequestParam(value="asignatura") String asignatura){
-//		return this.espacioService.findDisponibles(universidad, facultad, grado, curso, asignatura);
-//	}
+	@GetMapping("/espaciosDisponibles")
+	public List<Espacio> findDisponibles(@RequestParam(value="universidad") String universidad, 
+			@RequestParam(value="facultad") String facultad,
+			@RequestParam(value="grado") String grado,
+			@RequestParam(value="curso") String curso,
+			@RequestParam(value="asignatura") String asignatura){
+		return this.espacioService.findDisponibles(universidad, facultad, grado, curso, asignatura);
+	}
 		
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
@@ -145,32 +145,29 @@ public class EspacioController{
 		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
 	}
 	
-//	@GetMapping("/espaciosAlumno/{id}")
-//	public ResponseEntity<?> espaciosDeUnAlumno(@PathVariable Long id) {
-//		Map<String, Object> response = new HashMap<String, Object>();
-//		List<Espacio> espacios = new ArrayList<>();
-//		Alumno alumno = this.alumnoService.findOne(id);
-//			
-//		try {
-//			espacios = this.espacioService.espaciosDeUnAlumno(id);
-//		}catch(DataAccessException e) {
-//			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
-//		}
-//		
-//		if(alumno == null) {
-//			response.put("mensaje",	 "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
-//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-//		}
-//		
-//		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
-//	}
+	@GetMapping("/espaciosAlumno/{id}")
+	public ResponseEntity<?> espaciosDeUnAlumno(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		List<Espacio> espacios = new ArrayList<>();
+		Alumno alumno = this.alumnoService.findOne(id);
+			
+		try {
+			espacios = this.espacioService.espaciosDeUnAlumno(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(alumno == null) {
+			response.put("mensaje",	 "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
+	}
 	
-//	@GetMapping("/capacidad")
-//	public List<Espacio> espaciosConCapacidad(){
-//		return this.espacioService.espaciosConCapacidad();
-//	}
+
 	
 	@GetMapping("/draftModeProfesor/{id}")
 	public ResponseEntity<?> espaciosDeUnProfesorEnDraftMode(@PathVariable Long id) {
@@ -192,6 +189,11 @@ public class EspacioController{
 		}
 		
 		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);	
+	}
+	
+	@GetMapping("/espaciosConCapacidad")
+	public List<Espacio> espaciosConCapacidad() throws Exception{
+		return this.espacioService.espaciosConHorarioConCapacidad();
 	}
 	
 	

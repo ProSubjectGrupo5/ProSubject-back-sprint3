@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
-// A quitar capacidad de espacio he quitado (jesus) estacondicion dde la primera query :e.capacidad > e.alumnos.size AND
+import com.prosubject.prosubject.backend.apirest.model.Horario;
+
 @Repository
 public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	@Query("select distinct(e) from espacios e inner join e.asignatura asig "
@@ -28,10 +30,11 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	
 //	
 //	
-//	@Query("select h.espacio from horario h  join h.alumnos alum where alum.id=?1")
-//	List<Espacio> espaciosDeUnAlumno(Long id);
-//
-//	@Query("select distinct(h.espacio) from horario h  where h.capacidad > h.alumnos.size")
-//	List<Espacio> espaciosConHorarioConCapacidad();
+	@Query("select r.horario.espacio from rangos r where r.alumno.id=?1")
+	List<Espacio> espaciosDeUnAlumno(Long id);
+
+	
+	@Query("select distinct(h.espacio) from horario h where h.capacidad > (select count(r.alumno.id) from rangos r where r.horario.id = h.id) AND h.espacio.draftMode = 0")
+	List<Espacio> espaciosConHorarioConCapacidad();
 	
 }

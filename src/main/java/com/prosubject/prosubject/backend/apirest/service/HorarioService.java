@@ -109,9 +109,9 @@ public class HorarioService {
 //		
 //		
 //	
-//		public List<Horario> horariosDeUnEspacio(long espacioId) {
-//			return this.horarioRepository.horariosDeUnEspacio(espacioId);
-//		}
+		public List<Horario> horariosDeUnEspacio(long espacioId) {
+			return this.horarioRepository.horariosDeUnEspacio(espacioId);
+		}
 //		
 //	
 //		//Metodo para inscribir un alumno en un horario
@@ -131,6 +131,9 @@ public class HorarioService {
 		public List<Horario> horariosDeProfesor(Long profesorId) throws Exception{
 			return this.horarioRepository.horariosDeProfesor(profesorId);
 		}
+		
+		
+	
 	
 		
 		
