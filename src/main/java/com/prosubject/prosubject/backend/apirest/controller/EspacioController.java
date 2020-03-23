@@ -80,6 +80,39 @@ public class EspacioController{
 	}
 	
 	
+	@GetMapping("/draftMode/{id}")
+	public ResponseEntity<?> findOne(@PathVariable Long id,@RequestParam String username) {
+		Espacio espacio = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			espacio = this.espacioService.findOne(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(espacio == null) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		if(espacio.getDraftMode() == 0) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		Profesor profesor = this.profesorService.findByUsername(username);
+		if(profesor != null) {
+			if(!profesor.equals(espacio.getProfesor())) {
+				response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(id.toString()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		}
+		
+		return new ResponseEntity<Espacio>(espacio, HttpStatus.OK);
+	}
+	
+	
 	@PostMapping("")
 	public Espacio crearEspacio(@RequestBody Espacio espacio ) {
 		Espacio e = new Espacio();

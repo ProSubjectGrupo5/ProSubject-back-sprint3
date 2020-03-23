@@ -70,6 +70,39 @@ public class HorarioController{
 		return new ResponseEntity<Horario>(horario, HttpStatus.OK);
 	}
 	
+	@GetMapping("/draftMode/{id}")
+	public ResponseEntity<?> findOne(@PathVariable Long id,@RequestParam String username) {
+		Horario horario = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			horario = this.horarioService.findOne(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(horario == null) {
+			response.put("mensaje",	 "El horario con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		if(horario.getEspacio().getDraftMode() == 0) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		Profesor profesor = this.profesorService.findByUsername(username);
+		if(profesor != null) {
+			if(!profesor.equals(horario.getEspacio().getProfesor())) {
+				response.put("mensaje",	 "El profesor no pertenece al horario cuyo id es ".concat(id.toString()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		}
+		
+		return new ResponseEntity<Horario>(horario, HttpStatus.OK);
+	}
+	
 	@PostMapping("")
 	public ResponseEntity<?> crearHorarios(@RequestBody Collection<Horario> horario ) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
@@ -161,6 +194,31 @@ public class HorarioController{
 //
 //	
 	@GetMapping("espacio/{id}")
+	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id) {
+		List<Horario> horarios = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Espacio espacio = this.espaciosService.findOne(id);
+		
+		try {
+			horarios = this.horarioService.horariosDeUnEspacio(id);
+		}catch(DataAccessException e ) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		if(espacio == null) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no esxite"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		
+		
+		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
+	}
+	
+	@GetMapping("espacioDraftMode/{id}")
 	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id , @RequestParam String username) {
 		List<Horario> horarios = null;
 		Map<String, Object> response = new HashMap<String, Object>();
@@ -182,17 +240,17 @@ public class HorarioController{
 		if(espacio.getDraftMode() == 0) {
 			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}else {
-			
-			Profesor profesor = this.profesorService.findByUsername(username);
-			if(profesor != null) {
-				if(!profesor.equals(espacio.getProfesor())) {
-					response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(id.toString()));
-					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-				}
+		}
+		
+		Profesor profesor = this.profesorService.findByUsername(username);
+		if(profesor != null) {
+			if(!profesor.equals(espacio.getProfesor())) {
+				response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(id.toString()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 			}
+		}
 			
-		}	
+			
 		
 		
 		
