@@ -125,11 +125,11 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `tele
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Ruiz', 'Castilla', '12523211T', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
 
 
-INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Fundamentos de programación');
-INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Análisis y Diseño de Datos y Algoritmos');
-INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Diseño y pruebas 1');
-INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Diseño y pruebas 2');
-INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20', 'Foro Complemento de Bases de Datos');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Fundamentos de programación');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Análisis y Diseño de Datos y Algoritmos');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 1');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 2');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Complemento de Bases de Datos');
 
 
 
@@ -151,15 +151,15 @@ INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`)
 
 
 
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '1','2020-03-20','2020-04-20');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '2','2020-03-20','2020-04-20');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('3', '3','2020-03-20','2020-04-20');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '3','2020-03-20','2020-04-20');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '4','2020-03-20','2020-04-20');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '1','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '2','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('3', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '4','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
 
 
-INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00', '4', '5');
-INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00', '12', '5');
+INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
+INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
 
 
 
