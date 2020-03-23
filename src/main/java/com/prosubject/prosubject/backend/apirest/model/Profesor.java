@@ -72,8 +72,10 @@ public class Profesor implements Serializable {
 	@Column(nullable = false)
 	private Boolean expedienteValidado;
 	
-	
-	private Byte[] expendiente;
+	@Valid
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "file_id")
+	private DBFile expendiente;
 
 	public Long getId() {
 		return id;
@@ -147,11 +149,11 @@ public class Profesor implements Serializable {
 		this.expedienteValidado = expedienteValidado;
 	}
 
-	public Byte[] getExpendiente() {
+	public DBFile getExpendiente() {
 		return expendiente;
 	}
 
-	public void setExpendiente(Byte[] expendiente) {
+	public void setExpendiente(DBFile expendiente) {
 		this.expendiente = expendiente;
 	}
 
