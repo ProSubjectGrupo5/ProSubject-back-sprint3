@@ -114,7 +114,7 @@ public class HorarioService {
 			
 			rango.setAlumno(alumno);
 			rango.setFechaInicio(fechaActual);
-			rango.setFechaFin(sumarRestarDiasFecha(rango.getFechaInicio(), 1));
+			rango.setFechaFin(sumarRestarDiasFecha(rango.getFechaInicio(), 28));
 			
 			Horario saved = this.horarioRepository.save(horario);
 			
@@ -134,13 +134,13 @@ public class HorarioService {
 		}
 		
 		
-		public Date sumarRestarDiasFecha(Date fecha, int meses){
+		public Date sumarRestarDiasFecha(Date fecha, int dias){
 
 			Calendar calendar = Calendar.getInstance();
 
 			calendar.setTime(fecha); // Configuramos la fecha que se recibe
 
-			calendar.add(Calendar.MONTH, meses);
+			calendar.add(Calendar.DAY_OF_YEAR, dias);
 
 			return calendar.getTime();
 			}
