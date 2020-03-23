@@ -161,7 +161,7 @@ public class HorarioController{
 //
 //	
 	@GetMapping("espacio/{id}")
-	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id) {
+	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id , @RequestParam String username) {
 		List<Horario> horarios = null;
 		Map<String, Object> response = new HashMap<String, Object>();
 		Espacio espacio = this.espaciosService.findOne(id);
@@ -174,16 +174,27 @@ public class HorarioController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
-		/*
-		if(horarios.isEmpty()) {
-			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no tiene ningun horario"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		*/
 		if(espacio == null) {
 			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no esxite"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
+		
+		if(espacio.getDraftMode() == 0) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}else {
+			
+			Profesor profesor = this.profesorService.findByUsername(username);
+			if(profesor != null) {
+				if(!profesor.equals(espacio.getProfesor())) {
+					response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(id.toString()));
+					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+				}
+			}
+			
+		}	
+		
+		
 		
 		
 		
