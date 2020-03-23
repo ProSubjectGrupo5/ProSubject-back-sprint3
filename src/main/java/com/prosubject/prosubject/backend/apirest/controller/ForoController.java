@@ -31,7 +31,7 @@ import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RestController
 @RequestMapping("/api/foros")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
 public class ForoController {
 
 	@Autowired
@@ -108,13 +108,14 @@ public class ForoController {
 	public ResponseEntity<?> foroPorEspacioId(@PathVariable Long espacioId, @RequestParam String username, @RequestParam String autoridad){
 		Foro foro = null;
 		Espacio espacio = null;
-		//Alumno alumno = null;
+		//List<Alumno> alumnos = null;
 		//Profesor profesor = null;
 		List<Horario> horarios = null;
 		Map<String, Object> response = new HashMap<String, Object>();
 		
 		espacio = this.espacioService.findOne(espacioId);
 		horarios = this.horarioService.horariosDeUnEspacio(espacioId);
+	
 		
 		
 		try {
@@ -133,8 +134,8 @@ public class ForoController {
 			if(autoridad.equals("ALUMNO")) {
 				
 				Alumno alumno = this.alumnoService.findByUsername(username);
-				if(alumno != null) {
-					Boolean res = horarios.stream().anyMatch(x->x.getAlumnos().contains(alumno));
+				if(alumno != null) {		//HE CAMBIADO ESTA PARTE DEL CODIGO DEBIDO A QUE AHORA NO HAY UNA LISTA DE ALUMNOS EN HORARIO antes estaba .anyMatch(x->x.getAlumnos()).contains(alumno));
+					Boolean res = horarios.stream().anyMatch(x->this.alumnoService.alumnosDeUnHorario(x.getId()).contains(alumno));
 					if(!res) {
 						response.put("mensaje",	 "El alumno no se encuentra inscrito en el espacio cuyo id es ".concat(espacioId.toString()));
 						return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
