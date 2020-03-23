@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
+import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RestController
 @RequestMapping("/api/horarios")
@@ -38,6 +39,9 @@ public class HorarioController{
 	private AlumnoService alumnoService;
 	@Autowired
 	private EspacioService espaciosService;
+	@Autowired
+	private ProfesorService profesorService;	
+
 	
 
 	@GetMapping("")
@@ -270,6 +274,37 @@ public class HorarioController{
 			response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no tiene horarios en ese espacio"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
+		
+		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
+	}
+	
+	@GetMapping("espaciosNoEditables/profesor/{profesorId}")
+	public ResponseEntity<?> horariosNoEditablesDeUnProfesor(@PathVariable Long profesorId) throws Exception {
+		List<Horario> horarios = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Profesor profesor = this.profesorService.findOne(profesorId);
+		
+		try {
+			horarios = this.horarioService.horariosNoEditablesDeUnProfesor(profesorId);
+		}catch(DataAccessException e ) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(profesor == null) {
+			response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no esxite"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		if(horarios.isEmpty()) {
+			response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no tiene ningun horario con espacios no disponibles"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		
+		
+		
 		
 		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}

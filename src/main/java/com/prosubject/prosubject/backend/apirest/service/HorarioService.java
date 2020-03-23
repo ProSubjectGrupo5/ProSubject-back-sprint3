@@ -145,6 +145,11 @@ public class HorarioService {
 			return calendar.getTime();
 			}
 		
+		public List<Horario> horariosNoEditablesDeUnProfesor(Long profesorId) throws Exception{
+			return this.horarioRepository.horariosNoEditablesDeUnProfesor(profesorId);
+		}
+		
+		
 		
 	
 	

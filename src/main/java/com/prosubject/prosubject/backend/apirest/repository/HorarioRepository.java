@@ -20,6 +20,9 @@ public interface HorarioRepository extends JpaRepository<Horario, Long>  {
 	@Query("select h from horario h where h.espacio.profesor.id = ?1")
 	List<Horario> horariosDeProfesor(Long profesorId);
 	
+	@Query("select h from horario h where h.espacio.profesor.id = ?1 AND h.espacio.draftMode = 0")
+	List<Horario> horariosNoEditablesDeUnProfesor(Long profesorId);
+	
 
 	
 	
