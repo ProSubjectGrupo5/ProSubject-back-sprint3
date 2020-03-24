@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
+import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.repository.HorarioRepository;
@@ -147,6 +148,11 @@ public class HorarioService {
 		
 		public List<Horario> horariosNoEditablesDeUnProfesor(Long profesorId) throws Exception{
 			return this.horarioRepository.horariosNoEditablesDeUnProfesor(profesorId);
+		}
+		
+		public void delete(Horario horario) {
+			this.horarioRepository.delete(horario);
+			
 		}
 		
 		
