@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.prosubject.prosubject.backend.apirest.exception.FileStorageException;
 import com.prosubject.prosubject.backend.apirest.exception.MyFileNotFoundException;
+import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.repository.DBFileRepository;
 
@@ -40,4 +41,8 @@ public class DBFileStorageService {
         return dbFileRepository.findById(fileId)
                 .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
     }
+    
+	public DBFile findOne(final Long fileId) {
+		return this.dbFileRepository.findById(fileId).orElse(null);
+	}
 }
