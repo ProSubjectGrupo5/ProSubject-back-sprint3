@@ -12,7 +12,7 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	@Query("select p from profesores p join p.useraccount u where u.id=?1")
 	Profesor findProfesorByUserAccountId(Long id);
 	
-	@Query("select p from profesores p join p.useraccount u where u.username=?1")
+	@Query("select p from profesores p where p.useraccount.username=?1")
 	Profesor findProfesorByUsername(String username);
 
 }

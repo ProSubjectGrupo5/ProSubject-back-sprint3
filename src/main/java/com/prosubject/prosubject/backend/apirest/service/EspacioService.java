@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
+import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
 
 @Service
@@ -20,6 +21,8 @@ public class EspacioService {
 	private ForoService foroService;
 	@Autowired
 	private AlumnoService alumnoService;
+	@Autowired
+	private HorarioService horarioService;
 
 	
 	public List<Espacio> findAll() {
@@ -75,13 +78,25 @@ public class EspacioService {
 		public List<Espacio> espaciosDeUnAlumno(Long id){
 			return this.espacioRepository.espaciosDeUnAlumno(id);
 		}
-		
-		public List<Espacio> espaciosConCapacidad(){
-			return this.espacioRepository.espaciosConHorarioConCapacidad();
-		}
+
 	public List<Espacio> espaciosDeUnProfesorEnDraftMode(Long id){
 			return this.espacioRepository.espaciosDeUnProfesorEnDraftMode(id);
 		}
+	
+	public List<Espacio> espaciosConHorarioConCapacidad() throws Exception{
+		return this.espacioRepository.espaciosConHorarioConCapacidad();
+	}
+	
+	public void delete(Espacio espacio) {
+		
+		List<Horario> horarios = this.horarioService.horariosDeUnEspacio(espacio.getId());
+		for (Horario horario : horarios) {
+			this.horarioService.delete(horario);
+		}
+		
+		this.espacioRepository.delete(espacio);
+		
+	}
 	
 	
 }

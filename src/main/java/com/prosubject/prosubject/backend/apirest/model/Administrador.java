@@ -56,7 +56,7 @@ public class Administrador implements Serializable {
 	@Column(unique = true, nullable = false)
 	private String email;
 
-	@Pattern(regexp="^([+][1-9]\\d{0,3})?([ ])?([(][1-9]\\d{0,4}[)])?([ ])?\\d{6,10}|^$",message = "Debe introducir un numero de telefono correcto")
+	@Pattern(regexp="^\\d{9}|^$",message = "Debe introducir un numero de telefono correcto")
 	private String telefono;
 	
 

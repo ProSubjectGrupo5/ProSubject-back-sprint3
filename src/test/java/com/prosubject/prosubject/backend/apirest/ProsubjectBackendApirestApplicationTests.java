@@ -47,6 +47,7 @@ class ProsubjectBackendApirestApplicationTests {
 	 @Autowired
 	 private EspacioRepository espRep;
 	
+
 //	
 //	@Test
 //    public void adminControllerTest() {
@@ -92,6 +93,8 @@ class ProsubjectBackendApirestApplicationTests {
 //		}
 //		
 //		//Espacios
+
+
 //		@Test 
 //		public void findDisponiblesTest() {
 //			String uni = "Universidad de Sevilla";
