@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -377,6 +378,48 @@ public class HorarioController{
 		
 		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}
+	
+	
+	@DeleteMapping("/{horarioId}")
+	public ResponseEntity<?> eliminarHorario(@PathVariable Long horarioId ,  @RequestParam String username ) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Horario horario = this.horarioService.findOne(horarioId);
+		
+		if(horario == null) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horarioId.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		
+		if(horario.getEspacio().getDraftMode() == 0) {
+			response.put("mensaje",	 "El horario que estas intentando borrar no se encuentra en un espacio editable");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		Profesor profesor = this.profesorService.findByUsername(username);
+		if(profesor != null) {
+			if(!profesor.equals(horario.getEspacio().getProfesor())) {
+				response.put("mensaje",	 "El profesor no pertenece al horario cuyo id es ".concat(horarioId.toString()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		}
+		
+		try {
+			this.horarioService.delete(horario);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		response.put("mensaje", "El horario ha sido borrado con exito");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 

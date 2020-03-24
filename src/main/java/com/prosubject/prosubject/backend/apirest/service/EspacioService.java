@@ -21,6 +21,8 @@ public class EspacioService {
 	private ForoService foroService;
 	@Autowired
 	private AlumnoService alumnoService;
+	@Autowired
+	private HorarioService horarioService;
 
 	
 	public List<Espacio> findAll() {
@@ -83,6 +85,17 @@ public class EspacioService {
 	
 	public List<Espacio> espaciosConHorarioConCapacidad() throws Exception{
 		return this.espacioRepository.espaciosConHorarioConCapacidad();
+	}
+	
+	public void delete(Espacio espacio) {
+		
+		List<Horario> horarios = this.horarioService.horariosDeUnEspacio(espacio.getId());
+		for (Horario horario : horarios) {
+			this.horarioService.delete(horario);
+		}
+		
+		this.espacioRepository.delete(espacio);
+		
 	}
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
-import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
@@ -227,6 +227,44 @@ public class EspacioController{
 	@GetMapping("/espaciosConCapacidad")
 	public List<Espacio> espaciosConCapacidad() throws Exception{
 		return this.espacioService.espaciosConHorarioConCapacidad();
+	}
+	
+	@DeleteMapping("/{espacioId}")
+	public ResponseEntity<?> eliminarEspacio(@PathVariable Long espacioId ,  @RequestParam String username ) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Espacio  espacio = this.espacioService.findOne(espacioId);
+		
+		if(espacio == null) {
+			response.put("mensaje",	 "El espacio con ID: ".concat(espacioId.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		if(espacio.getDraftMode() == 0) {
+			response.put("mensaje",	 "El espacio que estas intentando borrar no es editable");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		
+		Profesor profesor = this.profesorService.findByUsername(username);
+		if(profesor != null) {
+			if(!profesor.equals(espacio.getProfesor())) {
+				response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(espacioId.toString()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+		}
+		
+		try {
+			this.espacioService.delete(espacio);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		response.put("mensaje", "El espacio ha sido borrado con exito");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
+		
+		
 	}
 	
 	
