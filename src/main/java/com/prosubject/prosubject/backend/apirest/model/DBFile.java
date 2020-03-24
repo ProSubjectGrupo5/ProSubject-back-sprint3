@@ -3,23 +3,33 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
-import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name = "FILES")
+
+@Entity(name = "FILES")
 public class DBFile {
+	
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String fileName;
-
+    
+    private String nombre;
+    
     private String fileType;
+    
+	/*@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "profesor_id")
+	private Profesor profesor;*/
+	
 
     @Lob
     private byte[] data;
@@ -29,25 +39,25 @@ public class DBFile {
     }
 
     public DBFile(String fileName, String fileType, byte[] data) {
-        this.fileName = fileName;
+        this.nombre = fileName;
         this.fileType = fileType;
         this.data = data;
     }
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getFileName() {
-		return fileName;
+		return nombre;
 	}
 
 	public void setFileName(String fileName) {
-		this.fileName = fileName;
+		this.nombre = fileName;
 	}
 
 	public String getFileType() {
