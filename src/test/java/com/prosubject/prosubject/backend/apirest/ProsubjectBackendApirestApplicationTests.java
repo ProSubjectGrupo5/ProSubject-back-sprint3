@@ -73,7 +73,7 @@ class ProsubjectBackendApirestApplicationTests {
 		@Test
 		public void findAlumnoByUserAccountIdTest() {
 			String nombre = "Fernando";
-			Long id = (long) 2;
+			Long id = (long) 28;
 			Alumno aux  = alumRep.findAlumnoByUserAccountId(id);
 			assertEquals(aux.getNombre(), nombre);
 		}
