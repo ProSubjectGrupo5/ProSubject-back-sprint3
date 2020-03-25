@@ -47,52 +47,51 @@ class ProsubjectBackendApirestApplicationTests {
 	 @Autowired
 	 private EspacioRepository espRep;
 	
-
-//	
-//	@Test
-//    public void adminControllerTest() {
-//		assertThat(adminController).isNotNull();
-//    }
-//	
-//	//Administrador
-//	@Test
-//	public void findAdministradorByUserAccountIdTest() {
-//		String nombre = "Antonio";
-//		Long id = (long) 1;
-//		Administrador a = adminRep.findAdministradorByUserAccountId(id);
-//		assertEquals(a.getNombre(), nombre);
-//		
-//	}
-//	
-//	//Alumno
-//	//Para ver si se crean bien los controladores
-//		@Test
-//		public void alumControllerTest() {
-//			assertThat(alumController).isNotNull();
-//		} 
-//		
-//		@Test
-//		public void findAlumnoByUserAccountIdTest() {
-//			String nombre = "Fernando";
-//			Long id = (long) 2;
-//			Alumno aux  = alumRep.findAlumnoByUserAccountId(id);
-//			assertEquals(aux.getNombre(), nombre);
-//		}
-//	
-//		
-//		//Asignatura
-//		@Test
-//		public void findListaAsignaturasTest() {
-//			String uni = "Universidad de Sevilla";
-//			String facultad = "Escuela Técnica Superior de Ingeniería Informática";
-//			String grado = "Ingeniería del Software";
-//			String curso = "PRIMERO";
-//			List<Asignatura> res = asigRep.findListaAsignaturas(uni, facultad, grado, curso);
-//			assertThat(res).isNotEmpty();
-//			assertEquals(res.get(0).getNombre(),"Fundamentos de programación");
-//		}
-//		
-//		//Espacios
+	
+	@Test
+    public void adminControllerTest() {
+		assertThat(adminController).isNotNull();
+    }
+	
+	//Administrador
+	@Test
+	public void findAdministradorByUserAccountIdTest() {
+		String nombre = "Antonio";
+		Long id = (long) 1;
+		Administrador a = adminRep.findAdministradorByUserAccountId(id);
+		assertEquals(a.getNombre(), nombre);
+		
+	}
+	
+	//Alumno
+	//Para ver si se crean bien los controladores
+		@Test
+		public void alumControllerTest() {
+			assertThat(alumController).isNotNull();
+		} 
+		
+		@Test
+		public void findAlumnoByUserAccountIdTest() {
+			String nombre = "Fernando";
+			Long id = (long) 2;
+			Alumno aux  = alumRep.findAlumnoByUserAccountId(id);
+			assertEquals(aux.getNombre(), nombre);
+		}
+	
+		
+		//Asignatura
+		@Test
+		public void findListaAsignaturasTest() {
+			String uni = "Universidad de Sevilla";
+			String facultad = "Escuela Técnica Superior de Ingeniería Informática";
+			String grado = "Ingeniería del Software";
+			String curso = "PRIMERO";
+			List<Asignatura> res = asigRep.findListaAsignaturas(uni, facultad, grado, curso);
+			assertThat(res).isNotEmpty();
+			assertEquals(res.get(0).getNombre(),"Fundamentos de programación");
+		}
+		
+		//Espacios
 
 
 //		@Test 
