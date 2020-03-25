@@ -1,9 +1,16 @@
-dist: precise
+dist: trusty
 languaje: java
 jdk: 
 - openjdk10
 services:
 - mysql
+addons:
+  sonarcloud:
+    organization: "prosubjectgrupo5"
+    token:
+      secure: "xaGFlgLfHnrB/tgdioUDgHQKcE2jGodH5vKOgs+3oK2IYGtLBJVLMiJLL3YXO9vGCY794wEH54+UVs7X9KHSzK1JPuXL3cAcdBUYNxsjIKvolQ4rhb3uASZ8xEPZtbG5REtCASmvfCSF472awoVDHLriAjifM8G5C0pZiZvu6pNsfOgttYaR6UiJhhEXyhREEWN/LCc4zw9x6ggZLdOVoXMOLElkJ4rAySccroCAuXccn3ZoqCl6DlvRzA6Zmp98CKvvJ/PzMjGGfZwjpD/JBC/jHg+E9nj6f3sgaCb59MO9nTkzfONXUOpOFX8jB3PVnrd+ZM7wHUK6nfe8P/kIDXPvNUafYZhgIBRJK/d1wJUVUA2Ew/Z4x3Zr0OcyCGW2xZ5+h31+HqJystPeCdXeK7OG8dddisqz8Ntepu0buodEL8q5YCOAAgNkszC46KJlQOQf0PsJ7Cl9TO8Zh+ogRmxIsudYUw1FasSBDxsSLITQoROmAYMpoTmvt+gDUU5VrlmwSZXRCtk3u8VzQ/4BR7tvVTreoVEl/k6okAc1pBbgNnsRYoWHih+sw0w7NEkY3FjRC14P9Xleh8wv2/30osURREnyCqaBfPChCnNPewxlXgjeSv67vRP5OslZXKrxSI4HVubIfsS44XldCEJKVTdkTaf8dkJpi5/rv9PATCo="
+script:
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=ProSubjectGrupo5_ProSubject-back 
 install:
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_install:
