@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 
@@ -32,6 +31,10 @@ public class AlumnoService {
 		return this.alumnoRepository.findAlumnoByUserAccountId(userAccountId);
 	}
 	
+	public Alumno findByUsername(final String username) {
+		return this.alumnoRepository.findAlumnoByUsername(username);
+	}
+	
 
 	public Alumno save(final Alumno a) {
 		
@@ -56,6 +59,18 @@ public class AlumnoService {
 		Alumno alumnoEditado = save(alumn);
 
 		return alumnoEditado;
+	}
+	
+	public List<Alumno> alumnosDeUnHorario(Long id) {
+		return this.alumnoRepository.alumnosDeUnHorario(id);
+	}
+	
+	public List<String> emailsAlumno() {
+		return this.alumnoRepository.emailsAlumno();
+	}
+	
+	public List<String> DNIsAlumno() {
+		return this.alumnoRepository.DNIsAlumno();
 	}
 	
 }

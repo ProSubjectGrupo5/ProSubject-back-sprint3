@@ -61,7 +61,7 @@ public class Profesor implements Serializable {
 	@Column(unique = true , nullable = false)
 	private String email;
 	
-	@Pattern(regexp="^([+][1-9]\\d{0,3})?([ ])?([(][1-9]\\d{0,4}[)])?([ ])?\\d{6,10}|^$",message = "Debe introducir un numero de telefono correcto")
+	@Pattern(regexp="^\\d{9}|^$",message = "Debe introducir un numero de telefono correcto")
 	private String telefono;
 	
 	
@@ -72,8 +72,10 @@ public class Profesor implements Serializable {
 	@Column(nullable = false)
 	private Boolean expedienteValidado;
 	
-	
-	private Byte[] expendiente;
+	@Valid
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "file_id")
+	private DBFile expendiente;
 
 	public Long getId() {
 		return id;
@@ -147,11 +149,11 @@ public class Profesor implements Serializable {
 		this.expedienteValidado = expedienteValidado;
 	}
 
-	public Byte[] getExpendiente() {
+	public DBFile getExpendiente() {
 		return expendiente;
 	}
 
-	public void setExpendiente(Byte[] expendiente) {
+	public void setExpendiente(DBFile expendiente) {
 		this.expendiente = expendiente;
 	}
 

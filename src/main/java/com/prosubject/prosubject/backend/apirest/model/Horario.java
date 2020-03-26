@@ -31,20 +31,18 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Valid
-	@ManyToMany
-	private Collection<Alumno> alumnos;
-
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date fechaInicio;
 
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date fechaFin;
+	private Date horaInicio;
+
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private Date horaFin;
 	
 	@Column(nullable = false)
 	private DiaSemana dia;
@@ -85,21 +83,22 @@ private static final long serialVersionUID = 1L;
 		this.espacio = espacio;
 	}
 
-	public Date getFechaInicio() {
-		
-		return fechaInicio;
+
+
+	public Date getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
-	public Date getFechaFin() {
-		return fechaFin;
+	public Date getHoraFin() {
+		return horaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
+	public void setHoraFin(Date horaFin) {
+		this.horaFin = horaFin;
 	}
 
 	public DiaSemana getDia() {
@@ -110,13 +109,7 @@ private static final long serialVersionUID = 1L;
 		this.dia = dia;
 	}
 	
-	public Collection<Alumno> getAlumnos() {
-		return alumnos;
-	}
 
-	public void setAlumnos(Collection<Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
 
 
 	
