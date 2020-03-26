@@ -1,5 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,5 +16,12 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	
 	@Query("select p from profesores p where p.useraccount.username=?1")
 	Profesor findProfesorByUsername(String username);
+	
+	
+	@Query("select p.email from profesores p")
+	List<String> emailsProfesor();
+	
+	@Query("select p.dni from profesores p")
+	List<String> DNIsProfesor();
 
 }
