@@ -12,11 +12,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
 
@@ -33,28 +40,38 @@ public class SignUpController {
 
 	@Autowired
 	private UserAccountService userAccountService;
+	
+	@Autowired
+	private DBFileStorageService dBFileStorageService;
 
 	@PostMapping("/signUpProfesor")
-	public ResponseEntity<?> signUpProfesor(@RequestBody Profesor profesor) {
+	public ResponseEntity<?> signUpProfesor(@RequestParam("profesor") String profesor,@RequestParam("file") MultipartFile file) throws JsonMappingException, JsonProcessingException {
+		Profesor prof=new ObjectMapper().readValue(profesor, Profesor.class);
 		Map<String, Object> response = new HashMap<String, Object>();
 		Profesor profesorNuevo = null;
 		List<String> emails = this.profesorService.emailsProfesor();
 		List<String> dnis = this.profesorService.DNIsProfesor();
 		List<String> users = this.userAccountService.todosUsername();
 
-		if (dnis.contains(profesor.getDni())) {
+		if (dnis.contains(prof.getDni())) {
 			response.put("mensaje", "El DNI ya esta en uso por un profesor");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		} else if (emails.contains(profesor.getEmail())) {
+		} else if (emails.contains(prof.getEmail())) {
 			response.put("mensaje", "El email ya esta en uso por un profesor");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		} else if (users.contains(profesor.getUserAccount().getUsername())) {
+		} else if (users.contains(prof.getUserAccount().getUsername())) {
 			response.put("mensaje", "El nombre de usuario ya esta en uso");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
 
 			try {
-				profesorNuevo = this.profesorService.save(profesor);
+				
+				DBFile dbFile = this.dBFileStorageService.storeFile(file);
+				
+				prof.setExpendiente(dbFile);
+				
+				profesorNuevo = this.profesorService.save(prof);
+				
 			} catch (DataAccessException e) {
 				response.put("mensaje", "Error al realizar el insert en la base de datos");
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
