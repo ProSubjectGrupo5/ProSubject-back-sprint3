@@ -3,23 +3,13 @@ package com.prosubject.prosubject.backend.apirest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
-import org.apache.catalina.User;
-import org.hibernate.id.ForeignGenerator;
+
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +105,6 @@ class ProsubjectBackendApirestApplicationTests {
 	}
 	
 	//Alumno
-	//Para ver si se crean bien los controladores
 		@Test
 		public void alumControllerTest() {
 			assertThat(alumController).isNotNull();
@@ -173,7 +162,7 @@ class ProsubjectBackendApirestApplicationTests {
 			assertEquals(asignatura.getNombre(),"Fundamentos de la programación II");
 			
 			
-			//NO LO PILLA BIEN EL CURSO Y GRADO
+			
 
 		}
 		
@@ -241,7 +230,6 @@ class ProsubjectBackendApirestApplicationTests {
 			
 		}
 		//Foro
-		
 		@Test
 		public void GetterAndSetterForoTest() {
 			
@@ -310,7 +298,7 @@ class ProsubjectBackendApirestApplicationTests {
 			profesor.setEmail("rodrojgut@alum.us.es");
 			profesor.setTelefono("123456789");
 			profesor.setTarifaPremium(true);
-			profesor.setExpedienteValidado(true);
+			//profesor.setExpedienteValidado(true);
 			profesor.setExpendiente(expediente);
 			assertEquals(profesor.getUserAccount(),userAccount);
 			assertEquals(profesor.getNombre(),"Rodrigo");
@@ -320,7 +308,7 @@ class ProsubjectBackendApirestApplicationTests {
 			assertEquals(profesor.getEmail(),"rodrojgut@alum.us.es");
 			assertEquals(profesor.getTelefono(),"123456789");
 			assertEquals(profesor.getTarifaPremium(),true);
-			assertEquals(profesor.getExpedienteValidado(),true);
+		//	assertEquals(profesor.getExpedienteValidado(),true);
 			assertEquals(profesor.getExpendiente(),expediente);
 			
 			
