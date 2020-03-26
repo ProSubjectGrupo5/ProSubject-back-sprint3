@@ -23,6 +23,7 @@ import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.ValidacionExpediente;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 
@@ -82,21 +83,17 @@ public class ProfesorController {
 	}
 	
 	
-	@PutMapping("/verificarExpediente/{id}")
-	public ResponseEntity<?> verificarExpediente(@PathVariable Long id){
+	@GetMapping("/aceptarExpediente/{id}")
+	public ResponseEntity<?> aceptarExpediente(@PathVariable Long id){
 		Map<String, Object> response = new HashMap<String, Object>();
 		Profesor profesorModificado = null;
 		
 		Profesor prof = this.profesorService.findOne(id);
 		Assert.assertNotNull(prof);
-		
-		if(prof.getExpedienteValidado().equals(false)) {
-			prof.setExpedienteValidado(true);
-		}
-		else
-			prof.setExpedienteValidado(false);
+
 		
 		try {
+			prof.setExpedienteValidado(ValidacionExpediente.ACEPTADO);
 			profesorModificado = this.profesorService.save(prof);	
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar el update en la base de datos");
@@ -107,6 +104,32 @@ public class ProfesorController {
 		return new ResponseEntity<Profesor>(profesorModificado, HttpStatus.OK);	
 	}
 	
+	@GetMapping("/rechazarExpediente/{id}")
+	public ResponseEntity<?> rechazarExpediente(@PathVariable Long id){
+		Map<String, Object> response = new HashMap<String, Object>();
+		Profesor profesorModificado = null;
+		
+		Profesor prof = this.profesorService.findOne(id);
+		Assert.assertNotNull(prof);
+
+		
+		try {
+			prof.setExpedienteValidado(ValidacionExpediente.RECHAZADO);
+			profesorModificado = this.profesorService.save(prof);	
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el update en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		return new ResponseEntity<Profesor>(profesorModificado, HttpStatus.OK);	
+	}
+	
+	@GetMapping("/validacionExpedientePendiente")
+	public List<Profesor> profesoresExpedientePendiete(){
+		return this.profesorService.profesoresExpedientePendiete();
+		
+	}
 	
 	
 }
