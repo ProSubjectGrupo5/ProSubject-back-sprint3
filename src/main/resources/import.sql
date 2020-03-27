@@ -151,11 +151,11 @@ INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,
 
 
 
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '1','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('1', '2','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('3', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `rangos` (`horario_id`, `alumno_id`,`fecha_inicio`,`fecha_fin`) VALUES ('7', '4','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('1', '1');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('1', '2');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('3', '3');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('7', '3');
+INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('7', '4');
 
 
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');

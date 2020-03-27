@@ -121,8 +121,7 @@ public class HorarioService {
 			Date fechaActual =new Date();
 			
 			rango.setAlumno(alumno);
-			rango.setFechaInicio(fechaActual);
-			rango.setFechaFin(sumarRestarDiasFecha(rango.getFechaInicio(), 28));
+		
 			
 			Horario saved = this.horarioRepository.save(horario);
 			
