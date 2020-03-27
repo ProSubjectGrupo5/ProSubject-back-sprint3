@@ -64,6 +64,8 @@ public class HorarioService {
 		
 		for (Horario horario : h) {
 			if (horario.getId()==null) {
+				Date fechaInicio = horario.getFechaInicio();
+				horario.setFechaFin(sumarRestarDiasFecha(fechaInicio, 28));
 				horario.setEspacio(eSaved);
 			}	
 			
@@ -89,13 +91,18 @@ public class HorarioService {
 		Espacio eSaved = this.espacioService.save(e);
 		
 		if (h.getId()==null) {
+			
 			h.setEspacio(eSaved);
 				
 		}
 			
 		if(checkHoraInicioValid(h)&& checkHoraFinValid(h)) {
+			Date fechaInicio = h.getFechaInicio();
+			h.setFechaFin(sumarRestarDiasFecha(fechaInicio, 28));
 			h = this.horarioRepository.save(h);
 		}
+		
+		
 				
 		
 			return h;
