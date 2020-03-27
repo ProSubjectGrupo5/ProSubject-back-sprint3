@@ -141,13 +141,13 @@ INSERT INTO `espacios` (`asignatura_id`, `foro_id`, `profesor_id`, `precio`,`dra
 
 
 
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('1','11:00:00','12:00:00','1',2,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('3','11:00:00','12:00:00','1',2,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('3','18:30:00','19:30:00','2',6,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('5','12:00:00','13:00:00','2',6,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('2','20:00:00','21:00:00','3',12,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('4','15:00:00','16:00:00','4',12,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('4','15:00:00','16:00:00','5',4,'2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('1','11:00:00','12:00:00','1',2,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('3','11:00:00','12:00:00','1',2,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('3','18:30:00','19:30:00','2',6,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('5','12:00:00','13:00:00','2',6,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('2','20:00:00','21:00:00','3',12,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('4','15:00:00','16:00:00','4',12,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
+INSERT INTO `horario` (`dia`,`hora_inicio`,`hora_fin`,`espacio_id`, `capacidad`,`fecha_inicio`,`fecha_fin`) VALUES ('4','15:00:00','16:00:00','5',4,'2020-08-20 00:00:00.000000','2020-09-20 00:00:00.000000');
 
 
 
