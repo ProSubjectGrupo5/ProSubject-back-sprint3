@@ -65,5 +65,9 @@ public class ProfesorService {
 	public List<String> DNIsProfesor() {
 		return this.profesorRepository.DNIsProfesor();
 	}
+	
+	public List<Profesor> profesoresExpedientePendiete() {
+		return this.profesorRepository.profesoresExpedientePendiete();
+	}
 
 }

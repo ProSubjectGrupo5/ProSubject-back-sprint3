@@ -70,7 +70,7 @@ public class Profesor implements Serializable {
 	
 	
 	@Column(nullable = false)
-	private Boolean expedienteValidado;
+	private ValidacionExpediente expedienteValidado;
 	
 	@Valid
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
@@ -141,11 +141,11 @@ public class Profesor implements Serializable {
 		this.tarifaPremium = tarifaPremium;
 	}
 
-	public Boolean getExpedienteValidado() {
+	public ValidacionExpediente getExpedienteValidado() {
 		return expedienteValidado;
 	}
 
-	public void setExpedienteValidado(Boolean expedienteValidado) {
+	public void setExpedienteValidado(ValidacionExpediente expedienteValidado) {
 		this.expedienteValidado = expedienteValidado;
 	}
 

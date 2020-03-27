@@ -23,5 +23,8 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	
 	@Query("select p.dni from profesores p")
 	List<String> DNIsProfesor();
+	
+	@Query("select p from profesores p where p.expedienteValidado=0")
+	List<Profesor> profesoresExpedientePendiete();
 
 }
