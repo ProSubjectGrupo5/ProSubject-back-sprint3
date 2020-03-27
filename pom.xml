@@ -113,6 +113,7 @@
 	<build>
 		<plugins>
 			<plugin>
+<<<<<<< .merge_file_a09700
 <<<<<<< .merge_file_a15396
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -137,6 +138,8 @@
                         </executions>
                     </plugin>
 =======
+=======
+>>>>>>> .merge_file_a01700
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
             <executions>
@@ -150,7 +153,10 @@
                 </execution>
             </executions>
         </plugin>
+<<<<<<< .merge_file_a09700
 >>>>>>> .merge_file_a09392
+=======
+>>>>>>> .merge_file_a01700
 		</plugins>
 	</build>
 
