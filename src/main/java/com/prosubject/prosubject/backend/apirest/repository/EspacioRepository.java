@@ -34,7 +34,7 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	List<Espacio> espaciosDeUnAlumno(Long id);
 
 	
-	@Query("select distinct(h.espacio) from horario h where h.capacidad > (select count(r.alumno.id) from rangos r where r.horario.id = h.id) AND h.espacio.draftMode = 0")
+	@Query("select distinct(h.espacio) from horario h where h.capacidad > (select count(r.alumno.id) from rangos r where r.horario.id = h.id) AND h.espacio.draftMode = 0 AND h.fechaInicio > CURRENT_TIMESTAMP")
 	List<Espacio> espaciosConHorarioConCapacidad();
 	
 }
