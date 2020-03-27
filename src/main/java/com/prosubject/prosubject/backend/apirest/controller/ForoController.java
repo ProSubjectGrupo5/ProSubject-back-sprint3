@@ -28,6 +28,7 @@ import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
+import com.prosubject.prosubject.backend.apirest.payload.OutputMessage;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
@@ -59,6 +60,13 @@ public class ForoController {
 		
 	}
 	
+	 @MessageMapping("")
+	 @SendTo("/respuestas")
+	    public OutputMessage send(final Respuesta message) throws Exception {
+
+	        final String time = new SimpleDateFormat("HH:mm").format(new Date());
+	        return new OutputMessage(message.getUser(), message.getContenido(), time);
+	    }
 	 
 	 
 	@GetMapping("/{id}")
