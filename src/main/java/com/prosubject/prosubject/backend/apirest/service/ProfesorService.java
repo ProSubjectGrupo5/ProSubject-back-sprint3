@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.ValidacionExpediente;
 import com.prosubject.prosubject.backend.apirest.repository.ProfesorRepository;
 
 @Service
@@ -40,6 +41,10 @@ public class ProfesorService {
 	public Profesor edit(Long id, Profesor profesor) {
 
 		Profesor profe = findOne(id);
+		
+		if(profe.getExpendiente()!=profesor.getExpendiente()) {
+			profe.setExpedienteValidado(ValidacionExpediente.PENDIENTE);
+		}
 
 		profe.setApellido1(profesor.getApellido1());
 		profe.setApellido2(profesor.getApellido2());
