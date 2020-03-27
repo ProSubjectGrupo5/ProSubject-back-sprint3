@@ -107,6 +107,10 @@ public class EspacioController{
 				response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(id.toString()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 			}
+		}else {
+			response.put("mensaje",	 "El Username no existe");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			
 		}
 		
 		return new ResponseEntity<Espacio>(espacio, HttpStatus.OK);
@@ -250,6 +254,10 @@ public class EspacioController{
 				response.put("mensaje",	 "El profesor no pertenece al espacio cuyo id es ".concat(espacioId.toString()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 			}
+		}else {
+			response.put("mensaje",	 "El Username no existe");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			
 		}
 		
 		try {

@@ -10,7 +10,7 @@ import com.prosubject.prosubject.backend.apirest.model.DBFile;
 
 	
 	@Repository
-	public interface DBFileRepository extends JpaRepository<DBFile, String> {
+	public interface DBFileRepository extends JpaRepository<DBFile, Long> {
 
 		
 		

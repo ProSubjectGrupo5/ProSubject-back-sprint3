@@ -55,5 +55,19 @@ public class ProfesorService {
 
 		return profeEditado;
 	}
+	
+	
+	
+	public List<String> emailsProfesor() {
+		return this.profesorRepository.emailsProfesor();
+	}
+	
+	public List<String> DNIsProfesor() {
+		return this.profesorRepository.DNIsProfesor();
+	}
+	
+	public List<Profesor> profesoresExpedientePendiete() {
+		return this.profesorRepository.profesoresExpedientePendiete();
+	}
 
 }
