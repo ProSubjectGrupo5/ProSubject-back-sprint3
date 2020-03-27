@@ -22,10 +22,13 @@ public class CarritoService {
 		return this.carritoRepository.findById(carritoId).orElse(null);
 	}
 	
-	public Carrito precioMensualHorarios(Long carritoId) {
-		Double precioHorario = this.carritoRepository.precioMensualHorarios(carritoId);
+	public Carrito precioMensualHorarios(Long alumnoId) {
+		Double precioHorario = this.carritoRepository.precioMensualHorarios(alumnoId);
 		Integer mensual = 4;
-		Carrito c = findOne(carritoId);
+		if(precioHorario==null) {
+			precioHorario = 0.0;
+		}
+		Carrito c = findOne(alumnoId);
 		c.setPrecioMensual(precioHorario * mensual);
 		return c;
 	}

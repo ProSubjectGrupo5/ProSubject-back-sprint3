@@ -124,6 +124,26 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `tele
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '21562321U', 'juanje_chus@gmail.com', 'Mario', '678886247', '36');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Ruiz', 'Castilla', '12523211T', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
 
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '1');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '2');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '3');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '4');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '5');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '6');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '7');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '8');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '9');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '10');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '11');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '12');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '13');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '14');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '15');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '16');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '17');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '18');
+INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '19');
+
 
 INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Fundamentos de programación');
 INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Análisis y Diseño de Datos y Algoritmos');
