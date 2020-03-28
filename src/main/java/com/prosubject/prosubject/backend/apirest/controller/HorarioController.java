@@ -88,10 +88,7 @@ public class HorarioController{
 			response.put("mensaje",	 "El horario con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
-		if(horario.getEspacio().getDraftMode() == 0) {
-			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
+	
 		
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
