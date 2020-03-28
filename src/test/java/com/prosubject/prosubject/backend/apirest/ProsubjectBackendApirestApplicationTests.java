@@ -328,11 +328,12 @@ class ProsubjectBackendApirestApplicationTests {
 					
 					rango.setAlumno(alumno);
 					rango.setHorario(horario);
+
 					assertEquals(rango.getAlumno(),alumno);
 					assertEquals(rango.getHorario(),horario);
 
-					
-					
+
+		
 					
 					
 				}

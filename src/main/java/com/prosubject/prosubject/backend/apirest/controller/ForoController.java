@@ -1,5 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +27,8 @@ import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.Respuesta;
+import com.prosubject.prosubject.backend.apirest.payload.OutputMessage;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
@@ -54,6 +60,15 @@ public class ForoController {
 		
 	}
 	
+	 @MessageMapping("")
+	 @SendTo("/respuestas")
+	    public OutputMessage send(final Respuesta message) throws Exception {
+
+	        final String time = new SimpleDateFormat("HH:mm").format(new Date());
+	        return new OutputMessage(message.getUser(), message.getContenido(), time);
+	    }
+	 
+	 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Long id){
 		Foro foro = null;
