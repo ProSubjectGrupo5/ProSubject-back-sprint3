@@ -328,12 +328,9 @@ class ProsubjectBackendApirestApplicationTests {
 					
 					rango.setAlumno(alumno);
 					rango.setHorario(horario);
-					rango.setFechaInicio(fechaInicio);
-					rango.setFechaFin(fechaFin);
 					assertEquals(rango.getAlumno(),alumno);
 					assertEquals(rango.getHorario(),horario);
-					assertEquals(rango.getFechaInicio(),fechaInicio);
-					assertEquals(rango.getFechaFin(),fechaFin);
+
 					
 					
 					
