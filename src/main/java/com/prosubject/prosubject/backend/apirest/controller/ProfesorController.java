@@ -106,7 +106,7 @@ public class ProfesorController {
 		} else {
 
 			try {
-				if (!file.isEmpty()) {
+				if (file!=null) {
 					if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
 						response.put("mensaje", "El expediente no tiene formato pdf");
 						return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
