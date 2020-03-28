@@ -167,14 +167,6 @@ public class Profesor implements Serializable {
 		this.useraccount = userAccount;
 	}
 
-
-	
-
-
-
-
-
-
 }
 
 

@@ -55,7 +55,8 @@ public class EspacioController{
 			@RequestParam(value="grado") String grado,
 			@RequestParam(value="curso") String curso,
 			@RequestParam(value="asignatura") String asignatura){
-		return this.espacioService.findDisponibles(universidad, facultad, grado, curso, asignatura);
+		
+		return this.espacioService.findDisponibles(universidad ,facultad, grado, curso, asignatura);
 	}
 		
 	@GetMapping("/{id}")
