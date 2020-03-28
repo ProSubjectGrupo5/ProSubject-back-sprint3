@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.CarritoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
@@ -42,7 +44,9 @@ public class HorarioController{
 	@Autowired
 	private EspacioService espaciosService;
 	@Autowired
-	private ProfesorService profesorService;	
+	private ProfesorService profesorService;
+	@Autowired
+	private CarritoService carritoService;
 
 	
 
@@ -275,6 +279,7 @@ public class HorarioController{
 	public ResponseEntity<?> insertarAlumno(@RequestBody List<Horario> horarios , @RequestParam Long alumnoId) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioModificado = null;
+		Carrito carro = null;
 		List<Horario> horariosAñadidos = new ArrayList<Horario>();
 		
 		for (Horario horario : horarios) {
@@ -303,7 +308,8 @@ public class HorarioController{
 		}
 		
 		try {
-			horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);	
+			horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);
+			carro = this.carritoService.removeAllHorario(alumno);
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
