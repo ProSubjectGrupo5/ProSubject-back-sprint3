@@ -74,5 +74,9 @@ public class ProfesorService {
 	public List<Profesor> profesoresExpedientePendiete() {
 		return this.profesorRepository.profesoresExpedientePendiete();
 	}
+	
+	public List<Profesor> profesoresTarifaPremium(){
+		return this.profesorRepository.profesoresTarifaPremium();
+	}
 
 }
