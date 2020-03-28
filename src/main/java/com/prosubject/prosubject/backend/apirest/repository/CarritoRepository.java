@@ -15,5 +15,8 @@ public interface CarritoRepository extends JpaRepository<Carrito, Long>{
 			+ "where c.alumno.id=?1") 
 	Double precioMensualHorarios(Long id);
 	
+	@Query("select c from carrito c where c.alumno.id=?1")
+	Carrito carritoAlumno(Long id);
+	
 	
 }

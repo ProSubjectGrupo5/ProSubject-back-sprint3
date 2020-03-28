@@ -1,11 +1,14 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.repository.CarritoRepository;
 
 @Service
@@ -36,6 +39,22 @@ public class CarritoService {
 	public Carrito save(final Carrito c) {
 		Carrito saved = this.carritoRepository.save(c);
 		return saved;
+	}
+	
+	public Carrito addHorario(final Carrito carro, Horario horario) {
+		carro.getHorario().add(horario);
+	    return save(carro);
+	}
+	
+	public Carrito removeHorario(final Carrito carro, Horario horario) {
+		carro.getHorario().remove(horario);
+	    return save(carro);
+	}
+	
+	public Carrito removeAllHorario(final Alumno alumno, List<Horario> horario) {
+		Carrito carro = this.carritoRepository.carritoAlumno(alumno.getId());
+		carro.getHorario().removeAll(horario);
+	    return save(carro);
 	}
 	
 }
