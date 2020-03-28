@@ -55,12 +55,12 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private Date fechaInicio;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private Date fechaFin;
 	
 	
