@@ -1,5 +1,6 @@
 package com.prosubject.prosubject.backend.apirest.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -270,17 +271,20 @@ public class HorarioController{
 	}
 	
 	
+
+	
 	@PutMapping("/insertarAlumno")
-	public ResponseEntity<?> insertarAlumno(@RequestParam Long horarioId, @RequestParam Long alumnoId) throws Exception {
+	public ResponseEntity<?> insertarAlumno(@RequestBody List<Horario> horarios , @RequestParam Long alumnoId) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioModificado = null;
+		List<Horario> horariosAñadidos = new ArrayList<Horario>();
 		
-		Horario horario = this.horarioService.findOne(horarioId);
+		for (Horario horario : horarios) {
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
-		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horarioId);
+		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horario.getId());
 		
 		if(horario == null) {
-			response.put("mensaje",	 "El horario con ID: ".concat(horarioId.toString()).concat(" no existe"));
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
@@ -301,14 +305,19 @@ public class HorarioController{
 		}
 		
 		try {
-			horarioModificado = this.horarioService.añadirAlumno(horarioId, alumnoId);	
+			horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);	
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
-		return new ResponseEntity<Horario>(horarioModificado, HttpStatus.OK);	
+		horariosAñadidos.add(horarioModificado);
+		
+		
+		}
+		
+		return new ResponseEntity<List<Horario>>(horariosAñadidos, HttpStatus.OK);	
 	}
 	
 //	
