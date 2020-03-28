@@ -145,6 +145,11 @@ public class HorarioController{
 	public ResponseEntity<?> modificarHorario(@RequestBody Horario horario ) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioGuardado = null;
+		
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() != 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
 		try {
 			horarioGuardado =horarioService.saveOne(horario);
 		}catch(DataAccessException e) {
