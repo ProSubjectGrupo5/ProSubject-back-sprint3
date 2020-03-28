@@ -121,7 +121,7 @@ public class ProfesorController {
 
 				profesorEditado = profesorService.edit(id, prof);
 			} catch (DataAccessException e) {
-				response.put("mensaje", "Error al realizar el edit en la base de datos");
+				response.put("mensaje", "Se ha producido un error");
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
