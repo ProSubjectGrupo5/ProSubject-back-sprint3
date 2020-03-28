@@ -11,6 +11,7 @@ import com.prosubject.prosubject.backend.apirest.exception.FileStorageException;
 import com.prosubject.prosubject.backend.apirest.exception.MyFileNotFoundException;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
+import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.repository.DBFileRepository;
 
 @Service
@@ -44,5 +45,10 @@ public class DBFileStorageService {
     
 	public DBFile findOne(final Long fileId) {
 		return this.dbFileRepository.findById(fileId).orElse(null);
+	}
+	
+	public void delete(DBFile dBFile) {
+		this.dbFileRepository.delete(dBFile);
+		
 	}
 }

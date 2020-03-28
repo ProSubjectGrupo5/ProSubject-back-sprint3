@@ -31,6 +31,7 @@ import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.model.ValidacionExpediente;
 import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
 
 @RestController
 @RequestMapping("/api/profesores")
@@ -39,7 +40,10 @@ public class ProfesorController {
 
 	@Autowired
 	private ProfesorService profesorService;
-	
+
+	@Autowired
+	private UserAccountService userAccountService;
+
 	@Autowired
 	private DBFileStorageService dBFileStorageService;
 
@@ -74,23 +78,56 @@ public class ProfesorController {
 	// ----------------------------
 
 	@PutMapping("/edit/{id}")
-	public ResponseEntity<?> editarProfesor(@PathVariable Long id,@RequestParam("profesor") String profesor,@RequestParam("file") MultipartFile file) throws JsonMappingException, JsonProcessingException {
-		Profesor prof=new ObjectMapper().readValue(profesor, Profesor.class);
+	public ResponseEntity<?> editarProfesor(@PathVariable Long id, @RequestParam("profesor") String profesor,
+			@RequestParam(required = false, name = "file") MultipartFile file)
+			throws JsonMappingException, JsonProcessingException {
+		Profesor prof = new ObjectMapper().readValue(profesor, Profesor.class);
 		Map<String, Object> response = new HashMap<String, Object>();
 		Profesor profesorEditado = null;
 
-		try {
-			
-			DBFile dbFile = this.dBFileStorageService.storeFile(file);
-			prof.setExpendiente(dbFile);
-			profesorEditado = profesorService.edit(id, prof);
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar el edit en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		Profesor p = this.profesorService.findOne(id);
 
-		return new ResponseEntity<Profesor>(profesorEditado, HttpStatus.OK);
+		List<String> emailsEnuso = this.profesorService.emailsProfesor();
+		emailsEnuso.remove(p.getEmail());
+		List<String> dnisEnuso = this.profesorService.DNIsProfesor();
+		dnisEnuso.remove(p.getDni());
+		List<String> usersEnuso = this.userAccountService.todosUsername();
+		usersEnuso.remove(p.getUserAccount().getUsername());
+
+		if (dnisEnuso.contains(prof.getDni())) {
+			response.put("mensaje", "El DNI ya esta en uso por un profesor");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else if (emailsEnuso.contains(prof.getEmail())) {
+			response.put("mensaje", "El email ya esta en uso por un profesor");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else if (usersEnuso.contains(prof.getUserAccount().getUsername())) {
+			response.put("mensaje", "El nombre de usuario ya esta en uso");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else {
+
+			try {
+				if (!file.isEmpty()) {
+					if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
+						response.put("mensaje", "El expediente no esta en formato pdf");
+						return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+					} else {
+						DBFile borrarPdf = this.profesorService.findOne(id).getExpendiente();
+						this.dBFileStorageService.delete(borrarPdf);
+						DBFile dbFile = this.dBFileStorageService.storeFile(file);
+						prof.setExpendiente(dbFile);
+					}
+				}
+
+				profesorEditado = profesorService.edit(id, prof);
+			} catch (DataAccessException e) {
+				response.put("mensaje", "Error al realizar el edit en la base de datos");
+				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			return new ResponseEntity<Profesor>(profesorEditado, HttpStatus.OK);
+		}
 	}
 
 	// ----------------------------
