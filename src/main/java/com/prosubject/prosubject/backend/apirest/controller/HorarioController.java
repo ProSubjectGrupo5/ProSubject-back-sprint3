@@ -89,7 +89,6 @@ public class HorarioController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
-		
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
 			if(!profesor.equals(horario.getEspacio().getProfesor())) {
