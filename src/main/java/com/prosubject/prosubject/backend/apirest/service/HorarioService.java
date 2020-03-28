@@ -133,8 +133,6 @@ public class HorarioService {
 			Date fechaActual =new Date();
 			
 			rango.setAlumno(alumno);
-		
-		
 			
 			Horario saved = this.horarioRepository.save(horario);
 			
