@@ -270,9 +270,7 @@ public class HorarioController{
 		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}
 	
-	
 
-	
 	@PutMapping("/insertarAlumno")
 	public ResponseEntity<?> insertarAlumno(@RequestBody List<Horario> horarios , @RequestParam Long alumnoId) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
