@@ -54,8 +54,8 @@ public class EspacioService {
 			
 		}else {
 			Espacio espacioAntiguo=this.findOne(e.getId());
-			Assert.isTrue(espacioAntiguo.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
-					" no puede ser modificado, debido al draftMode");
+//			Assert.isTrue(espacioAntiguo.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
+//					" no puede ser modificado, debido al draftMode");
 			f=this.foroService.foroPorEspacioId(e.getId());
 			e.setForo(f);
 			
