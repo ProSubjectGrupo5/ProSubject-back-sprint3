@@ -88,6 +88,10 @@ public class HorarioController{
 			response.put("mensaje",	 "El horario con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
 	
 		
 		Profesor profesor = this.profesorService.findByUsername(username);
@@ -146,7 +150,7 @@ public class HorarioController{
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioGuardado = null;
 		
-		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() != 0) {
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
 			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
@@ -396,10 +400,10 @@ public class HorarioController{
 		}
 		
 		
-		if(horario.getEspacio().getDraftMode() == 0) {
-			response.put("mensaje",	 "El horario que estas intentando borrar no se encuentra en un espacio editable");
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-			}
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
 			if(!profesor.equals(horario.getEspacio().getProfesor())) {
