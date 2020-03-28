@@ -98,7 +98,7 @@ public class ProfesorController {
 			response.put("mensaje", "El DNI ya esta en uso por un profesor");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else if (emailsEnuso.contains(prof.getEmail())) {
-			response.put("mensaje", "El email ya esta en uso por un profesor");
+			response.put("mensaje", "El email ya no se encuentra en uso");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else if (usersEnuso.contains(prof.getUserAccount().getUsername())) {
 			response.put("mensaje", "El nombre de usuario ya esta en uso");
@@ -108,7 +108,7 @@ public class ProfesorController {
 			try {
 				if (!file.isEmpty()) {
 					if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
-						response.put("mensaje", "El expediente no esta en formato pdf");
+						response.put("mensaje", "El expediente no tiene formato pdf");
 						return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 					} else {
