@@ -58,7 +58,6 @@ public class CarritoService {
 	
 	public Carrito removeAllHorario(final Alumno alumno) {
 		Carrito carro = this.carritoRepository.carritoAlumno(alumno.getId());
-//		Horario horarioAntiguo = this.horarioService.findOne(horario.getId());
 		List<Horario> listaHorario = new ArrayList<Horario>();
 		carro.setHorario(listaHorario);
 	    return save(carro);

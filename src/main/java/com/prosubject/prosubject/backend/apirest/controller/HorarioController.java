@@ -276,13 +276,14 @@ public class HorarioController{
 	
 
 	@PutMapping("/insertarAlumno")
-	public ResponseEntity<?> insertarAlumno(@RequestBody List<Horario> horarios , @RequestParam Long alumnoId) throws Exception {
+	public ResponseEntity<?> insertarAlumno(@RequestBody List<Long> horariosId , @RequestParam Long alumnoId) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioModificado = null;
 		Carrito carro = null;
 		List<Horario> horariosAñadidos = new ArrayList<Horario>();
 		
-		for (Horario horario : horarios) {
+		for (Long horarioId : horariosId) {
+		Horario horario = this.horarioService.findOne(horarioId);
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
 		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horario.getId());
 		
