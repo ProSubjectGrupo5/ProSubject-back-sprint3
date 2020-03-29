@@ -52,13 +52,23 @@ INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Historia del Arte
 INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Biología', '2');
 
 
+
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingeniería del Software', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingeniería de Computadores', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Tecnología informática', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingeniería de la salud', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Historia del Arte contemporaneo', '4', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Historia del Arte antiguo', '4', '4');
-
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Psicología', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Administración y dirección de empresas', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Grado en Ingeniería Aeroespacial', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Medicina', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Grado en Relaciones Internacionales', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Ingenieria Industrial', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Trabajo Social', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Turismo', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Comunicación Audiovisual', '','4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Química', '','4');
 
 INSERT INTO `cursos` (`nombre`) VALUES ('PRIMERO');
 INSERT INTO `cursos` (`nombre`) VALUES ('SEGUNDO');
