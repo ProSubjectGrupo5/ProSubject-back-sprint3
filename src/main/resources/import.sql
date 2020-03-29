@@ -37,6 +37,8 @@ INSERT INTO `useraccounts` (`password`,`username`,`autoridad`) VALUES ('juanje_c
 INSERT INTO `useraccounts` (`password`,`username`,`autoridad`) VALUES ('carmenrucasti1','carmenrucasti1','1');
 INSERT INTO `useraccounts` (`password`,`username`,`autoridad`) VALUES ('carmenrucasti','carmenrucasti','2');
 
+INSERT INTO `administradores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Romero', 'Caceres', '4754620Y', 'antromcac@alum.us.es', 'Antonio', '603552740', '1');
+
 
 
 INSERT INTO `universidades` (`nombre`) VALUES ('Universidad de Sevilla');
