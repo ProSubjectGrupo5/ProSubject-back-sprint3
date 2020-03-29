@@ -16,11 +16,12 @@ public class RespuestaService {
 	@Autowired
 	private RespuestaRepository RespuestaRepository;
 	
-	
+	/*
 	public Respuesta create() {
 		final Respuesta r = new Respuesta();
 		return r;
 	}
+	*/
 	
 	public List<Respuesta> findAll() {
 		return this.RespuestaRepository.findAll();

@@ -50,12 +50,29 @@ public class EspacioController{
 	}
 	
 	@GetMapping("/espaciosDisponibles")
-	public List<Espacio> findDisponibles(@RequestParam(value="universidad") String universidad, 
+	public ResponseEntity<?> findDisponibles(@RequestParam(value="universidad") String universidad, 
 			@RequestParam(value="facultad") String facultad,
 			@RequestParam(value="grado") String grado,
 			@RequestParam(value="curso") String curso,
 			@RequestParam(value="asignatura") String asignatura){
-		return this.espacioService.findDisponibles(universidad, facultad, grado, curso, asignatura);
+		List<Espacio> espacios = new ArrayList<>();
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			espacios = this.espacioService.findDisponibles(universidad, facultad, grado, curso, asignatura);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		if(espacios.isEmpty()) {
+			response.put("mensaje", "No existen espacios para el filtro realizado");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<List<Espacio>>(espacios, HttpStatus.OK);
 	}
 		
 	@GetMapping("/{id}")

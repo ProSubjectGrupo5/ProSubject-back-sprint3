@@ -60,13 +60,16 @@ public class ForoController {
 		
 	}
 	
-	 @MessageMapping("")
+	/*
+	
+	 @MessageMapping("/mensaje")
 	 @SendTo("/respuestas")
 	    public OutputMessage send(final Respuesta message) throws Exception {
 
 	        final String time = new SimpleDateFormat("HH:mm").format(new Date());
 	        return new OutputMessage(message.getUser(), message.getContenido(), time);
 	    }
+	    */
 	 
 	 
 	@GetMapping("/{id}")
