@@ -3,11 +3,7 @@ languaje: java
 jdk: 
 - openjdk10
 services:
-<<<<<<< HEAD
 - postgresql
-=======
-- mysql
->>>>>>> developer
 addons:
   sonarcloud:
     organization: "prosubjectgrupo5"
@@ -22,7 +18,7 @@ before_install:
 - psql -c 'create database db02fbkv8ge7t4;' -U postgres
 
 on:
-    branch: developer
+    branch: master
 
 
 
