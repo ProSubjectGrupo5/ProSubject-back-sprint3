@@ -55,8 +55,18 @@ INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería del S
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería de Computadores', '1', '4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Tecnología informática', '1', '4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería de la salud', '1', '4');
-INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Historia del Arte contemporaneo', '4', '4');
-INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Historia del Arte antiguo', '4', '4');
+INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Historia del Arte', '4', '4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Psicología', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Administración y dirección de empresas', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Ingeniería Aeroespacial', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Medicina', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Relaciones Internacionales', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Ingenieria Industrial', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Trabajo Social', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Turismo', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Comunicación Audiovisual', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Química', '','4');
+
 
 
 INSERT INTO curso (nombre) VALUES ('PRIMERO');
@@ -71,6 +81,19 @@ INSERT INTO asignatura (nombre, curso_id) VALUES ('Análisis y diseño de datos 
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Diseño y pruebas 1', '3');
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Diseño y pruebas 2', '3');
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Complemento de Bases de Datos', '4');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Historia del Arte contemporaneo', '2');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Historia del Arte antiguo', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Fundamentos de psicobiología', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Matématicas I', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Química', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Fisica II', '2');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Farmacología general', '3');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Política y sociedad', '3');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Elasticidad y Resistencia de Materiales', '2');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Bases de Derecho Administrativo', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Geografía General y Regional del Turismo', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('La comunicación en entornos virtuales', '3');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Mecanica y ondas', '1');
 
 
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('1', '1');
@@ -122,12 +145,44 @@ INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useracco
 INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '21562321U', 'juanje_chus@gmail.com', 'Mario', '678886247', '36');
 INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Ruiz', 'Castilla', '12523211T', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
 
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '1');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '2');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '3');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '4');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '5');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '6');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '7');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '8');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '9');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '10');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '11');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '12');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '13');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '14');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '15');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '16');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '17');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '18');
+INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '19');
 
 INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-20 00:00:00.000000', 'Foro Fundamentos de programación');
 INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-20 00:00:00.000000', 'Foro Análisis y Diseño de Datos y Algoritmos');
 INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 1');
 INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 2');
 INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-20 00:00:00.000000', 'Foro Complemento de Bases de Datos');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','Historia del Arte contemporaneo');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-26 00:00:00.000000','Historia del Arte antiguo');
+INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-27 00:00:00.000000','Fundamentos de psicobiología');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-28 00:00:00.000000','Matématicas I');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','Química');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-25 00:00:00.000000','Fisica II');
+INSERT INTO foro (fecha_creacion, titulo) VALUES ('2020-03-29 00:00:00.000000','Farmacología general');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','Política y sociedad');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-27 00:00:00.000000','Elasticidad y Resistencia de Materiales');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','Bases de Derecho Administrativo');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-28 00:00:00.000000','Geografía General y Regional del Turismo');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','La comunicación en entornos virtuales');
+INSERT INTO foro (fecha_creacion, titulo)  VALUES ('2020-03-29 00:00:00.000000','Mecanica y ondas');
 
 
 
@@ -138,20 +193,20 @@ INSERT INTO espacio (asignatura_id, foro_id, profesor_id, precio,draft_mode) VAL
 INSERT INTO espacio (asignatura_id, foro_id, profesor_id, precio,draft_mode) VALUES ('5', '5','5','8',0);
 
 
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad) VALUES ('1','11:00:00','12:00:00','1',2);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad) VALUES ('3','11:00:00','12:00:00','1',2);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad)  VALUES ('3','18:30:00','19:30:00','2',6);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad)  VALUES ('5','12:00:00','13:00:00','2',6);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad)  VALUES ('2','20:00:00','21:00:00','3',12);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad)  VALUES ('4','15:00:00','16:00:00','4',12);
-INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad)  VALUES ('4','15:00:00','16:00:00','5',4);
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('1','11:00:00','12:00:00','1',2,'2020-06-01 00:00:00.000000','2020-06-28 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('3','11:00:00','12:00:00','1',2,'2020-05-01 00:00:00.000000','2020-05-28 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('3','18:30:00','19:30:00','2',6,'2020-04-01 00:00:00.000000','2020-04-28 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('5','12:00:00','13:00:00','2',6,'2020-06-02 00:00:00.000000','2020-06-29 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('2','20:00:00','21:00:00','3',12,'2020-07-01 00:00:00.000000','2020-07-28 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('4','15:00:00','16:00:00','4',12,'2020-07-02 00:00:00.000000','2020-07-29 00:00:00.000000');
+INSERT INTO horario (dia,hora_inicio,hora_fin,espacio_id, capacidad,fecha_inicio,fecha_fin) VALUES ('4','15:00:00','16:00:00','5',4,'2020-08-01 00:00:00.000000','2020-08-28 00:00:00.000000');
 
 
-INSERT INTO rango (horario_id, alumno_id,fecha_inicio,fecha_fin) VALUES ('1', '1','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO rango (horario_id, alumno_id,fecha_inicio,fecha_fin) VALUES ('1', '2','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO rango (horario_id, alumno_id,fecha_inicio,fecha_fin) VALUES ('3', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO rango (horario_id, alumno_id,fecha_inicio,fecha_fin) VALUES ('7', '3','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
-INSERT INTO rango (horario_id, alumno_id,fecha_inicio,fecha_fin) VALUES ('7', '4','2020-03-20 00:00:00.000000','2020-04-20 00:00:00.000000');
+INSERT INTO rango (horario_id, alumno_id) VALUES ('1', '1');
+INSERT INTO rango (horario_id, alumno_id) VALUES ('1', '2');
+INSERT INTO rango (horario_id, alumno_id) VALUES ('3', '3');
+INSERT INTO rango (horario_id, alumno_id) VALUES ('7', '3');
+INSERT INTO rango (horario_id, alumno_id) VALUES ('7', '4');
 
 
 INSERT INTO respuesta (contenido, creacion_respuesta, user_account_id, foro_id) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
