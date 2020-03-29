@@ -49,6 +49,15 @@ INSERT INTO facultad (nombre, universidad_id) VALUES ('Arquitectura', '1');
 INSERT INTO facultad (nombre, universidad_id) VALUES ('Matemática', '1');
 INSERT INTO facultad (nombre, universidad_id) VALUES ('Historia del Arte', '2');
 INSERT INTO facultad (nombre, universidad_id) VALUES ('Biología', '2');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Psicología', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Ciencias Económicas', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Escuela Técnica Superior de Ingeniería', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Medicina', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Ciencias del Trabajo', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Turismo y Finanzas', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Ciencias de la Comunicación', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Química', '1');
+INSERT INTO facultad (nombre, universidad_id) VALUES ('Facultad de Ciencias Jurídicas y Políticas', '2');
 
 
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería del Software', '1', '4');
@@ -56,16 +65,16 @@ INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería de Co
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Tecnología informática', '1', '4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingeniería de la salud', '1', '4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Historia del Arte', '4', '4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Psicología', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Administración y dirección de empresas', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Ingeniería Aeroespacial', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Medicina', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Relaciones Internacionales', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Ingenieria Industrial', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Trabajo Social', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Turismo', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Comunicación Audiovisual', '','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Química', '','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Psicología', '6','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Administración y dirección de empresas', '7','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Ingeniería Aeroespacial', '8','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Medicina', '9','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Grado en Relaciones Internacionales', '14','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Ingenieria Industrial', '8','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Trabajo Social', '10','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Turismo', '11','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Comunicación Audiovisual', '12','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos)  VALUES ('Química', '13','4');
 
 
 
@@ -104,6 +113,20 @@ INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('2', '4');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('3', '1');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('4', '1');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('5', '1');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('5', '1');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('6', '5');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('7', '5');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('8', '6');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('9', '7');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('10', '8');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('11', '8');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('12', '9');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('13', '10');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('14', '11');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('15', '12');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('16', '13');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('17', '14');
+INSERT INTO asignatura_grados (asignaturas_id, grados) VALUES ('18', '15');
 
 INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Prueba', 'Prueba','47543228A','profesorprueba@gmail.com', 'Prueba','123436385', '5', false, false);
 INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Romero ', 'Organvidez','47543218R','drorganvidez@gmail.com', 'David', '123436485', '6', false, false);
