@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.prosubject.prosubject.backend.apirest.model.Alumno;
+
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
-import com.prosubject.prosubject.backend.apirest.model.Horario;
+
 
 @Repository
 public interface EspacioRepository extends JpaRepository<Espacio, Long> {
@@ -34,7 +34,7 @@ public interface EspacioRepository extends JpaRepository<Espacio, Long> {
 	List<Espacio> espaciosDeUnAlumno(Long id);
 
 	
-	@Query("select distinct(h.espacio) from horario h where h.capacidad > (select count(r.alumno.id) from rangos r where r.horario.id = h.id) AND h.espacio.draftMode = 0")
+	@Query("select distinct(h.espacio) from horario h where h.capacidad > (select count(r.alumno.id) from rangos r where r.horario.id = h.id) AND h.espacio.draftMode = 0 AND h.fechaInicio > CURRENT_DATE")
 	List<Espacio> espaciosConHorarioConCapacidad();
 	
 }

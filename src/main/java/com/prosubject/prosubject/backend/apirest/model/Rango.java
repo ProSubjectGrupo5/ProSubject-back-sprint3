@@ -24,15 +24,6 @@ public class Rango implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date fechaInicio;
-
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date fechaFin;
 	
 	@Valid
 	@ManyToOne(optional = false)
@@ -52,21 +43,6 @@ public class Rango implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
-	}
 
 	public Horario getHorario() {
 		return horario;

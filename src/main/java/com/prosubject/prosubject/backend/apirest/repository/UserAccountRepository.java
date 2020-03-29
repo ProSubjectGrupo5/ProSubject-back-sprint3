@@ -21,6 +21,11 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
 	
 	
 	
-
-
+	@Query("select u from useraccounts u  where "
+			+ "u = (select p.useraccount from profesores p where p.email=?1) "
+			+ "OR "
+			+ "u = (select a.useraccount from alumnos a where a.email=?1)")
+	Optional<UserAccount> cuentaLogueada(String email);
+	
+	
 }

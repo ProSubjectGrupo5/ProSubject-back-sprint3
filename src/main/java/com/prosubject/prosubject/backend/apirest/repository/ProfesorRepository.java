@@ -2,6 +2,7 @@ package com.prosubject.prosubject.backend.apirest.repository;
 
 import java.util.List;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,8 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	
 	@Query("select p from profesores p where p.expedienteValidado=0")
 	List<Profesor> profesoresExpedientePendiete();
+	
+	@Query("select p from profesores p where p.tarifaPremium=1")
+	List<Profesor> profesoresTarifaPremium();
 
 }

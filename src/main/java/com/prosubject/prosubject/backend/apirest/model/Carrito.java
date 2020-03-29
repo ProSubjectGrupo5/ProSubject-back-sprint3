@@ -2,6 +2,7 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class Carrito implements Serializable{
 	@Column(nullable = false)
 	@Min(0)
 	private Double precioMensual;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -54,7 +55,11 @@ public class Carrito implements Serializable{
 		this.alumno = alumno;
 	}
 
-	public void setHorario(Set<Horario> horario) {
+	public Collection<Horario> getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Collection<Horario> horario) {
 		this.horario = horario;
 	}
 
@@ -65,5 +70,13 @@ public class Carrito implements Serializable{
 	public void setPrecioMensual(Double precioMensual) {
 		this.precioMensual = precioMensual;
 	}
+
+//	public List<Carrito> getHorario() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+	
 	
 }

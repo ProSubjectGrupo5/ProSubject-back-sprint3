@@ -1,5 +1,6 @@
 package com.prosubject.prosubject.backend.apirest.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.CarritoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
@@ -41,7 +44,9 @@ public class HorarioController{
 	@Autowired
 	private EspacioService espaciosService;
 	@Autowired
-	private ProfesorService profesorService;	
+	private ProfesorService profesorService;
+	@Autowired
+	private CarritoService carritoService;
 
 	
 
@@ -88,10 +93,11 @@ public class HorarioController{
 			response.put("mensaje",	 "El horario con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
-		if(horario.getEspacio().getDraftMode() == 0) {
-			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
+	
 		
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
@@ -148,6 +154,11 @@ public class HorarioController{
 	public ResponseEntity<?> modificarHorario(@RequestBody Horario horario ) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioGuardado = null;
+		
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
 		try {
 			horarioGuardado =horarioService.saveOne(horario);
 		}catch(DataAccessException e) {
@@ -242,10 +253,7 @@ public class HorarioController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
-		if(espacio.getDraftMode() == 0) {
-			response.put("mensaje",	 "El espacio con ID: ".concat(id.toString()).concat(" no se encuentra entre tus espacios editables"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
+
 		
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
@@ -266,18 +274,20 @@ public class HorarioController{
 		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}
 	
-	
+
 	@PutMapping("/insertarAlumno")
-	public ResponseEntity<?> insertarAlumno(@RequestParam Long horarioId, @RequestParam Long alumnoId) throws Exception {
+	public ResponseEntity<?> insertarAlumno(@RequestBody List<Horario> horarios , @RequestParam Long alumnoId) throws Exception {
 		Map<String, Object> response = new HashMap<String, Object>();
 		Horario horarioModificado = null;
+		Carrito carro = null;
+		List<Horario> horariosAñadidos = new ArrayList<Horario>();
 		
-		Horario horario = this.horarioService.findOne(horarioId);
+		for (Horario horario : horarios) {
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
-		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horarioId);
+		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horario.getId());
 		
 		if(horario == null) {
-			response.put("mensaje",	 "El horario con ID: ".concat(horarioId.toString()).concat(" no existe"));
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
@@ -298,14 +308,20 @@ public class HorarioController{
 		}
 		
 		try {
-			horarioModificado = this.horarioService.añadirAlumno(horarioId, alumnoId);	
+			horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);
+			carro = this.carritoService.removeAllHorario(alumno);
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
-		return new ResponseEntity<Horario>(horarioModificado, HttpStatus.OK);	
+		horariosAñadidos.add(horarioModificado);
+		
+		
+		}
+		
+		return new ResponseEntity<List<Horario>>(horariosAñadidos, HttpStatus.OK);	
 	}
 	
 //	
@@ -397,10 +413,10 @@ public class HorarioController{
 		}
 		
 		
-		if(horario.getEspacio().getDraftMode() == 0) {
-			response.put("mensaje",	 "El horario que estas intentando borrar no se encuentra en un espacio editable");
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-			}
+		if(this.alumnoService.alumnosDeUnHorario(horario.getId()).size() > 0) {
+			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no se puede editar porque tiene alumnos dentro"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
 		Profesor profesor = this.profesorService.findByUsername(username);
 		if(profesor != null) {
 			if(!profesor.equals(horario.getEspacio().getProfesor())) {
