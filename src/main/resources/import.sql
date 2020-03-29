@@ -48,7 +48,7 @@ INSERT INTO `universidades` (`nombre`) VALUES ('Universidad Pablo de Olavide');
 INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Escuela Técnica Superior de Ingeniería Informática', '1');
 INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Arquitectura', '1');
 INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Matemática', '1');
-INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Historia del Arte', '2');
+INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Geografía e Historia', '2');
 INSERT INTO `facultades` (`nombre`, `universidad_id`) VALUES ('Biología', '2');
 
 
@@ -57,8 +57,7 @@ INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingenier
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingeniería de Computadores', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Tecnología informática', '1', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Ingeniería de la salud', '1', '4');
-INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Historia del Arte contemporaneo', '4', '4');
-INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Historia del Arte antiguo', '4', '4');
+INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`) VALUES ('Historia del Arte', '4', '4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Psicología', '','4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Administración y dirección de empresas', '','4');
 INSERT INTO `grados` (`nombre`, `facultad_id`, `numerocursos`)  VALUES ('Grado en Ingeniería Aeroespacial', '','4');
@@ -82,6 +81,20 @@ INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Análisis y diseño de
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Diseño y pruebas 1', '3');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Diseño y pruebas 2', '3');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Complemento de Bases de Datos', '4');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Historia del Arte contemporaneo', '2');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Historia del Arte antiguo', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Fundamentos de psicobiología', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Matématicas I', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Química', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Fisica II', '2');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Farmacología general', '3');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Política y sociedad', '3');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Elasticidad y Resistencia de Materiales', '2');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Bases de Derecho Administrativo', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Geografía General y Regional del Turismo', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('La comunicación en entornos virtuales', '3');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Mecanica y ondas', '1');
+
 
 
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('1', '1');
@@ -160,6 +173,19 @@ INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.00
 INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 1');
 INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Diseño y pruebas 2');
 INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-20 00:00:00.000000', 'Foro Complemento de Bases de Datos');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','Historia del Arte contemporaneo');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-26 00:00:00.000000','Historia del Arte antiguo');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-27 00:00:00.000000','Fundamentos de psicobiología');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-28 00:00:00.000000','Matématicas I');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','Química');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-25 00:00:00.000000','Fisica II');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`) VALUES ('2020-03-29 00:00:00.000000','Farmacología general');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','Política y sociedad');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-27 00:00:00.000000','Elasticidad y Resistencia de Materiales');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','Bases de Derecho Administrativo');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-28 00:00:00.000000','Geografía General y Regional del Turismo');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','La comunicación en entornos virtuales');
+INSERT INTO `foros` (`fecha_creacion`, `titulo`)  VALUES ('2020-03-29 00:00:00.000000','Mecanica y ondas');
 
 
 
