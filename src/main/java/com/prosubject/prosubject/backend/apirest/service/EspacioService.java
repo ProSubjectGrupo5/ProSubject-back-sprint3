@@ -1,6 +1,8 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.springframework.util.Assert;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
 
 @Service
@@ -29,11 +32,14 @@ public class EspacioService {
 		return this.espacioRepository.findAll();
 	}
 	
-	public List<Espacio> findDisponibles(String universidad, 
+	public List<Espacio> findDisponibles(String universidad,
 			String facultad, String grado,String curso, String asignatura){
 		 List<Espacio> espaciosFiltrados =this.espacioRepository.findDisponibles(universidad, facultad, grado,curso, asignatura);
+		//Para poner primero los profesores que han pagado el premium (Comparador)
+		 Comparator<Espacio> cmp = Comparator.comparing((Espacio d) -> d.getProfesor().getTarifaPremium()).reversed();
 		 List<Espacio> espacioDisponible = this.espacioRepository.espaciosConHorarioConCapacidad();
 		 boolean intersacion  = espacioDisponible.retainAll(espaciosFiltrados);
+		 espacioDisponible.sort(cmp);
 		 return espacioDisponible;
 	}
 	
@@ -54,8 +60,8 @@ public class EspacioService {
 			
 		}else {
 			Espacio espacioAntiguo=this.findOne(e.getId());
-			Assert.isTrue(espacioAntiguo.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
-					" no puede ser modificado, debido al draftMode");
+//			Assert.isTrue(espacioAntiguo.getDraftMode()==1,"El espacio con id "+ e.getId().toString() +
+//					" no puede ser modificado, debido al draftMode");
 			f=this.foroService.foroPorEspacioId(e.getId());
 			e.setForo(f);
 			

@@ -1,5 +1,7 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,10 @@ public class UserAccountService {
 	public UserAccount findByUserAndPass(String usuario, String password) {
 		return this.userAccountRepository.cuentaLogueada(usuario, password).orElse(null);
 	}
+	
+	public List<String> todosUsername() {
+		return this.userAccountRepository.todosUsername();
+	}
+	
+	
 }

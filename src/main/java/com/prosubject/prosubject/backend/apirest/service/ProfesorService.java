@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.ValidacionExpediente;
 import com.prosubject.prosubject.backend.apirest.repository.ProfesorRepository;
 
 @Service
@@ -40,6 +41,11 @@ public class ProfesorService {
 	public Profesor edit(Long id, Profesor profesor) {
 
 		Profesor profe = findOne(id);
+		
+		if(profe.getExpendiente().getId()!=profesor.getExpendiente().getId()) {
+			profe.setExpedienteValidado(ValidacionExpediente.PENDIENTE);
+			profe.setExpendiente(profesor.getExpendiente());
+		}
 
 		profe.setApellido1(profesor.getApellido1());
 		profe.setApellido2(profesor.getApellido2());
@@ -47,13 +53,30 @@ public class ProfesorService {
 		profe.setEmail(profesor.getEmail());
 		profe.setNombre(profesor.getNombre());
 		profe.setTelefono(profesor.getTelefono());
-		profe.setExpendiente(profesor.getExpendiente());
 		profe.getUserAccount().setUsername((profesor.getUserAccount().getUsername()));
 		profe.getUserAccount().setPassword((profesor.getUserAccount().getPassword()));
 		
 		Profesor profeEditado = save(profe);
 
 		return profeEditado;
+	}
+	
+	
+	
+	public List<String> emailsProfesor() {
+		return this.profesorRepository.emailsProfesor();
+	}
+	
+	public List<String> DNIsProfesor() {
+		return this.profesorRepository.DNIsProfesor();
+	}
+	
+	public List<Profesor> profesoresExpedientePendiete() {
+		return this.profesorRepository.profesoresExpedientePendiete();
+	}
+	
+	public List<Profesor> profesoresTarifaPremium(){
+		return this.profesorRepository.profesoresTarifaPremium();
 	}
 
 }

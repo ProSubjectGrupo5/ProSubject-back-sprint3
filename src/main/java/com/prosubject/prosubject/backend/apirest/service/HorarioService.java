@@ -1,7 +1,9 @@
 package com.prosubject.prosubject.backend.apirest.service;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
-import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.repository.HorarioRepository;
@@ -33,11 +34,18 @@ public class HorarioService {
 	}
 	
 	public List<Horario> findAll() {
-		return this.horarioRepository.findAll();
+		List<Horario> horarios =this.horarioRepository.findAll();
+		
+		for (Horario horario : horarios) {
+			this.EliminarPorFechaFin(horario);
+		}
+		return horarios;
 	}
 	
 	public Horario findOne(final long horarioId) {
-		return this.horarioRepository.findById(horarioId).orElse(null);
+		Horario horario = this.horarioRepository.findById(horarioId).orElse(null);
+		this.EliminarPorFechaFin(horario);
+		return horario;
 	}
 	
 	private boolean checkHoraInicioValid(Horario horario) throws Exception {
@@ -64,6 +72,8 @@ public class HorarioService {
 		
 		for (Horario horario : h) {
 			if (horario.getId()==null) {
+				Date fechaInicio = horario.getFechaInicio();
+				horario.setFechaFin(sumarRestarDiasFecha(fechaInicio, 28));
 				horario.setEspacio(eSaved);
 			}	
 			
@@ -89,13 +99,18 @@ public class HorarioService {
 		Espacio eSaved = this.espacioService.save(e);
 		
 		if (h.getId()==null) {
+			
 			h.setEspacio(eSaved);
 				
 		}
 			
 		if(checkHoraInicioValid(h)&& checkHoraFinValid(h)) {
+			Date fechaInicio = h.getFechaInicio();
+			h.setFechaFin(sumarRestarDiasFecha(fechaInicio, 28));
 			h = this.horarioRepository.save(h);
 		}
+		
+		
 				
 		
 			return h;
@@ -103,7 +118,11 @@ public class HorarioService {
 		
 
 		public List<Horario> horariosDeUnEspacio(long espacioId) {
-			return this.horarioRepository.horariosDeUnEspacio(espacioId);
+			List<Horario> horarios = this.horarioRepository.horariosDeUnEspacio(espacioId);
+			for (Horario horario : horarios) {
+				this.EliminarPorFechaFin(horario);
+			}
+			return horarios;
 		}
 		//Metodo para inscribir un alumno en un horario
 		public Horario añadirAlumno(Long horarioId, Long alumnoId) throws Exception{
@@ -114,8 +133,6 @@ public class HorarioService {
 			Date fechaActual =new Date();
 			
 			rango.setAlumno(alumno);
-			rango.setFechaInicio(fechaActual);
-			rango.setFechaFin(sumarRestarDiasFecha(rango.getFechaInicio(), 28));
 			
 			Horario saved = this.horarioRepository.save(horario);
 			
@@ -127,11 +144,21 @@ public class HorarioService {
 		
 		public List<Horario> horariosDeAlumno(Long alumnoId) throws Exception{
 		
-			return this.horarioRepository.horariosDeAlumno(alumnoId);
+			List<Horario> horarios = this.horarioRepository.horariosDeAlumno(alumnoId);
+			
+			for (Horario horario : horarios) {
+				this.EliminarPorFechaFin(horario);
+			}
+			return horarios;
 		}
 //		
 		public List<Horario> horariosDeProfesor(Long profesorId) throws Exception{
-			return this.horarioRepository.horariosDeProfesor(profesorId);
+			List<Horario> horarios = this.horarioRepository.horariosDeProfesor(profesorId);
+			
+			for (Horario horario : horarios) {
+				this.EliminarPorFechaFin(horario);
+			}
+			return horarios;
 		}
 		
 		
@@ -147,12 +174,31 @@ public class HorarioService {
 			}
 		
 		public List<Horario> horariosNoEditablesDeUnProfesor(Long profesorId) throws Exception{
-			return this.horarioRepository.horariosNoEditablesDeUnProfesor(profesorId);
+			List<Horario> horarios= this.horarioRepository.horariosNoEditablesDeUnProfesor(profesorId);
+			
+			for (Horario horario : horarios) {
+				this.EliminarPorFechaFin(horario);
+			}
+			return horarios;
 		}
 		
 		public void delete(Horario horario) {
 			this.horarioRepository.delete(horario);
 			
+		}
+		
+		public Horario EliminarPorFechaFin(Horario horario) {
+			Date fechaActual =new Date();
+			if (horario.getFechaFin().before(fechaActual)) {
+				List<Rango> rangos = this.rangoService.rangosPorHorario(horario.getId());		
+				for (Rango rango : rangos) {
+					this.rangoService.delete(rango);
+					
+				}
+				
+			}
+			
+			return horario;
 		}
 		
 		

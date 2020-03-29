@@ -39,6 +39,10 @@ public class RangoService {
 		
 		return saved;
 	}
+	
+	public List<Rango> rangosPorHorario(Long horarioId){
+		return this.rangoRepository.rangosPorHorario(horarioId);
+	}
 
 
 	public void delete(Rango rango) {
