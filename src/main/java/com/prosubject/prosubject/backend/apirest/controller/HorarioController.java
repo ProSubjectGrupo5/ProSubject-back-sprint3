@@ -210,13 +210,13 @@ public class HorarioController{
 //
 //	
 	@GetMapping("espacio/{id}")
-	public ResponseEntity<?> horariosDeUnEspacio(@PathVariable Long id) {
+	public ResponseEntity<?> horariosDisponibleDeUnEspacio(@PathVariable Long id) {
 		List<Horario> horarios = null;
 		Map<String, Object> response = new HashMap<String, Object>();
 		Espacio espacio = this.espaciosService.findOne(id);
 		
 		try {
-			horarios = this.horarioService.horariosDeUnEspacio(id);
+			horarios = this.horarioService.horariosDisponiblesDeUnEspacio(id);
 		}catch(DataAccessException e ) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));

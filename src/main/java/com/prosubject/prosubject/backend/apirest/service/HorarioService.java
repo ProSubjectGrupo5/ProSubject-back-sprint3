@@ -114,6 +114,14 @@ public class HorarioService {
 	}
 		
 
+		public List<Horario> horariosDisponiblesDeUnEspacio(long espacioId) {
+			List<Horario> horarios = this.horarioRepository.horariosDisponiblesDeUnEspacio(espacioId);
+			for (Horario horario : horarios) {
+				this.EliminarPorFechaFin(horario);
+			}
+			return horarios;
+		}
+		
 		public List<Horario> horariosDeUnEspacio(long espacioId) {
 			List<Horario> horarios = this.horarioRepository.horariosDeUnEspacio(espacioId);
 			for (Horario horario : horarios) {
