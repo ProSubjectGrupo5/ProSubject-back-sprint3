@@ -167,7 +167,7 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `tele
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Bay', '', '62383749K', 'miriam.bay@gmail.com', 'Miriam', '643132547', '32');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Gonzales de la Peña', 'Garcia', '15054975A', 'marioogonzalez2@gmail.com', 'Mario', '643831247', '34');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '02030477Z', 'juanje_chus@gmail.com', 'Mario', '678886247', '36');
-INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Ruiz', 'Castilla', '12523211T', 'carmenrucasti@gmail.com', 'Carmen', '98543603B', '38');
+INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Ruiz', 'Castilla', '98543603B', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
 
 INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '1');
 INSERT INTO `carrito`(`precio_mensual`, `alumno_id`) VALUES ('0', '2');
