@@ -98,7 +98,7 @@ public class ProfesorController {
 			response.put("mensaje", "El DNI ya esta en uso por un profesor");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else if (emailsEnuso.contains(prof.getEmail())) {
-			response.put("mensaje", "El email ya no se encuentra en uso");
+			response.put("mensaje", "El email ya se encuentra en uso");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else if (usersEnuso.contains(prof.getUserAccount().getUsername())) {
 			response.put("mensaje", "El nombre de usuario ya esta en uso");
@@ -106,14 +106,16 @@ public class ProfesorController {
 		} else {
 
 			try {
-				if (file!=null) {
+				if (file != null) {
 					if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
 						response.put("mensaje", "El expediente no tiene formato pdf");
 						return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 					} else {
-						DBFile borrarPdf = this.profesorService.findOne(id).getExpendiente();
-						this.dBFileStorageService.delete(borrarPdf);
+						if (p.getExpendiente() != null) {
+							DBFile borrarPdf = this.profesorService.findOne(id).getExpendiente();
+							this.dBFileStorageService.delete(borrarPdf);
+						}
 						DBFile dbFile = this.dBFileStorageService.storeFile(file);
 						prof.setExpendiente(dbFile);
 					}
@@ -178,7 +180,7 @@ public class ProfesorController {
 		return this.profesorService.profesoresExpedientePendiete();
 
 	}
-	
+
 	@GetMapping("/profesoresTarifaPremium")
 	public List<Profesor> profesoresTarifaPremium() {
 		return this.profesorService.profesoresExpedientePendiete();
