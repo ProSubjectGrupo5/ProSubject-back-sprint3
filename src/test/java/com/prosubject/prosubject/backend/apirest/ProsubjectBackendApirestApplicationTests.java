@@ -8,6 +8,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -434,5 +440,45 @@ class ProsubjectBackendApirestApplicationTests {
 		assertThat(res).isNotNull();
 
 	}
+	
+	
+	//SELENIUM
+		//Busqueda asignatura
+		  @Test
+		  public void pruebaBusquedaAsigTest5() throws InterruptedException {
+			System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+			WebDriver driver = new ChromeDriver();
+			
+		    driver.get("https://prosubject-v2.herokuapp.com/inicio");
+		    driver.manage().window().setSize(new Dimension(1146, 662));
+		    driver.findElement(By.linkText("Busqueda de espacios")).click();
+		    {
+		      WebElement element = driver.findElement(By.linkText("Busqueda de espacios"));
+		      Actions builder = new Actions(driver);
+		      builder.moveToElement(element).perform();
+		    }
+		    {
+		      WebElement element = driver.findElement(By.tagName("body"));
+		      Actions builder = new Actions(driver);
+		      builder.moveToElement(element, 0, 0).perform();
+		    }
+//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-invalid")).click();
+		    driver.findElement(By.cssSelector(".col-md-6 > .ng-invalid")).sendKeys("Universidad de Sevilla");
+//		    driver.findElement(By.className("form-control ng-dirty ng-valid ng-touched")).sendKeys("Escuela Técnica Superior de Ingeniería Informática");
+//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-untouched")).click();
+//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-untouched")).sendKeys("Escuela Técnica Superior de Ingeniería Informática");
+//		    driver.findElement(By.cssSelector(".col-md-4:nth-child(1) > .form-control")).click();
+//		    driver.findElement(By.cssSelector(".col-md-4 > .ng-dirty")).sendKeys("Ingeniería del Software");
+//		    driver.findElement(By.cssSelector(".ng-invalid:nth-child(2)")).click();
+//		    {
+//		      WebElement dropdown = driver.findElement(By.cssSelector(".col-md-4:nth-child(2) > .form-control"));
+//		      dropdown.findElement(By.xpath("//option[. = 'PRIMERO']")).click();
+//		    }
+//		    driver.findElement(By.cssSelector(".col-md-4:nth-child(2) > .form-control")).click();
+//		    driver.findElement(By.cssSelector(".ng-untouched")).click();
+//		    driver.findElement(By.cssSelector(".ng-untouched")).sendKeys("Fundamentos de programación");
+//		    driver.findElement(By.cssSelector(".btn:nth-child(3)")).click();
+		    driver.quit();
+		  }
 
 }

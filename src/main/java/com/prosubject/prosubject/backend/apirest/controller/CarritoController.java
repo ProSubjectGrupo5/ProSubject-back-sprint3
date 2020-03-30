@@ -95,6 +95,11 @@ public class CarritoController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 			}
 	       
+	       if(carro.getHorario().contains(horario)) {
+				response.put("mensaje",	 "El carrito ya tiene almacenado este horario.");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+	       
 	       if(horario == null) {
 				response.put("mensaje",	 "El horario con ID: ".concat(horarioId.toString()).concat(" no existe"));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
