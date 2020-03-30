@@ -108,10 +108,7 @@ public class HorarioService {
 			Date fechaInicio = h.getFechaInicio();
 			h.setFechaFin(sumarRestarDiasFecha(fechaInicio, 28));
 			h = this.horarioRepository.save(h);
-		}
-		
-		
-				
+		}		
 		
 			return h;
 	}
