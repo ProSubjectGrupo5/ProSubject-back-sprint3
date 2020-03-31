@@ -16,11 +16,7 @@ install:
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_install:
 - chmod +x mvnw 
-<<<<<<< HEAD
 - psql -c 'create database db02fbkv8ge7t4;' -U postgres
-
-=======
-- sudo mysql -e 'CREATE DATABASE db_springboot_backend;'
 - sudo apt-get update
 - sudo apt-get install dbus-x11
 - export DISPLAY=:99.0
@@ -35,7 +31,7 @@ before_install:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
 - tar -xzf geckodriver-v0.20.1-linux64.tar.gz
 - sudo cp geckodriver /usr/bin
->>>>>>> developer
+
 on:
     branch: master
 
