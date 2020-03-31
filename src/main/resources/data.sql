@@ -246,5 +246,5 @@ INSERT INTO rango (horario_id, alumno_id) VALUES ('7', '3');
 INSERT INTO rango (horario_id, alumno_id) VALUES ('7', '4');
 
 
-INSERT INTO respuesta (contenido, creacion_respuesta, useraccount_id, foro_id) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
-INSERT INTO respuesta (contenido, creacion_respuesta, useraccount_id, foro_id) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
+INSERT INTO respuesta (contenido, creacion_respuesta, user_account_id, foro_id) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
+INSERT INTO respuesta (contenido, creacion_respuesta, user_account_id, foro_id) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
