@@ -451,7 +451,7 @@ class ProsubjectBackendApirestApplicationTests {
 	  //SELENIUM
 	  @Test
 	  public void testLoginProfesor() {
-		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
 		ChromeDriver driver = new ChromeDriver();
 		
 		driver.get("https://prosubject-v2.herokuapp.com/inicio");
@@ -475,7 +475,7 @@ class ProsubjectBackendApirestApplicationTests {
 		
 	  @Test
 	  public void testLoginAlum() {
-		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
 		ChromeDriver driver = new ChromeDriver();
 		    
 		driver.get("https://prosubject-v2.herokuapp.com/inicio");
