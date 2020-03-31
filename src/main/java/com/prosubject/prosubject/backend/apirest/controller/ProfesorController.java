@@ -183,7 +183,7 @@ public class ProfesorController {
 
 	@GetMapping("/profesoresTarifaPremium")
 	public List<Profesor> profesoresTarifaPremium() {
-		return this.profesorService.profesoresExpedientePendiete();
+		return this.profesorService.profesoresTarifaPremium();
 	}
 
 }
