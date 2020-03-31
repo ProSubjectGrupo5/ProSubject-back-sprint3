@@ -31,7 +31,7 @@ public class DBFile {
 	private Profesor profesor;*/
 	
 
-    @Lob
+    //@Lob
     private byte[] data;
 
     public DBFile() {
