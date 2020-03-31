@@ -36,24 +36,10 @@ INSERT INTO user_account (password,username,autoridad) VALUES ('juanje_chus1','j
 INSERT INTO user_account (password,username,autoridad) VALUES ('juanje_chus','juanje_chus','2');
 INSERT INTO user_account (password,username,autoridad) VALUES ('carmenrucasti1','carmenrucasti1','1');
 INSERT INTO user_account (password,username,autoridad) VALUES ('carmenrucasti','carmenrucasti','2');
-INSERT INTO user_account (password,username,autoridad) VALUES ('raurodmen','raurodmen','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('crilorbre','crilorbre','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('albanggon','albanggon','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('alvcascac','alvcascac','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('dommuñesp','dommuñesp','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('jeselirod','jeselirod','0');
-INSERT INTO user_account (password,username,autoridad) VALUES ('antsegjim','antsegjim','0');
 
 
 
 INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Romero', 'Caceres', '79632123M', 'antromcac@alum.us.es', 'Antonio', '603552740', '1');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Rodriguez', 'Mendez', '76933593L', 'raurodmen@alum.us.es', 'Raul', '674761837', '39');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Lorca', 'Brenes', '85383802M', 'crilorbre@alum.us.es', 'Cristian', '620510520', '40');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Angel', 'Gonzalez', '59172238T', 'albanggon@alum.us.es', 'Alberto', '603552721', '41');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Castro', 'Cachero', '62312293A', 'alvcascac@alum.us.es', 'Alvaro Juan', '674761856', '42');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Muñoz', 'Espejo', '45166237X', 'dommuñesp@alum.us.es', 'Domingo', '610510578', '43');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Elias', 'Rodriguez', '51243608E', 'jeselirod@alum.us.es', 'Jesus', '674741887', '44');
-INSERT INTO administrador (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Segura', 'Jimenez', '12673927F', 'antsegjim@alum.us.es', 'Antonio', '620520591', '45');
 
 INSERT INTO universidad (nombre) VALUES ('Universidad de Sevilla');
 INSERT INTO universidad (nombre) VALUES ('Universidad Pablo de Olavide');
