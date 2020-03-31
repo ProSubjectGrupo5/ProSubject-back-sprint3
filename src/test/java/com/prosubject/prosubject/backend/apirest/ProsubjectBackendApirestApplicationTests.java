@@ -451,7 +451,7 @@ class ProsubjectBackendApirestApplicationTests {
 	  //SELENIUM
 	  @Test
 	  public void testLoginProfesor() {
-//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
 		ChromeDriver driver = new ChromeDriver();
 		
 		driver.get("https://prosubject-v2.herokuapp.com/inicio");
@@ -475,7 +475,7 @@ class ProsubjectBackendApirestApplicationTests {
 		
 	  @Test
 	  public void testLoginAlum() {
-//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
 		ChromeDriver driver = new ChromeDriver();
 		    
 		driver.get("https://prosubject-v2.herokuapp.com/inicio");
@@ -489,4 +489,34 @@ class ProsubjectBackendApirestApplicationTests {
 	    driver.quit();
 	  }
 
+	  @Test
+	  public void testRegistroAlumRepetido() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		  
+		driver.get("https://prosubject-v2.herokuapp.com/inicio");
+	    driver.manage().window().setSize(new Dimension(1146, 662));
+	    driver.findElement(By.cssSelector(".far")).click();
+	    driver.findElement(By.linkText("Registro")).click();
+	    driver.findElement(By.name("nombre")).click();
+	    driver.findElement(By.name("nombre")).sendKeys("Jesus");
+	    driver.findElement(By.name("apellido1")).sendKeys("Elias");
+	    driver.findElement(By.name("apellido2")).sendKeys("Rodriguez");
+	    driver.findElement(By.name("dni")).sendKeys("17842170N");
+	    driver.findElement(By.name("telefono")).click();
+	    driver.findElement(By.cssSelector("app-registro > .row")).click();
+	    driver.findElement(By.name("username")).sendKeys("jesu");
+	    driver.findElement(By.name("email")).click();
+	    driver.findElement(By.name("email")).sendKeys("jesuselias@gmail.com");
+	    driver.findElement(By.name("username")).click();
+	    driver.findElement(By.name("username")).sendKeys("jesuelia98");
+	    driver.findElement(By.cssSelector(".ng-invalid:nth-child(4) > .row:nth-child(1)")).click();
+	    driver.findElement(By.name("password")).sendKeys("jesuelia");
+	    driver.findElement(By.name("confirmPassword")).click();
+	    driver.findElement(By.name("confirmPassword")).sendKeys("jesuelia");
+	    driver.findElement(By.cssSelector("label:nth-child(6)")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    
+	  }
+	  
 }
