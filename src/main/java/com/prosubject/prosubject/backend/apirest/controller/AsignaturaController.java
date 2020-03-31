@@ -55,6 +55,31 @@ public class AsignaturaController {
 		return new ResponseEntity<Asignatura>(asignatura, HttpStatus.OK);
 	}
 	
+	
+	@GetMapping("/nombre")
+	public ResponseEntity<?> getAsignaturaPorNombre(@RequestParam String nombre){
+		Asignatura asignatura = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			asignatura = this.asignaturaService.getAsignaturaPorNombre(nombre);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(asignatura == null) {
+			response.put("mensaje",	 "La asignatura con nombre: '".concat(nombre).concat("' no existe."));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<Asignatura>(asignatura, HttpStatus.OK);
+	}
+	
+	
+	
+	
 	@GetMapping("/busquedaAsignaturas")
 	public List<Asignatura> findListaAsignatura(@RequestParam String universidad, 
 			@RequestParam String facultad,

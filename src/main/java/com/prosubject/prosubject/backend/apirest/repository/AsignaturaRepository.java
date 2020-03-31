@@ -17,5 +17,9 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Long>{
 			+ "inner join facul.universidad uni "
 			+ "where uni.nombre=?1 AND facul.nombre=?2 AND gra.nombre=?3 AND cur.nombre=?4")
 	List<Asignatura> findListaAsignaturas(String universidad, String facultad, String grado, String curso);
+	
+	
+	@Query("select a from asignaturas a where a.nombre=?1")
+	Asignatura getAsignaturaPorNombre(String nombre);
 
 }
