@@ -36,13 +36,13 @@ INSERT INTO user_account (password,username,autoridad) VALUES ('juanje_chus1','j
 INSERT INTO user_account (password,username,autoridad) VALUES ('juanje_chus','juanje_chus','2');
 INSERT INTO user_account (password,username,autoridad) VALUES ('carmenrucasti1','carmenrucasti1','1');
 INSERT INTO user_account (password,username,autoridad) VALUES ('carmenrucasti','carmenrucasti','2');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('raurodmen','raurodmen','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('crilorbre','crilorbre','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('albanggon','albanggon','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('alvcascac','alvcascac','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('dommuñesp','dommuñesp','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('jeselirod','jeselirod','0');
-INSERT INTO useraccount (password,username,autoridad) VALUES ('antsegjim','antsegjim','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('raurodmen','raurodmen','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('crilorbre','crilorbre','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('albanggon','albanggon','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('alvcascac','alvcascac','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('dommuñesp','dommuñesp','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('jeselirod','jeselirod','0');
+INSERT INTO user_account (password,username,autoridad) VALUES ('antsegjim','antsegjim','0');
 
 
 
