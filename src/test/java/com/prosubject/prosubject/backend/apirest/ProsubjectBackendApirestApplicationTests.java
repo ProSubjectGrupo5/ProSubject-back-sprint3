@@ -4,12 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import org.junit.Before;
+import org.junit.After;
 
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
 import com.prosubject.prosubject.backend.apirest.controller.AlumnoController;
@@ -442,43 +448,45 @@ class ProsubjectBackendApirestApplicationTests {
 	}
 	
 	
-	//SELENIUM
-		//Busqueda asignatura
-		  @Test
-		  public void pruebaBusquedaAsigTest5() throws InterruptedException {
-			System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
-			WebDriver driver = new ChromeDriver();
-			
-		    driver.get("https://prosubject-v2.herokuapp.com/inicio");
-		    driver.manage().window().setSize(new Dimension(1146, 662));
-		    driver.findElement(By.linkText("Busqueda de espacios")).click();
-		    {
-		      WebElement element = driver.findElement(By.linkText("Busqueda de espacios"));
-		      Actions builder = new Actions(driver);
-		      builder.moveToElement(element).perform();
-		    }
-		    {
-		      WebElement element = driver.findElement(By.tagName("body"));
-		      Actions builder = new Actions(driver);
-		      builder.moveToElement(element, 0, 0).perform();
-		    }
-//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-invalid")).click();
-		    driver.findElement(By.cssSelector(".col-md-6 > .ng-invalid")).sendKeys("Universidad de Sevilla");
-//		    driver.findElement(By.className("form-control ng-dirty ng-valid ng-touched")).sendKeys("Escuela Técnica Superior de Ingeniería Informática");
-//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-untouched")).click();
-//		    driver.findElement(By.cssSelector(".col-md-6 > .ng-untouched")).sendKeys("Escuela Técnica Superior de Ingeniería Informática");
-//		    driver.findElement(By.cssSelector(".col-md-4:nth-child(1) > .form-control")).click();
-//		    driver.findElement(By.cssSelector(".col-md-4 > .ng-dirty")).sendKeys("Ingeniería del Software");
-//		    driver.findElement(By.cssSelector(".ng-invalid:nth-child(2)")).click();
-//		    {
-//		      WebElement dropdown = driver.findElement(By.cssSelector(".col-md-4:nth-child(2) > .form-control"));
-//		      dropdown.findElement(By.xpath("//option[. = 'PRIMERO']")).click();
-//		    }
-//		    driver.findElement(By.cssSelector(".col-md-4:nth-child(2) > .form-control")).click();
-//		    driver.findElement(By.cssSelector(".ng-untouched")).click();
-//		    driver.findElement(By.cssSelector(".ng-untouched")).sendKeys("Fundamentos de programación");
-//		    driver.findElement(By.cssSelector(".btn:nth-child(3)")).click();
-		    driver.quit();
-		  }
+	  //SELENIUM
+	  @Test
+	  public void testLoginProfesor() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		
+		driver.get("https://prosubject-v2.herokuapp.com/inicio");
+	    driver.manage().window().setSize(new Dimension(1552, 840));
+	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.name("username")).sendKeys("alejandrocano");
+	    driver.findElement(By.name("password")).sendKeys("alejandrocano");
+	    driver.findElement(By.cssSelector(".ng-dirty:nth-child(1)")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    {
+	      WebElement element = driver.findElement(By.cssSelector(".btn"));
+	      Actions builder = new Actions(driver);
+	      builder.moveToElement(element).perform();
+	    }
+	    
+	    driver.quit();
+		
+	  }
+		
+		
+	  @Test
+	  public void testLoginAlum() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		    
+		driver.get("https://prosubject-v2.herokuapp.com/inicio");
+	    driver.manage().window().setSize(new Dimension(1146, 663));
+	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    
+	    driver.quit();
+	  }
 
 }
