@@ -53,6 +53,7 @@ public class ProfesorService {
 		profe.setEmail(profesor.getEmail());
 		profe.setNombre(profesor.getNombre());
 		profe.setTelefono(profesor.getTelefono());
+		profe.setTarifaPremium(profesor.getTarifaPremium());
 		profe.getUserAccount().setUsername((profesor.getUserAccount().getUsername()));
 		profe.getUserAccount().setPassword((profesor.getUserAccount().getPassword()));
 		
