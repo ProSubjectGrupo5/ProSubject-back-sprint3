@@ -253,5 +253,10 @@ INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('7', '4');
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
 
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '1', '1', 1,'No me ha ayudado a aprobar la asignatura');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '2','1', 2,'Sus clases no valen la pena, solo te muestra ejercicios resueltos');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('2', '3','2', 3,'He aprobado pero no explica muy bien');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '3','5', 4,'Gracias a él he aprobado');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '4','4', 5,'Gracias a sus clases he conseguido sacarme un notable');
 
 
