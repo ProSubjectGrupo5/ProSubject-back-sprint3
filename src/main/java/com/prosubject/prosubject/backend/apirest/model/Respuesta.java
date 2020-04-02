@@ -47,6 +47,15 @@ public class Respuesta implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "foro_id")
 	private Foro foro;
+	
+	/*
+	public Respuesta(String contenido, Date fecha, UserAccount user, Foro foro) {
+		this.contenido = contenido;
+		this.creacionRespuesta = fecha;
+		this.user = user;
+		this.foro = foro;
+	}
+	*/
 
 	
 	

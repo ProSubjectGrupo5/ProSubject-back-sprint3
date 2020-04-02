@@ -2,16 +2,13 @@
 package com.prosubject.prosubject.backend.apirest.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +52,16 @@ private static final long serialVersionUID = 1L;
 	@Column(nullable = false)
 	@Min(0)
 	private Long capacidad;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd-MM-yyyy")
+	private Date fechaInicio;
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd-MM-yyyy")
+	private Date fechaFin;
 	
 	
 
@@ -108,6 +115,24 @@ private static final long serialVersionUID = 1L;
 	public void setDia(DiaSemana dia) {
 		this.dia = dia;
 	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+	
+	
 	
 
 

@@ -65,4 +65,12 @@ public class AlumnoService {
 		return this.alumnoRepository.alumnosDeUnHorario(id);
 	}
 	
+	public List<String> emailsAlumno() {
+		return this.alumnoRepository.emailsAlumno();
+	}
+	
+	public List<String> DNIsAlumno() {
+		return this.alumnoRepository.DNIsAlumno();
+	}
+	
 }

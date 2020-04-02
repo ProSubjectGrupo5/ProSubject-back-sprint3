@@ -56,5 +56,13 @@ public class AdministradorService {
 
 		return adminEditado;
 	}
+	
+	public List<String> emailsAdministradores() {
+		return this.administradorRepository.emailsAdministradores();
+	}
+	
+	public List<String> dnisAdministradores() {
+		return this.administradorRepository.dnisAdministradores();
+	}
 
 }

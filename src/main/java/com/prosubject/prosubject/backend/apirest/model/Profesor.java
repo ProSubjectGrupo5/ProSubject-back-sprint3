@@ -61,7 +61,7 @@ public class Profesor implements Serializable {
 	@Column(unique = true , nullable = false)
 	private String email;
 	
-	@Pattern(regexp="^([+][1-9]\\d{0,3})?([ ])?([(][1-9]\\d{0,4}[)])?([ ])?\\d{6,10}|^$",message = "Debe introducir un numero de telefono correcto")
+	@Pattern(regexp="^\\d{9}|^$",message = "Debe introducir un numero de telefono correcto")
 	private String telefono;
 	
 	
@@ -70,7 +70,7 @@ public class Profesor implements Serializable {
 	
 	
 	@Column(nullable = false)
-	private Boolean expedienteValidado;
+	private ValidacionExpediente expedienteValidado;
 	
 	@Valid
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
@@ -141,11 +141,11 @@ public class Profesor implements Serializable {
 		this.tarifaPremium = tarifaPremium;
 	}
 
-	public Boolean getExpedienteValidado() {
+	public ValidacionExpediente getExpedienteValidado() {
 		return expedienteValidado;
 	}
 
-	public void setExpedienteValidado(Boolean expedienteValidado) {
+	public void setExpedienteValidado(ValidacionExpediente expedienteValidado) {
 		this.expedienteValidado = expedienteValidado;
 	}
 
@@ -166,14 +166,6 @@ public class Profesor implements Serializable {
 	public void setUserAccount(UserAccount userAccount) {
 		this.useraccount = userAccount;
 	}
-
-
-	
-
-
-
-
-
 
 }
 

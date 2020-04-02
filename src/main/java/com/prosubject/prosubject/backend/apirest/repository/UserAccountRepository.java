@@ -1,5 +1,6 @@
 package com.prosubject.prosubject.backend.apirest.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,17 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
 	@Query("select u from useraccounts u where u.username=?1 AND u.password=?2")
 	Optional<UserAccount> cuentaLogueada(String usuario, String password);
 	
+	@Query("select p.username from useraccounts p")
+	List<String> todosUsername();
 	
-
-
+	
+	
+	
+	@Query("select u from useraccounts u  where "
+			+ "u = (select p.useraccount from profesores p where p.email=?1) "
+			+ "OR "
+			+ "u = (select a.useraccount from alumnos a where a.email=?1)")
+	Optional<UserAccount> cuentaLogueada(String email);
+	
+	
 }
