@@ -46,6 +46,11 @@ public class ValoracionService {
 		
 	}
 	
+	
+	public List<Valoracion> valoracionesPorEspacioId(final Long espacioId) {
+		return this.valoracionRepository.valoracionesDeUnEspacio(espacioId);
+	}
+	
 
 
 

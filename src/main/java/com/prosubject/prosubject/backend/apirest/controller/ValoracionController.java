@@ -138,4 +138,31 @@ public class ValoracionController {
 	}
 	
 	
+	@GetMapping("/espacio/{id}")
+	public ResponseEntity<?> valoracionesPorEspacioId(@PathVariable Long id) {
+		List<Valoracion> valoraciones = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Espacio espacio = this.espacioService.findOne(id);
+		if (espacio == null) {
+			response.put("mensaje", "El  espacio con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			valoraciones = this.valoracionService.valoracionesPorEspacioId(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (valoraciones.isEmpty()) {
+			response.put("mensaje", "Este espacio no tiene valoraciones");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<List<Valoracion>>(valoraciones, HttpStatus.OK);
+
+	}
+	
+	
 }
