@@ -22,7 +22,7 @@ public class Valoracion implements Serializable{
 	private Long id;
 	
 	@Range(min = 0, max = 5)
-	private Integer puntuacion;
+	private Double puntuacion;
 	
 	private String comentario;
 	
@@ -49,11 +49,13 @@ public class Valoracion implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getPuntuacion() {
+
+
+	public Double getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(Integer puntuacion) {
+	public void setPuntuacion(Double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 
