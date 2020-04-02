@@ -80,6 +80,16 @@ public class Valoracion implements Serializable{
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}
+
+	public Espacio getEspacio() {
+		return espacio;
+	}
+
+	public void setEspacio(Espacio espacio) {
+		this.espacio = espacio;
+	}
+	
+	
 	
 	
 	

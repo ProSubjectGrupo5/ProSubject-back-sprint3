@@ -73,4 +73,9 @@ public class AlumnoService {
 		return this.alumnoRepository.DNIsAlumno();
 	}
 	
+	public List<Alumno> alumnosDeUnEspacio(Long id) {
+		return this.alumnoRepository.alumnosDeUnEspacio(id);
+	}
+	
+	
 }
