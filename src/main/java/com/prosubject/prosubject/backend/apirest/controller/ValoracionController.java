@@ -152,6 +152,11 @@ public class ValoracionController {
 			response.put("mensaje", "El  espacio con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
+		
+		if (espacio.getDraftMode()==1) {
+			response.put("mensaje", "El  espacio no esta publicado , por lo que no puede ser valorado");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
 		try {
 			valoraciones = this.valoracionService.valoracionesPorEspacioId(id);
 		} catch (DataAccessException e) {
@@ -160,10 +165,6 @@ public class ValoracionController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		if (valoraciones.isEmpty()) {
-			response.put("mensaje", "Este espacio no tiene valoraciones");
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
 
 		return new ResponseEntity<List<Valoracion>>(valoraciones, HttpStatus.OK);
 
