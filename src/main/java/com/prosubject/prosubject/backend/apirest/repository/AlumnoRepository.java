@@ -30,6 +30,9 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>  {
 	
 	@Query("select r.alumno from rangos r where r.horario.espacio.id=?1")
 	List<Alumno> alumnosDeUnEspacio(Long id);
+	
+	@Query("select v.alumno from valoraciones v where v.espacio.id=?1")
+	List<Alumno> alumnosQueHanValoradoUnEspacio(Long id);
 
 	
 	

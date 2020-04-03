@@ -87,6 +87,11 @@ public class ValoracionController {
 			response.put("mensaje", "El alumno no pertenece al espacio");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
+		List<Alumno> alumnosQueHanValoradoUnespacio = this.alumnoService.alumnosQueHanValoradoUnEspacio(espacio.getId());
+		if (alumnosQueHanValoradoUnespacio.contains(alumno)) {
+			response.put("mensaje", "El alumno  ya ha valorado este espacio");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
 		try {
 			valoracionGuardada  = valoracionService.save(valoracion);
 		}catch(DataAccessException e) {

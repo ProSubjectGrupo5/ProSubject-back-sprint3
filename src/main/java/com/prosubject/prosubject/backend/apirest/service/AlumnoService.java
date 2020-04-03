@@ -77,5 +77,9 @@ public class AlumnoService {
 		return this.alumnoRepository.alumnosDeUnEspacio(id);
 	}
 	
+	public List<Alumno> alumnosQueHanValoradoUnEspacio(Long espacioId) {
+		return this.alumnoRepository.alumnosQueHanValoradoUnEspacio(espacioId);
+	}
+	
 	
 }
