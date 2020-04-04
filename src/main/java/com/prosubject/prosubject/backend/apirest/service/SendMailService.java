@@ -11,7 +11,9 @@ public class SendMailService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	public void senMail(String to, String subject,String body) {
+	public String senMail(String to, String subject,String body) {
+		
+		String res = "Enviado a: " + to + "\nAsunto: " + subject + "\nCuerpo: " + body;
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		
@@ -21,6 +23,8 @@ public class SendMailService {
 		mailMessage.setText(body);
 		
 		javaMailSender.send(mailMessage);
+		
+		return res;
 		
 	}
 

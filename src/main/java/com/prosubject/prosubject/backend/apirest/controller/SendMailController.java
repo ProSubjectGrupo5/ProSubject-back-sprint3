@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.service.SendMailService;
 
-
 @RestController
 @RequestMapping("/api/mail")
 @CrossOrigin(origins = { "http://localhost:4200", "https://prosubject-v2.herokuapp.com" })
@@ -29,10 +28,15 @@ public class SendMailController {
 	public ResponseEntity<?> enviarEmail(@RequestParam("to") String to, @RequestParam("subject") String subject,
 			@RequestParam("body") String body) {
 
+		String res;
+		Map<String, Object> response = new HashMap<String, Object>();
 
-		String res = "Enviado a: " + to + "\nAsunto: " + subject + "\nCuerpo: " + body;
-
-		this.sendMailService.senMail(to, subject, body);
+		try {
+			res = this.sendMailService.senMail(to, subject, body);
+		} catch (Exception e) {
+			response.put("mensaje", "Error al mandar el email");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
 		return new ResponseEntity<String>(res, HttpStatus.OK);
 
