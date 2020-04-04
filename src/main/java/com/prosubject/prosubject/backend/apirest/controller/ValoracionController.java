@@ -24,6 +24,7 @@ import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.model.Valoracion;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
+import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 @RestController
@@ -37,6 +38,8 @@ public class ValoracionController {
 	private EspacioService espacioService;
 	@Autowired
 	private AlumnoService alumnoService ;
+	@Autowired
+	private ProfesorService profesorService;
 	
 	@GetMapping("")
 	public List<Valoracion> findAll() {
@@ -167,6 +170,58 @@ public class ValoracionController {
 
 
 		return new ResponseEntity<List<Valoracion>>(valoraciones, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/media/espacio/{id}")
+	public ResponseEntity<?> valoracionMediaDeEspacio(@PathVariable Long id) {
+		Double valoracionMedia = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Espacio espacio = this.espacioService.findOne(id);
+		if (espacio == null) {
+			response.put("mensaje", "Este espacio no existe");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			valoracionMedia = this.valoracionService.valoracionMediaDeEspacio(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (valoracionMedia == null) {
+			response.put("mensaje", "No tiene ningua valoracion este espacio");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Double>(valoracionMedia, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/media/profesor/{id}")
+	public ResponseEntity<?> valoracionMediaDeProfesor(@PathVariable Long id) {
+		Double valoracionMedia = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Profesor profesor = this.profesorService.findOne(id);
+		if (profesor == null) {
+			response.put("mensaje", "Este profesor no existe");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			valoracionMedia = this.valoracionService.valoracionMediaDeProfesor(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (valoracionMedia == null) {
+			response.put("mensaje", "No tiene ningua valoracion este profesor");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Double>(valoracionMedia, HttpStatus.OK);
 
 	}
 	

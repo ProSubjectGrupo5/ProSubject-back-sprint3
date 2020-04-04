@@ -16,12 +16,15 @@ public class ProfesorService {
 	
 	@Autowired
 	private ProfesorRepository profesorRepository;
+	@Autowired
+	private ValoracionService valoracionService;
 	
 	public List<Profesor> findAll() {
 		return this.profesorRepository.findAll();
 	}
 	
 	public Profesor findOne(final Long profesorId) {
+		
 		return this.profesorRepository.findById(profesorId).orElse(null);
 	}
 	
@@ -78,6 +81,15 @@ public class ProfesorService {
 	
 	public List<Profesor> profesoresTarifaPremium(){
 		return this.profesorRepository.profesoresTarifaPremium();
+	}
+	
+	public void valoracionMedia(Long profesorId) {
+	Profesor profesor = this.profesorRepository.findById(profesorId).orElse(null);
+	Double vm = this.valoracionService.valoracionMediaDeProfesor(profesorId);
+	profesor.setValoracionMedia(vm);
+	this.profesorRepository.save(profesor);
+		
+		
 	}
 
 }

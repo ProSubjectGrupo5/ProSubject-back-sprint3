@@ -76,6 +76,9 @@ public class Profesor implements Serializable {
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "file_id")
 	private DBFile expendiente;
+	
+	
+	private Double valoracionMedia;
 
 	public Long getId() {
 		return id;
@@ -166,6 +169,16 @@ public class Profesor implements Serializable {
 	public void setUserAccount(UserAccount userAccount) {
 		this.useraccount = userAccount;
 	}
+
+	public Double getValoracionMedia() {
+		return valoracionMedia;
+	}
+
+	public void setValoracionMedia(Double valoracionMedia) {
+		this.valoracionMedia = valoracionMedia;
+	}
+	
+	
 
 }
 

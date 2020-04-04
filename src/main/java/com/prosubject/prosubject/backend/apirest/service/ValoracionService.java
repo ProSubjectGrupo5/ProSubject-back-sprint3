@@ -16,6 +16,8 @@ public class ValoracionService {
 
 	@Autowired
 	private ValoracionRepository valoracionRepository;
+	@Autowired
+	private ProfesorService profesorService;
 	
 	
 	public Valoracion create() {
@@ -35,6 +37,7 @@ public class ValoracionService {
 	public Valoracion save(final Valoracion v) {
 		
 		Valoracion saved = this.valoracionRepository.save(v);
+		this.profesorService.valoracionMedia(saved.getProfesor().getId());
 		
 		return saved;
 	}
@@ -51,6 +54,14 @@ public class ValoracionService {
 		return this.valoracionRepository.valoracionesDeUnEspacio(espacioId);
 	}
 	
+	
+	public Double valoracionMediaDeEspacio(final Long espacioId) {
+		return this.valoracionRepository.valoracionMediaDeEspacio(espacioId);
+	}
+	
+	public Double valoracionMediaDeProfesor(final Long profesorId) {
+		return this.valoracionRepository.valoracionMediaDeProfesor(profesorId);
+	}
 
 
 
