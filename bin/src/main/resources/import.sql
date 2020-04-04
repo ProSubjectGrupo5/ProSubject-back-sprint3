@@ -142,11 +142,11 @@ INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('16', '
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('17', '14');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('18', '15');
 
-INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Rojas', 'Cantos','86800079B','alvaro@gmail.com', 'Alvaro','123436385', '5', 0, 2);
-INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Romero ', 'Organvidez','86558252Y','drorganvidez@gmail.com', 'David', '123436485', '6', 0, 2);
+INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`,`valoracion_media`) VALUES ('Rojas', 'Cantos','86800079B','alvaro@gmail.com', 'Alvaro','123436385', '5', 0, 2,1.5);
+INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`,`tarifa_premium`,`expediente_validado`,`valoracion_media`) VALUES ('Romero ', 'Organvidez','86558252Y','drorganvidez@gmail.com', 'David', '123436485', '6', 0, 2,3);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Rojas', 'Gutierrez','07575994R', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789',  '7', 0, 2);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Carillo', 'Mirando', '85694759W','fcarmir@gmail.com', 'Fernando','652314129',  '8', 0, 2);
-INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Cano', 'Caldero', '15001711F','alejandrocano.caldero@gmail.com', 'Alejandro','123426719', '12', 0, 2);
+INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`,`valoracion_media`) VALUES ('Cano', 'Caldero', '15001711F','alejandrocano.caldero@gmail.com', 'Alejandro','123426719', '12', 0, 2,4.5);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Cantero', 'Garcia', '99619865B','martacanterogarcia@gmail.com', 'Marta', '127656283','13', 0, 2);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Meca', 'Sanchez', '86658574W','andmecsan@alum.us.es', 'Andrea', '695073140','14', 0, 2);
 INSERT INTO `profesores` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`,  `useraccount_id`,`tarifa_premium`,`expediente_validado`) VALUES ('Jimenez', 'Soldado', '51464215J','frajimsol@alum.us.es', 'Franciso Javier','695073199', '16', 0, 2);
@@ -168,7 +168,7 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `tele
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Romero', 'Caceres', '39845718N', 'anaromcac@alum.us.es', 'Ana', '603552740', '4');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Squen', 'Saavedra', '90122321H', 'lizesqsaa@alum.us.es', 'Lizseth Katherine', '653552740', '9');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Lobato', 'Troncoso', '35561913A', 'josema_6497@alum.us.es', 'Jose Manuel', '603554740', '10');
-INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Mauri', 'Mitchell', '35561913A', 'crimaumit@alum.us.es', 'Cristina Maria', '695073170', '11');
+INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Mauri', 'Mitchell', '56136756N', 'crimaumit@alum.us.es', 'Cristina Maria', '695073170', '11');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Meca', 'Sanchez', '86658574W', 'andmecsan@alum.us.es', 'Andrea', '695073140', '15');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Jimenez', 'Soldado', '51464215J', 'frajimsol@alum.us.es', 'Franciso Javier', '695073199', '17');
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `dni`, `email`, `nombre`, `telefono`, `useraccount_id`) VALUES ('Montes', 'Saborido', '76414260A', 'eduardo@gmail.com', 'Eduardo', '695073369', '19');
@@ -253,5 +253,10 @@ INSERT INTO `rangos` (`horario_id`, `alumno_id`) VALUES ('7', '4');
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
 INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, `foro_id`) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
 
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '1', '1', 1,'No me ha ayudado a aprobar la asignatura');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '2','1', 2,'Sus clases no valen la pena, solo te muestra ejercicios resueltos');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('2', '3','2', 3,'He aprobado pero no explica muy bien');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '3','5', 4,'Gracias a él he aprobado');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '4','4', 5,'Gracias a sus clases he conseguido sacarme un notable');
 
 

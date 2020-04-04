@@ -55,6 +55,9 @@ public class AlumnoService {
 		alumn.setTelefono(alumno.getTelefono());
 		alumn.getUserAccount().setUsername((alumno.getUserAccount().getUsername()));
 		alumn.getUserAccount().setPassword((alumno.getUserAccount().getPassword()));
+		alumn.setUniversidad(alumno.getUniversidad());
+		alumn.setFacultad(alumno.getFacultad());
+		alumn.setGrado(alumno.getGrado());
 		
 		Alumno alumnoEditado = save(alumn);
 

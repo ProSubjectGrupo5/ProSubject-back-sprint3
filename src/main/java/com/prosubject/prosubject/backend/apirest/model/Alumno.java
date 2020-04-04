@@ -47,6 +47,18 @@ public class Alumno implements Serializable {
 	private String apellido2;
 	
 	@NotBlank
+	@Column(nullable = false)
+	private String universidad;
+	
+	@NotBlank
+	@Column(nullable = false)
+	private String facultad;
+	
+	@NotBlank
+	@Column(nullable = false)
+	private String grado;
+	
+	@NotBlank
 	@Pattern(regexp = "^(\\d{8})([A-Z])$",message = "Debe tener 8 numeros y 1 letra")
 	@Column(unique = true , nullable = false)
 	private String dni;
@@ -157,6 +169,40 @@ public class Alumno implements Serializable {
 		this.telefono = telefono;
 	}
 
+	
+	public String getUniversidad() {
+		return universidad;
+	}
+
+
+
+	public void setUniversidad(String universidad) {
+		this.universidad = universidad;
+	}
+
+
+
+	public String getFacultad() {
+		return facultad;
+	}
+
+
+
+	public void setFacultad(String facultad) {
+		this.facultad = facultad;
+	}
+
+
+
+	public String getGrado() {
+		return grado;
+	}
+
+
+
+	public void setGrado(String grado) {
+		this.grado = grado;
+	}
 
 
 
