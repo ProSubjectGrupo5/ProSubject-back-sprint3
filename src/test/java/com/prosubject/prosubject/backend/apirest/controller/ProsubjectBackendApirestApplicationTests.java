@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest 
 @RunWith(SpringRunner.class)
 @SpringJUnitWebConfig
-class ProsubjectBackendApirestApplicationTestsController {
+class ProsubjectBackendApirestApplicationTests {
 	
 
 	private static final Long TEST_ADMINISTRADOR_ID = 300L;
