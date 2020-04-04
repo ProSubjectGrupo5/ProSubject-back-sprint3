@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.UserAccount;
@@ -49,7 +51,8 @@ class ProsubjectBackendApirestApplicationTestsController {
 
 
 	//MOCKITO
-	
+	@Autowired
+	private AdministradorController AdministradorController;
 	@MockBean
 	private AdministradorService administradorService;
 	
