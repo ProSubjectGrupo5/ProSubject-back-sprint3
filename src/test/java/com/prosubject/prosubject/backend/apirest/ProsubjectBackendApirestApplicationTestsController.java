@@ -1,99 +1,50 @@
 package com.prosubject.prosubject.backend.apirest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.net.ssl.SSLEngineResult.Status;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.After;
-
-import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
-import com.prosubject.prosubject.backend.apirest.controller.AlumnoController;
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
-import com.prosubject.prosubject.backend.apirest.model.Alumno;
-import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
-import com.prosubject.prosubject.backend.apirest.model.Curso;
-import com.prosubject.prosubject.backend.apirest.model.DBFile;
-import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
-import com.prosubject.prosubject.backend.apirest.model.Espacio;
-import com.prosubject.prosubject.backend.apirest.model.Facultad;
-import com.prosubject.prosubject.backend.apirest.model.Foro;
-import com.prosubject.prosubject.backend.apirest.model.Grado;
-import com.prosubject.prosubject.backend.apirest.model.Horario;
-import com.prosubject.prosubject.backend.apirest.model.Profesor;
-import com.prosubject.prosubject.backend.apirest.model.Rango;
-import com.prosubject.prosubject.backend.apirest.model.Respuesta;
-import com.prosubject.prosubject.backend.apirest.model.Universidad;
 import com.prosubject.prosubject.backend.apirest.model.UserAccount;
-import com.prosubject.prosubject.backend.apirest.repository.AdministradorRepository;
-import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
-import com.prosubject.prosubject.backend.apirest.repository.AsignaturaRepository;
-import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
 import com.prosubject.prosubject.backend.apirest.service.AdministradorService;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.AsignaturaService;
+import com.prosubject.prosubject.backend.apirest.service.CarritoService;
+import com.prosubject.prosubject.backend.apirest.service.CursoService;
+import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
+import com.prosubject.prosubject.backend.apirest.service.FacultadService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
+import com.prosubject.prosubject.backend.apirest.service.GradoService;
+import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
+import com.prosubject.prosubject.backend.apirest.service.UniversidadService;
 import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
+import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import static org.hamcrest.Matchers.hasProperty;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import static org.hamcrest.Matchers.is;
-
 import static org.mockito.BDDMockito.given;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
-
-@WebMvcTest(controllers=AdministradorController.class,
-excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes =  WebMvcConfigurer.class))
+@WebMvcTest
 @RunWith(SpringRunner.class)
 class ProsubjectBackendApirestApplicationTestsController {
 	
 
-	private static final long TEST_ADMINISTRADOR_ID = 300;
+	private static final Long TEST_ADMINISTRADOR_ID = 300L;
+
+
+	private static final Long TEST_USERACCOUNT_ID = 300L;
 
 
 	//MOCKITO
@@ -110,8 +61,47 @@ class ProsubjectBackendApirestApplicationTestsController {
 	@MockBean
 	private ProfesorService profesorService;
 	
+	@MockBean
+	private EspacioService espacioService;
+	
+	@MockBean
+	private AsignaturaService asignaturaService;
+	
+	@MockBean
+	private CarritoService carritoService;
+	
+
+	@MockBean
+	private HorarioService horarioService;
+	
+	@MockBean
+	private CursoService cursoService;
+	
+	@MockBean
+	private ForoService foroService;
+
+
+	@MockBean
+	private ValoracionService valoracionService;
+	
+	@MockBean
+	private RespuestaService respuestaService;
+	
+	@MockBean
+	private GradoService gradoService;
+	
+	@MockBean
+	private FacultadService facultadService;
+	
+	@MockBean
+	private UniversidadService universidadService;
+	
+	@MockBean
+	private DBFileStorageService dbFileStorageService;
+	
 	@Mock 
 	private Administrador administrador;
+	
 	private UserAccount userAccount;
 	
 	@Autowired
@@ -125,6 +115,10 @@ class ProsubjectBackendApirestApplicationTestsController {
 
 		administrador = new Administrador();
 		userAccount = new UserAccount();
+		userAccount.setId(TEST_USERACCOUNT_ID);
+		userAccount.setAutoridad(Authority.ADMIN);
+		userAccount.setPassword("asdasdd123123131");
+		userAccount.setUsername("anaromcac");
 		administrador.setId(TEST_ADMINISTRADOR_ID);
 		administrador.setApellido1("Romero");
 		administrador.setApellido2("Caceres");
@@ -134,6 +128,7 @@ class ProsubjectBackendApirestApplicationTestsController {
 		administrador.setUserAccount(userAccount);
 		administrador.setEmail("anaromcac@alum.us.es");
 		given(this.administradorService.findOne(TEST_ADMINISTRADOR_ID)).willReturn(administrador);
+		given(this.userAccountService.findByUserAndPass(userAccount.getUsername(), userAccount.getPassword())).willReturn(userAccount);
 	}
 	
 	 
@@ -141,9 +136,17 @@ class ProsubjectBackendApirestApplicationTestsController {
 	   	@Test
 	   	void testShowAdministrador() throws Exception {
 	   		mockMvc.perform(get("/api/administradores/{id}",TEST_ADMINISTRADOR_ID))
-	   		
-	   		//.content("{\"userName\":\"testUserDetails\",\"firstName\":\"xxx\",\"lastName\":\"xxx\",\"password\":\"xxx\"}"))
-	   		.andExpect(status().isOk()).andReturn().getResponse();
+
+	   		.andExpect(status().isOk())
+	   		.andExpect(jsonPath("$.id", is(300)))
+	   		.andExpect(jsonPath("$.apellido1", is("Romero")))
+	   		.andExpect(jsonPath("$.apellido2", is("Caceres")))
+	   		.andExpect(jsonPath("$.nombre", is("Ana")))
+	   		.andExpect(jsonPath("$.dni", is("47546251F")))
+	   		.andExpect(jsonPath("$.telefono", is("955792206")))
+	   		.andExpect(jsonPath("$.email", is("anaromcac@alum.us.es")))
+	   		.andExpect(status().is2xxSuccessful())
+	   		.andDo(MockMvcResultHandlers.print());
 	   	}
 	
 
