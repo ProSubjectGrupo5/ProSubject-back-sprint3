@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
@@ -41,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest 
 @RunWith(SpringRunner.class)
+@SpringJUnitWebConfig
 class ProsubjectBackendApirestApplicationTestsController {
 	
 
