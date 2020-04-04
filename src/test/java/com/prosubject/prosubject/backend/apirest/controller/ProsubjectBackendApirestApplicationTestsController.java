@@ -1,4 +1,4 @@
-package com.prosubject.prosubject.backend.apirest;
+package com.prosubject.prosubject.backend.apirest.controller;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
