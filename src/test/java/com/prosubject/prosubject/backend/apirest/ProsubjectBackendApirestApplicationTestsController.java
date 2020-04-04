@@ -30,6 +30,7 @@ import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
 import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import static org.hamcrest.Matchers.is;
@@ -40,7 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest 
 @RunWith(SpringRunner.class)
-@ContextConfiguration
 class ProsubjectBackendApirestApplicationTestsController {
 	
 
@@ -48,6 +48,9 @@ class ProsubjectBackendApirestApplicationTestsController {
 
 
 	private static final Long TEST_USERACCOUNT_ID = 300L;
+
+
+	private static final Object TEST_UNIVERSIDAD_ID = 300L;
 
 
 	//MOCKITO
@@ -136,6 +139,7 @@ class ProsubjectBackendApirestApplicationTestsController {
 	}
 	
 	 
+
 		
 	   	@Test
 	   	void testShowAdministrador() throws Exception {
@@ -151,6 +155,12 @@ class ProsubjectBackendApirestApplicationTestsController {
 	   		.andExpect(jsonPath("$.email", is("anaromcac@alum.us.es")))
 	   		.andExpect(status().is2xxSuccessful())
 	   		.andDo(MockMvcResultHandlers.print());
+	   	}
+	   	
+	   	@Test
+	   	void testShowNegativeUniversidad() throws Exception {
+	   		mockMvc.perform(get("/api/universidades/{id}",TEST_UNIVERSIDAD_ID))
+	   		.andExpect(status().is(404));
 	   	}
 	
 
