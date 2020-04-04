@@ -26,6 +26,7 @@ import com.prosubject.prosubject.backend.apirest.service.GradoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
+import com.prosubject.prosubject.backend.apirest.service.SendMailService;
 import com.prosubject.prosubject.backend.apirest.service.UniversidadService;
 import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
 import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
@@ -58,8 +59,12 @@ class ProsubjectBackendApirestApplicationTests {
 	//MOCKITO
 	@Autowired
 	private AdministradorController AdministradorController;
+	
 	@MockBean
 	private AdministradorService administradorService;
+	
+	@MockBean
+	private SendMailService sendMailService;
 	
 	@MockBean
 	private UserAccountService userAccountService;
