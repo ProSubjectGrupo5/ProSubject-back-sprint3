@@ -71,7 +71,7 @@ public class EspacioService {
 		}
 		
 		
-		return this.espacioRepository.save(e);
+		return  this.espacioRepository.save(e);
 }
 		
 
