@@ -4,16 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -21,9 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import org.junit.Before;
-import org.junit.After;
 
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
 import com.prosubject.prosubject.backend.apirest.controller.AlumnoController;
@@ -48,8 +41,11 @@ import com.prosubject.prosubject.backend.apirest.repository.AdministradorReposit
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 import com.prosubject.prosubject.backend.apirest.repository.AsignaturaRepository;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
+import com.prosubject.prosubject.backend.apirest.service.AsignaturaService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
+import com.prosubject.prosubject.backend.apirest.service.HorarioService;
+import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -80,6 +76,13 @@ class ProsubjectBackendApirestApplicationTests {
 
 	@Autowired
 	private ForoService foroService;
+	
+	@Autowired
+	private HorarioService horarioService;
+	@Autowired
+	private AsignaturaService asignaturaService;
+	@Autowired
+	private ProfesorService profesorService;
 
 	@Test
 	public void adminControllerTest() {
@@ -339,6 +342,76 @@ class ProsubjectBackendApirestApplicationTests {
 		assertEquals(horario.getHoraFin(), date2);
 
 	}
+	
+	
+	@Test
+	public void ServicioHorarioDisponiblesDeUnEspacio() throws Exception {
+	 Long id = new Long(1);	
+		List<Horario> res = horarioService.horariosDisponiblesDeUnEspacio(id);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioHorariosDeUnEspacio() throws Exception {
+	 Long id = new Long(1);	
+		List<Horario> res = horarioService.horariosDeUnEspacio(id);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioHorariosDeAlumno() throws Exception {
+	 Long id = new Long(1);	
+		List<Horario> res = horarioService.horariosDeAlumno(id);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioHorariosDeProfesor() throws Exception {
+	 Long id = new Long(1);	
+		List<Horario> res = horarioService.horariosDeProfesor(id);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioHorariosNoEditablesDeUnProfesoro() throws Exception {
+	 Long id = new Long(1);	
+		List<Horario> res = horarioService.horariosNoEditablesDeUnProfesor(id);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioHorarioañadirAlumno() throws Exception {
+	 Long horarioId = new Long(3);	
+	 Long alumnoId = new Long(2);
+		Horario res = horarioService.añadirAlumno(horarioId, alumnoId);
+		assertThat(res).isNotNull();
+	}
+//	@Test
+//	public void ServicioHorarioSaveOne() throws Exception {
+//		Long asignaturaId = new Long(1);
+//		Long profesorId = new Long(7);
+//		Asignatura asignatura=this.asignaturaService.findOne(asignaturaId);
+//		Profesor profesor=this.profesorService.findOne(profesorId);
+//		Espacio espacio = new Espacio();
+//		espacio.setAsignatura(asignatura);
+//		espacio.setProfesor(profesor);
+//		espacio.setPrecio(12.0);
+//		espacio.setDraftMode(0);
+//		Horario horario = new Horario();
+//		Date date = new Date();
+//		Date date2 = new Date();
+//		date=this.horarioService.sumarRestarDiasFecha(date, 1);
+//		date2=this.horarioService.sumarRestarDiasFecha(date, 28);
+//		date2.after(date);
+//		horario.setCapacidad(1L);
+//		horario.setDia(DiaSemana.Viernes);
+//		horario.setEspacio(espacio);
+//		horario.setHoraInicio(date);
+//		horario.setHoraFin(date2);
+//		horario.setFechaInicio(date);
+//		Horario res = horarioService.saveOne(horario);
+//		assertThat(res).isNotNull();
+//	}
+	
 
 	// Profesor
 	@Test
