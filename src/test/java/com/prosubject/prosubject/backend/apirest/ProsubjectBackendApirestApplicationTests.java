@@ -224,7 +224,7 @@ class ProsubjectBackendApirestApplicationTests {
 		Grado grado = new Grado();
 		Facultad facultad = new Facultad();
 		grado.setNombre("Ingenieria del Software");
-		grado.setNumerocursos(1L);
+		grado.setNumerocursos(1);
 		grado.setFacultad(facultad);
 		assertEquals(grado.getNombre(), "Ingenieria del Software");
 		assertEquals(grado.getNumerocursos(), 1L);
@@ -233,6 +233,7 @@ class ProsubjectBackendApirestApplicationTests {
 	}
 
 	
+
 	
 
 	// Profesor
