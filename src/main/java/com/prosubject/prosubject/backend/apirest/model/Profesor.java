@@ -3,6 +3,7 @@ package com.prosubject.prosubject.backend.apirest.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -19,11 +22,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 @Entity(name = "profesores")
 public class Profesor implements Serializable {
 	
 
 	
+
+	public Date getFechaPagoPremium() {
+		return fechaPagoPremium;
+	}
+
+	public void setFechaPagoPremium(Date fechaPagoPremium) {
+		this.fechaPagoPremium = fechaPagoPremium;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -77,8 +91,12 @@ public class Profesor implements Serializable {
 	@JoinColumn(name = "file_id")
 	private DBFile expendiente;
 	
-	
 	private Double valoracionMedia;
+	
+	@Column(nullable = true)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd-MM-yyyy")
+	private Date fechaPagoPremium;
 
 	public Long getId() {
 		return id;
