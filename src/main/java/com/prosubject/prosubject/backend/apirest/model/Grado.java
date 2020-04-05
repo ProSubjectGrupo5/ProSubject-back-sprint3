@@ -31,16 +31,16 @@ public class Grado implements Serializable{
 	@JoinColumn(name = "facultad_id")
 	private Facultad facultad;
 	
-	@Range(min=1, max=5)
+	@Range(min=1, max=6)
 	@Column(nullable = false)
-	private Long numerocursos;
+	private Integer numerocursos;
 	
 	
-	public Long getNumerocursos() {
+	public int getNumerocursos() {
 		return numerocursos;
 	}
 
-	public void setNumerocursos(Long numerocursos) {
+	public void setNumerocursos(Integer numerocursos) {
 		this.numerocursos = numerocursos;
 	}
 
