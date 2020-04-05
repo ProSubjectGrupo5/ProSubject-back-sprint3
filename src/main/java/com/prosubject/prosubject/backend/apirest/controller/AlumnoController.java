@@ -11,15 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.UserAccountService;
 
 @RestController
@@ -29,6 +29,9 @@ public class AlumnoController {
 
 	@Autowired
 	private AlumnoService alumnoService;
+	
+	@Autowired
+	private EspacioService espacioService;
 
 	@Autowired
 	private UserAccountService userAccountService;
@@ -113,6 +116,35 @@ public class AlumnoController {
 
 		if (alumno == null) {
 			response.put("mensaje", "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<List<Alumno>>(alumno, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/espacio/{id}")
+	public ResponseEntity<?> alumnosDeUnEspacio(@PathVariable Long id) {
+		List<Alumno> alumno = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		Espacio espacio = this.espacioService.findOne(id);
+		
+		if (espacio == null) {
+			response.put("mensaje", "El espacio con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		try {
+			alumno = this.alumnoService.alumnosDeUnEspacio(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (alumno.isEmpty()) {
+			response.put("mensaje", "No hay alumnos en ese espacio");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 

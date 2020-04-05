@@ -54,6 +54,28 @@ public class GradoController{
 		
 	}
 	
+	@GetMapping("/gradoId")
+	public ResponseEntity<?> findGradoId(@RequestParam String nombreGrado){
+		Long gradoId = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			gradoId = this.gradoService.findGradoId(nombreGrado);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(gradoId == null) {
+			response.put("mensaje",	 "El grado con nombre: ".concat(nombreGrado.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<Long>(gradoId, HttpStatus.OK);
+		
+	}
+	
 	@GetMapping("/busquedaGrados")
 	public List<Grado> findGradoFacu(@RequestParam String universidad,
 			@RequestParam String facultad){

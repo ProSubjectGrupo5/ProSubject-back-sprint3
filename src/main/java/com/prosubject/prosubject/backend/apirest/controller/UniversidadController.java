@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Universidad;
@@ -51,5 +52,26 @@ public class UniversidadController {
 		}
 		
 		return new ResponseEntity<Universidad>(uni, HttpStatus.OK);
+	}
+	
+	@GetMapping("/uniId")
+	public ResponseEntity<?> findOne(@RequestParam String nombreUni){
+		Long uniId = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			uniId = this.universidadService.findUniId(nombreUni);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		if(uniId == null) {
+			response.put("mensaje",	 "La universidad con nombre: ".concat(nombreUni.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		return new ResponseEntity<Long>(uniId, HttpStatus.OK);
 	}
 }

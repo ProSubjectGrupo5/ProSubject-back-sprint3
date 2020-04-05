@@ -10,7 +10,8 @@ import com.prosubject.prosubject.backend.apirest.model.Espacio;
 
 
 @Repository
-public interface EspacioRepository extends JpaRepository<Espacio, Long> {
+public interface EspacioRepository extends JpaRepository<Espacio, Long>{
+	
 	@Query("select distinct(e) from espacios e inner join e.asignatura asig "
 			+ "inner join asig.curso cur "
 			+ "inner join asig.grados gra "

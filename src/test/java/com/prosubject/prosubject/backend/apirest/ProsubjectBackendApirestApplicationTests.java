@@ -5,28 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
+
 import java.util.HashMap;
+
+
 import java.util.List;
-import java.util.Map;
 
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import org.junit.Before;
-import org.junit.After;
-
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
 import com.prosubject.prosubject.backend.apirest.controller.AlumnoController;
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
@@ -50,8 +45,11 @@ import com.prosubject.prosubject.backend.apirest.repository.AdministradorReposit
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 import com.prosubject.prosubject.backend.apirest.repository.AsignaturaRepository;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
+import com.prosubject.prosubject.backend.apirest.service.AsignaturaService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
+import com.prosubject.prosubject.backend.apirest.service.HorarioService;
+import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -73,7 +71,6 @@ class ProsubjectBackendApirestApplicationTests {
 	private AsignaturaRepository asigRep;
 
 	@Autowired
-	@MockBean
 	private EspacioRepository espRep;
 
 	@Autowired
@@ -82,6 +79,13 @@ class ProsubjectBackendApirestApplicationTests {
 
 	@Autowired
 	private ForoService foroService;
+	
+	@Autowired
+	private HorarioService horarioService;
+	@Autowired
+	private AsignaturaService asignaturaService;
+	@Autowired
+	private ProfesorService profesorService;
 
 	@Test
 	public void adminControllerTest() {
@@ -187,91 +191,7 @@ class ProsubjectBackendApirestApplicationTests {
 
 	}
 
-	// Espacios
-	@Test
-	public void GetterAndSetterEspacioTest() {
-
-		Asignatura asignatura = new Asignatura();
-		Foro foro = new Foro();
-		Profesor profesor = new Profesor();
-		Espacio espacio = new Espacio();
-		espacio.setAsignatura(asignatura);
-		espacio.setForo(foro);
-		espacio.setProfesor(profesor);
-		espacio.setPrecio(12.0);
-		espacio.setDraftMode(0);
-		assertEquals(espacio.getAsignatura(), asignatura);
-		assertEquals(espacio.getForo(), foro);
-		assertEquals(espacio.getProfesor(), profesor);
-		assertEquals(espacio.getPrecio(), 12.0);
-		assertEquals(espacio.getDraftMode(), 0);
-	}
-
-	@Test
-	public void findDisponiblesTest() {
-		String uni = "Universidad de Sevilla";
-		String facultad = "Escuela Técnica Superior de Ingeniería Informática";
-		String grado = "Ingeniería del Software";
-		String curso = "PRIMERO";
-		String asignatura = "Fundamentos de programación";
-		List<Espacio> res = espRep.findDisponibles(uni, facultad, grado, curso, asignatura);
-		assertThat(res).isNotNull();
-
-	}
-
-	@Test
-	public void ServicioEspaciofindDisponiblesTest() {
-		String uni = "Universidad de Sevilla";
-		String facultad = "Escuela Técnica Superior de Ingeniería Informática";
-		String grado = "Ingeniería del Software";
-		String curso = "PRIMERO";
-		String asignatura = "Fundamentos de programación";
-		List<Espacio> res = espacioServicio.findDisponibles(uni, facultad, grado, curso, asignatura);
-		assertThat(res).isNotNull();
-
-	}
-
-//	@Test
-//	public void ServicioEspacioFindOne() {
-//		Long id = new Long(1);
-//		Espacio res = espacioServicio.findOne(id);
-//		assertThat(res).isNotNull();
-//
-//	}
 	
-
-
-	@Test
-	public void ServicioEspacioEspacioDeUnProfesor() {
-		Long id = new Long(1);
-		List<Espacio> res = espacioServicio.espaciosDeUnProfesor(id);
-		assertThat(res).isNotNull();
-
-	}
-
-	@Test
-	public void ServicioEspacioEspacioDeUnAlumno() {
-		Long id = new Long(1);
-		List<Espacio> res = espacioServicio.espaciosDeUnAlumno(id);
-		assertThat(res).isNotNull();
-
-	}
-
-	@Test
-	public void ServicioEspacioConHorarioConCapacidad() throws Exception {
-		List<Espacio> res = espacioServicio.espaciosConHorarioConCapacidad();
-		assertThat(res).isNotNull();
-
-	}
-	
-	@Test
-	public void ServicioEspaciosDeUnProfesorEnDraftMode() {
-		Long id = new Long(3);
-		List<Espacio> res = espacioServicio.espaciosDeUnProfesorEnDraftMode(id);
-		assertThat(res).isNotNull();
-
-	}
-
 
 
 
@@ -312,7 +232,7 @@ class ProsubjectBackendApirestApplicationTests {
 		Grado grado = new Grado();
 		Facultad facultad = new Facultad();
 		grado.setNombre("Ingenieria del Software");
-		grado.setNumerocursos(1L);
+		grado.setNumerocursos(1);
 		grado.setFacultad(facultad);
 		assertEquals(grado.getNombre(), "Ingenieria del Software");
 		assertEquals(grado.getNumerocursos(), 1L);
@@ -320,28 +240,9 @@ class ProsubjectBackendApirestApplicationTests {
 
 	}
 
-	// Horario
-	@Test
-	public void GetterAndSetterHorarioTest() {
+	
 
-		Horario horario = new Horario();
-		Espacio espacio = new Espacio();
-		Date date = new Date();
-		Date date2 = new Date();
-		date2.after(date);
-		horario.setCapacidad(1L);
-		horario.setDia(DiaSemana.Viernes);
-		horario.setEspacio(espacio);
-		horario.setHoraInicio(date);
-		horario.setHoraFin(date2);
-
-		assertEquals(horario.getCapacidad(), 1L);
-		assertEquals(horario.getDia(), DiaSemana.Viernes);
-		assertEquals(horario.getEspacio(), espacio);
-		assertEquals(horario.getHoraInicio(), date);
-		assertEquals(horario.getHoraFin(), date2);
-
-	}
+	
 
 	// Profesor
 	@Test
@@ -373,6 +274,7 @@ class ProsubjectBackendApirestApplicationTests {
 		assertEquals(profesor.getExpendiente(), expediente);
 
 	}
+	
 
 	// Rango
 	@Test
@@ -450,6 +352,192 @@ class ProsubjectBackendApirestApplicationTests {
 
 	}
 	
+
+	// Espacios
+		@Test
+		public void GetterAndSetterEspacioTest() {
+
+			Asignatura asignatura = new Asignatura();
+			Foro foro = new Foro();
+			Profesor profesor = new Profesor();
+			Espacio espacio = new Espacio();
+			espacio.setAsignatura(asignatura);
+			espacio.setForo(foro);
+			espacio.setProfesor(profesor);
+			espacio.setPrecio(12.0);
+			espacio.setDraftMode(0);
+			assertEquals(espacio.getAsignatura(), asignatura);
+			assertEquals(espacio.getForo(), foro);
+			assertEquals(espacio.getProfesor(), profesor);
+			assertEquals(espacio.getPrecio(), 12.0);
+			assertEquals(espacio.getDraftMode(), 0);
+		}
+
+		@Test
+		public void findDisponiblesTest() {
+			String uni = "Universidad de Sevilla";
+			String facultad = "Escuela Técnica Superior de Ingeniería Informática";
+			String grado = "Ingeniería del Software";
+			String curso = "PRIMERO";
+			String asignatura = "Fundamentos de programación";
+			List<Espacio> res = espRep.findDisponibles(uni, facultad, grado, curso, asignatura);
+			assertThat(res).isNotNull();
+
+		}
+
+		@Test
+		public void ServicioEspaciofindDisponiblesTest() {
+			String uni = "Universidad de Sevilla";
+			String facultad = "Escuela Técnica Superior de Ingeniería Informática";
+			String grado = "Ingeniería del Software";
+			String curso = "PRIMERO";
+			String asignatura = "Fundamentos de programación";
+			List<Espacio> res = espacioServicio.findDisponibles(uni, facultad, grado, curso, asignatura);
+			assertThat(res).isNotNull();
+
+		}
+
+	
+		@Test
+		public void ServicioEspacioFind() {
+			Espacio espacio= this.espacioServicio.findOne(1L);
+			assertThat(espacio.getId()).isEqualTo(1L);
+		}
+
+		
+
+
+		@Test
+		public void ServicioEspacioEspacioDeUnProfesor() {
+			Long id = new Long(1);
+			List<Espacio> res = espacioServicio.espaciosDeUnProfesor(id);
+			assertThat(res).isNotNull();
+
+		}
+
+		@Test
+		public void ServicioEspacioEspacioDeUnAlumno() {
+			Long id = new Long(1);
+			List<Espacio> res = espacioServicio.espaciosDeUnAlumno(id);
+			assertThat(res).isNotNull();
+
+		}
+
+		@Test
+		public void ServicioEspacioConHorarioConCapacidad() throws Exception {
+			List<Espacio> res = espacioServicio.espaciosConHorarioConCapacidad();
+			assertThat(res).isNotNull();
+
+		}
+		
+		@Test
+		public void ServicioEspaciosDeUnProfesorEnDraftMode() {
+			Long id = new Long(3);
+			List<Espacio> res = espacioServicio.espaciosDeUnProfesorEnDraftMode(id);
+			assertThat(res).isNotNull();
+
+		}
+
+
+	// Horario
+		@Test
+		public void GetterAndSetterHorarioTest() {
+
+			Horario horario = new Horario();
+			Espacio espacio = new Espacio();
+			Date date = new Date();
+			Date date2 = new Date();
+			date2.after(date);
+			horario.setCapacidad(1L);
+			horario.setDia(DiaSemana.Viernes);
+			horario.setEspacio(espacio);
+			horario.setHoraInicio(date);
+			horario.setHoraFin(date2);
+
+			assertEquals(horario.getCapacidad(), 1L);
+			assertEquals(horario.getDia(), DiaSemana.Viernes);
+			assertEquals(horario.getEspacio(), espacio);
+			assertEquals(horario.getHoraInicio(), date);
+			assertEquals(horario.getHoraFin(), date2);
+
+		}
+		
+		
+		@Test
+		public void ServicioHorarioDisponiblesDeUnEspacio() throws Exception {
+		 Long id = new Long(1);	
+			List<Horario> res = horarioService.horariosDisponiblesDeUnEspacio(id);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioHorariosDeUnEspacio() throws Exception {
+		 Long id = new Long(1);	
+			List<Horario> res = horarioService.horariosDeUnEspacio(id);
+			assertThat(res).isNotNull();
+		}
+		@Test
+		public void ServicioHorariosDeAlumno() throws Exception {
+		 Long id = new Long(1);	
+			List<Horario> res = horarioService.horariosDeAlumno(id);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioHorariosDeProfesor() throws Exception {
+		 Long id = new Long(1);	
+			List<Horario> res = horarioService.horariosDeProfesor(id);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioHorariosNoEditablesDeUnProfesoro() throws Exception {
+		 Long id = new Long(1);	
+			List<Horario> res = horarioService.horariosNoEditablesDeUnProfesor(id);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioHorarioañadirAlumno() throws Exception {
+		 Long horarioId = new Long(3);	
+		 Long alumnoId = new Long(2);
+			Horario res = horarioService.añadirAlumno(horarioId, alumnoId);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioHorarioFindOne() throws Exception {
+			Horario res = horarioService.findOne(1);
+			assertThat(res).isNotNull();
+		}
+	/*	@Test
+		public void ServicioHorarioSaveOne() throws Exception {
+
+			Asignatura asignatura=this.asignaturaService.findOne(1L);
+			Profesor profesor=this.profesorService.findOne(7L);
+			Espacio espacio = new Espacio();
+			espacio.setAsignatura(asignatura);
+			espacio.setProfesor(profesor);
+			espacio.setPrecio(12.0);
+			espacio.setDraftMode(0);
+			Horario horario = new Horario();
+			Date date = new Date();
+			Date date2 = new Date();
+			date=this.horarioService.sumarRestarDiasFecha(date, 1);
+			date2=this.horarioService.sumarRestarDiasFecha(date, 28);
+			date2.after(date);
+			horario.setCapacidad(1L);
+			horario.setDia(DiaSemana.Viernes);
+			horario.setEspacio(espacio);
+			horario.setHoraInicio(date);
+			horario.setHoraFin(date2);
+			horario.setFechaInicio(date);
+
+			
+			Horario res = horarioService.saveOne(horario);
+			//assertThat(res.);
+		}
+	*/
 	
 	  //SELENIUM
 	  @Test

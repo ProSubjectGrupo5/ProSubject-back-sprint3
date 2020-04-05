@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Curso;
+import com.prosubject.prosubject.backend.apirest.model.Grado;
 import com.prosubject.prosubject.backend.apirest.repository.CursoRepository;
 
 @Service
 public class CursoService {
 	@Autowired
 	private CursoRepository cursoRepository;
+	@Autowired
+	private GradoService gradoService;
 	
 	
 	public Curso create() {
@@ -30,6 +33,16 @@ public class CursoService {
 
 	public Curso save(final Curso c) {
 		return this.cursoRepository.save(c);
+	}
+	
+	public List<Curso> cursosPorGrado(String nombreGrado) {
+		Long gradoId = this.gradoService.findGradoId(nombreGrado);
+		Grado grado = this.gradoService.findOne(gradoId);
+		List<Curso> curso  = this.cursoRepository.findAll();
+		int numeroCurso = grado.getNumerocursos();
+		List<Curso> cursosFiltrados = curso.subList(0, numeroCurso); 
+	
+		return  cursosFiltrados;
 	}
 	
 }

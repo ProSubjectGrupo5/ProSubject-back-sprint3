@@ -55,6 +55,9 @@ public class AlumnoService {
 		alumn.setTelefono(alumno.getTelefono());
 		alumn.getUserAccount().setUsername((alumno.getUserAccount().getUsername()));
 		alumn.getUserAccount().setPassword((alumno.getUserAccount().getPassword()));
+		alumn.setUniversidad(alumno.getUniversidad());
+		alumn.setFacultad(alumno.getFacultad());
+		alumn.setGrado(alumno.getGrado());
 		
 		Alumno alumnoEditado = save(alumn);
 
@@ -72,5 +75,14 @@ public class AlumnoService {
 	public List<String> DNIsAlumno() {
 		return this.alumnoRepository.DNIsAlumno();
 	}
+	
+	public List<Alumno> alumnosDeUnEspacio(Long id) {
+		return this.alumnoRepository.alumnosDeUnEspacio(id);
+	}
+	
+	public List<Alumno> alumnosQueHanValoradoUnEspacio(Long espacioId) {
+		return this.alumnoRepository.alumnosQueHanValoradoUnEspacio(espacioId);
+	}
+	
 	
 }

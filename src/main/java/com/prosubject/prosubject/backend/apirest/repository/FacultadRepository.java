@@ -14,4 +14,7 @@ public interface FacultadRepository extends JpaRepository<Facultad, Long>{
 	@Query("select distinct(f) from facultades f inner join f.universidad uni "
 			+ "where uni.nombre=?1")
 	List<Facultad> findFacuUni(String universidad);
+	
+	@Query("select f.id from facultades f where f.nombre=?1")
+	Long findFacuId(String nombreFacu);
 }

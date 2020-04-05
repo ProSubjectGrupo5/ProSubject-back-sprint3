@@ -26,6 +26,10 @@ public class UniversidadService {
 		return this.universidadRepository.findById(universidadId).orElse(null);
 	}
 	
+	public Long findUniId(String nombreUni) {
+		return this.universidadRepository.findUniId(nombreUni);
+	}
+	
 	public Universidad save(final Universidad u) {
 		return this.universidadRepository.save(u);
 	}

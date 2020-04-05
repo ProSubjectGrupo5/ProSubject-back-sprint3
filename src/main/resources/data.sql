@@ -97,6 +97,7 @@ INSERT INTO curso (nombre) VALUES ('SEGUNDO');
 INSERT INTO curso (nombre) VALUES ('TERCERO');
 INSERT INTO curso (nombre) VALUES ('CUARTO');
 INSERT INTO curso (nombre) VALUES ('QUINTO');
+INSERT INTO curso (nombre) VALUES ('SEXTO');
 
 
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Fundamentos de programación', '1');
@@ -142,45 +143,45 @@ INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('16', '13');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('17', '14');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('18', '15');
 
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Rojas', 'Cantos','86800079B','alvaro@gmail.com', 'Alvaro','123436385', '5', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Romero ', 'Organvidez','86558252Y','drorganvidez@gmail.com', 'David', '123436485', '6', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Rojas', 'Gutierrez','07575994R', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789',  '7', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Carillo', 'Mirando', '85694759W','fcarmir@gmail.com', 'Fernando','652314129',  '8', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Cano', 'Caldero', '15001711F','alejandrocano.caldero@gmail.com', 'Alejandro','123426719', '12', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Cantero', 'Garcia', '99619865B','martacanterogarcia@gmail.com', 'Marta', '127656283','13', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Meca', 'Sanchez', '86658574W','andmecsan@alum.us.es', 'Andrea', '695073140','14',false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Jimenez', 'Soldado', '51464215J','frajimsol@alum.us.es', 'Franciso Javier','695073199', '16', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Montes', 'Saborido', '76414260A','eduardo@gmail.com', 'Eduardo', '695073369', '18', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Humanes', 'Garcia', '52951685G','davidtenis1@gmail.com', 'David', '695074189', '20', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Bueno', 'Molina', '31246570N','rcbuenomolina@gmail.com', 'Rocio', '695014169', '22', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Guerrero', 'Fischer', '20922692Y','paulaguerrerofischer@gmail.com', 'Paula', '695014129', '24', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Del Valle', 'Lopez de Santa Maria', '72338268W','javo13697@gmail.com', 'Javier', '652314129', '26', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Aguado', 'Delgado', '45247283G','saraaguadodelgado@gmail.com', 'Sara', '643135129', '29', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Bay', 'Bay', '62383749K','miriam.bay@gmail.com', 'Miriam', '643132547',  '31', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Gonzales de la Peña', 'Garcia', '15054975A','marioogonzalez2@gmail.com', 'Mario', '643831247','33', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '02030477Z','juanje_chus@gmail.com', 'Juan', '678886247', '35', false, 2);
-INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado) VALUES ('Ruiz', 'Castilla', '98543603B','carmenrucasti@gmail.com', 'Carmen', '623816657', '37', false, 2);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Rojas', 'Cantos','86800079B','alvaro@gmail.com', 'Alvaro','123436385', '5', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Romero ', 'Organvidez','86558252Y','drorganvidez@gmail.com', 'David', '123436485', '6', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Rojas', 'Gutierrez','07575994R', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789',  '7', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Carillo', 'Mirando', '85694759W','fcarmir@gmail.com', 'Fernando','652314129',  '8', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Cano', 'Caldero', '15001711F','alejandrocano.caldero@gmail.com', 'Alejandro','123426719', '12', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Cantero', 'Garcia', '99619865B','martacanterogarcia@gmail.com', 'Marta', '127656283','13', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Meca', 'Sanchez', '86658574W','andmecsan@alum.us.es', 'Andrea', '695073140','14',false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Jimenez', 'Soldado', '51464215J','frajimsol@alum.us.es', 'Franciso Javier','695073199', '16', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Montes', 'Saborido', '76414260A','eduardo@gmail.com', 'Eduardo', '695073369', '18', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Humanes', 'Garcia', '52951685G','davidtenis1@gmail.com', 'David', '695074189', '20', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Bueno', 'Molina', '31246570N','rcbuenomolina@gmail.com', 'Rocio', '695014169', '22', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Guerrero', 'Fischer', '20922692Y','paulaguerrerofischer@gmail.com', 'Paula', '695014129', '24', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Del Valle', 'Lopez de Santa Maria', '72338268W','javo13697@gmail.com', 'Javier', '652314129', '26', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Aguado', 'Delgado', '45247283G','saraaguadodelgado@gmail.com', 'Sara', '643135129', '29', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Bay', 'Bay', '62383749K','miriam.bay@gmail.com', 'Miriam', '643132547',  '31', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Gonzales de la Peña', 'Garcia', '15054975A','marioogonzalez2@gmail.com', 'Mario', '643831247','33', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '02030477Z','juanje_chus@gmail.com', 'Juan', '678886247', '35', false, 2,null);
+INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium) VALUES ('Ruiz', 'Castilla', '98543603B','carmenrucasti@gmail.com', 'Carmen', '623816657', '37', false, 2,null);
 
 
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Montes', 'Saborido', '04656520D', 'alicia@gmail.com', 'Alicia', '123456722', '2');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Rojas', 'Gutierrez', '07575994R', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789', '3');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Romero', 'Caceres', '39845718N', 'anaromcac@alum.us.es', 'Ana', '603552740', '4');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Squen', 'Saavedra', '90122321H', 'lizesqsaa@alum.us.es', 'Lizseth Katherine', '653552740', '9');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Lobato', 'Troncoso', '35561913A', 'josema_6497@alum.us.es', 'Jose Manuel', '603554740', '10');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Mauri', 'Mitchell', '56136756N', 'crimaumit@alum.us.es', 'Cristina Maria', '695073170', '11');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Meca', 'Sanchez', '86658574W', 'andmecsan@alum.us.es', 'Andrea', '695073140', '15');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Jimenez', 'Soldado', '51464215J', 'frajimsol@alum.us.es', 'Franciso Javier', '695073199', '17');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Montes', 'Saborido', '76414260A', 'eduardo@gmail.com', 'Eduardo', '695073369', '19');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Humanes', 'Garcia', '52951685G', 'davidtenis1@gmail.com', 'David', '695074189', '21');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Bueno', 'Molina', '31246570N', 'rcbuenomolina@gmail.com', 'Rocio', '695014169', '23');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Guerrero', 'Fischer', '20922692Y', 'paulaguerrerofischer@gmail.com', 'Paula', '695014129', '25');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Del Valle', 'Lopez de Santa Maria', '72338268W', 'javo13697@gmail.com', 'Javier', '652314129', '27');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Carillo', 'Mirando', '85694759W', 'fcarmir@gmail.com', 'Fernando', '652314129', '28');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Aguado', 'Delgado', '45247283G', 'saraaguadodelgado@gmail.com', 'Sara', '643135129', '30');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Bay', '', '62383749K', 'miriam.bay@gmail.com', 'Miriam', '643132547', '32');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Gonzales de la Peña', 'Garcia', '15054975A', 'marioogonzalez2@gmail.com', 'Mario', '643831247', '34');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '02030477Z', 'juanje_chus@gmail.com', 'Mario', '678886247', '36');
-INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id) VALUES ('Ruiz', 'Castilla', '98543603B', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '38');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Montes', 'Saborido', '04656520D', 'alicia@gmail.com', 'Alicia', '123456722','1', '1', '1', '2');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Rojas', 'Gutierrez', '07575994R', 'rodrojgut@alum.us.es', 'Rodrigo', '123456789', '4', '5', '1','3');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Romero', 'Caceres', '39845718N', 'anaromcac@alum.us.es', 'Ana', '603552740','1', '1', '1',  '4');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Squen', 'Saavedra', '90122321H', 'lizesqsaa@alum.us.es', 'Lizseth Katherine', '653552740','1', '3', '1',  '9');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Lobato', 'Troncoso', '35561913A', 'josema_6497@alum.us.es', 'Jose Manuel', '603554740', '1', '4', '1', '10');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Mauri', 'Mitchell', '56136756N', 'crimaumit@alum.us.es', 'Cristina Maria', '695073170','1', '3', '1', '11');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Meca', 'Sanchez', '86658574W', 'andmecsan@alum.us.es', 'Andrea', '695073140', '1', '1', '1','15');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Jimenez', 'Soldado', '51464215J', 'frajimsol@alum.us.es', 'Franciso Javier', '695073199','1', '3', '1', '17');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Montes', 'Saborido', '76414260A', 'eduardo@gmail.com', 'Eduardo', '695073369','1', '3', '1', '19');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Humanes', 'Garcia', '52951685G', 'davidtenis1@gmail.com', 'David', '695074189', '1', '1', '1','21');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Bueno', 'Molina', '31246570N', 'rcbuenomolina@gmail.com', 'Rocio', '695014169', '1', '1', '1', '23');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Guerrero', 'Fischer', '20922692Y', 'paulaguerrerofischer@gmail.com', 'Paula', '695014129', '1', '2', '1','25');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Del Valle', 'Lopez de Santa Maria', '72338268W', 'javo13697@gmail.com', 'Javier', '652314129', '1', '1', '1','27');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Carillo', 'Mirando', '85694759W', 'fcarmir@gmail.com', 'Fernando', '652314129', '9', '9', '1','28');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Aguado', 'Delgado', '45247283G', 'saraaguadodelgado@gmail.com', 'Sara', '643135129','1', '4', '1', '30');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Bay', '', '62383749K', 'miriam.bay@gmail.com', 'Miriam', '643132547', '9', '9', '1','32');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Gonzales de la Peña', 'Garcia', '15054975A', 'marioogonzalez2@gmail.com', 'Mario', '643831247', '1', '4', '1','34');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono,facultad_nombre, grado_nombre, universidad_nombre, useraccount_id) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '02030477Z', 'juanje_chus@gmail.com', 'Mario', '678886247', '1', '2', '1','36');
+INSERT INTO alumno (apellido1, apellido2, dni, email, nombre, telefono, facultad_nombre, grado_nombre, universidad_nombre,useraccount_id) VALUES ('Ruiz', 'Castilla', '98543603B', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '1', '2', '1','38');
 
 INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '1');
 INSERT INTO carrito (precio_mensual, alumno_id) VALUES ('0', '2');
@@ -248,3 +249,11 @@ INSERT INTO rango (horario_id, alumno_id) VALUES ('7', '4');
 
 INSERT INTO respuesta (contenido, creacion_respuesta, user_account_id, foro_id) VALUES ('Me falla al insertar en la base de datos la fecha....', '2020-03-20 11:00:00.000000', '4', '5');
 INSERT INTO respuesta (contenido, creacion_respuesta, user_account_id, foro_id) VALUES ('Hola, la manera en la que lo estas haciendo es la correcta, tengo una duda, como definiste tu columna FECHA en MYSQL, es una fecha? Saludos,', '2020-03-20 11:40:00.000000', '12', '5');
+
+INSERT INTO valoracion (profesor_id, alumno_id,espacio_id,puntuacion,comentario) VALUES ('1', '1', '1', 1,'No me ha ayudado a aprobar la asignatura');
+INSERT INTO valoracion (profesor_id, alumno_id,espacio_id,puntuacion,comentario) VALUES ('1', '2','1', 2,'Sus clases no valen la pena, solo te muestra ejercicios resueltos');
+INSERT INTO valoracion (profesor_id, alumno_id,espacio_id,puntuacion,comentario) VALUES ('2', '3','2', 3,'He aprobado pero no explica muy bien');
+INSERT INTO valoracion (profesor_id, alumno_id,espacio_id,puntuacion,comentario) VALUES ('5', '3','5', 4,'Gracias a él he aprobado');
+INSERT INTO valoracion (profesor_id, alumno_id,espacio_id,puntuacion,comentario) VALUES ('5', '4','4', 5,'Gracias a sus clases he conseguido sacarme un notable');
+
+
