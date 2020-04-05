@@ -401,11 +401,6 @@ public class HorarioController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
-		if(horarios.isEmpty()) {
-			response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no tiene ningun horario con espacios no disponibles"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		
 		
 		
 		
