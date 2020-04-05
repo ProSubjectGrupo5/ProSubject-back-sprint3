@@ -305,7 +305,7 @@ class ProsubjectBackendApirestApplicationTests {
 		//
 		grado.setId(TEST_ID_POSITIVE);
 		grado.setNombre("nombre grado");
-		grado.setNumerocursos(null);
+		grado.setNumerocursos(10);
 		grado.setFacultad(null);
 		grado.getFacultad();
 		grado.getId();
