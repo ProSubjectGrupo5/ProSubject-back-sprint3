@@ -20,7 +20,7 @@ import com.prosubject.prosubject.backend.apirest.service.GradoService;
 
 @RestController
 @RequestMapping("/api/grados")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v3.herokuapp.com"})
 public class GradoController{
 	
 	@Autowired

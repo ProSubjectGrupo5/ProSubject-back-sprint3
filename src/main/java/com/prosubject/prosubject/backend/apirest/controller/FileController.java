@@ -37,7 +37,7 @@ import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 
 @RestController
 @RequestMapping("/api/files")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v3.herokuapp.com"})
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);

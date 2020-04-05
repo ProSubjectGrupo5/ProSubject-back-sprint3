@@ -30,7 +30,7 @@ import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 @RestController
 @RequestMapping("/api/espacios")
-@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v2.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://prosubject-v3.herokuapp.com"})
 public class EspacioController{
 
 	
