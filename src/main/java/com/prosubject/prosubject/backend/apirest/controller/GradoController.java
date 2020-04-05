@@ -45,10 +45,12 @@ public class GradoController{
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 		
+		
 		if(grado == null) {
 			response.put("mensaje",	 "El grado con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
+		
 		
 		return new ResponseEntity<Grado>(grado, HttpStatus.OK);
 		

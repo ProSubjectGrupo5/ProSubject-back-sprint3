@@ -69,7 +69,7 @@ public class EspacioController{
 		
 		
 		if(espacios.isEmpty()) {
-			response.put("mensaje", "No existen espacios para el filtro realizado");
+			response.put("mensaje", "No existen espacios disponibles para el filtro realizado.");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
 		
