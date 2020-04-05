@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -46,17 +48,20 @@ public class Alumno implements Serializable {
 	@Column(nullable = false)
 	private String apellido2;
 	
-	@NotBlank
-	@Column(nullable = false)
-	private String universidad;
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "universidad_nombre")
+	private Universidad universidad;
 	
-	@NotBlank
-	@Column(nullable = false)
-	private String facultad;
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "facultad_nombre")
+	private Facultad facultad;
 	
-	@NotBlank
-	@Column(nullable = false)
-	private String grado;
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "grado_nombre")
+	private Grado grado;
 	
 	@NotBlank
 	@Pattern(regexp = "^(\\d{8})([A-Z])$",message = "Debe tener 8 numeros y 1 letra")
@@ -169,43 +174,43 @@ public class Alumno implements Serializable {
 		this.telefono = telefono;
 	}
 
-	
-	public String getUniversidad() {
+
+
+	public Universidad getUniversidad() {
 		return universidad;
 	}
 
 
 
-	public void setUniversidad(String universidad) {
+	public void setUniversidad(Universidad universidad) {
 		this.universidad = universidad;
 	}
 
 
 
-	public String getFacultad() {
+	public Facultad getFacultad() {
 		return facultad;
 	}
 
 
 
-	public void setFacultad(String facultad) {
+	public void setFacultad(Facultad facultad) {
 		this.facultad = facultad;
 	}
 
 
 
-	public String getGrado() {
+	public Grado getGrado() {
 		return grado;
 	}
 
 
 
-	public void setGrado(String grado) {
+	public void setGrado(Grado grado) {
 		this.grado = grado;
 	}
 
-
-
+	
 
 
 
