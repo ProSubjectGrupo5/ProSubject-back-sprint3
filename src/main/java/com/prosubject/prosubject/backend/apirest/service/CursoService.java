@@ -1,5 +1,6 @@
 package com.prosubject.prosubject.backend.apirest.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,19 @@ public class CursoService {
 	
 	public List<Curso> cursosPorGrado(String nombreGrado) {
 		Long gradoId = this.gradoService.findGradoId(nombreGrado);
-		Grado grado = this.gradoService.findOne(gradoId);
-		List<Curso> curso  = this.cursoRepository.findAll();
-		int numeroCurso = grado.getNumerocursos();
-		List<Curso> cursosFiltrados = curso.subList(0, numeroCurso); 
-	
-		return  cursosFiltrados;
+		
+		if(gradoId != null) {
+			Grado grado = this.gradoService.findOne(gradoId);
+			List<Curso> curso  = this.cursoRepository.findAll();
+			int numeroCurso = grado.getNumerocursos();
+			List<Curso> cursosFiltrados = curso.subList(0, numeroCurso); 
+		
+			return  cursosFiltrados;
+			
+		}
+		
+		return new ArrayList<>();
+		
 	}
 	
 }
