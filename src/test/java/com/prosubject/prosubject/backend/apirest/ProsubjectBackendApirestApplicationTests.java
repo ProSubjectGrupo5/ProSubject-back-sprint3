@@ -312,7 +312,7 @@ class ProsubjectBackendApirestApplicationTests {
 		Grado grado = new Grado();
 		Facultad facultad = new Facultad();
 		grado.setNombre("Ingenieria del Software");
-		grado.setNumerocursos(1L);
+		grado.setNumerocursos(1);
 		grado.setFacultad(facultad);
 		assertEquals(grado.getNombre(), "Ingenieria del Software");
 		assertEquals(grado.getNumerocursos(), 1L);
@@ -385,32 +385,30 @@ class ProsubjectBackendApirestApplicationTests {
 		Horario res = horarioService.añadirAlumno(horarioId, alumnoId);
 		assertThat(res).isNotNull();
 	}
-//	@Test
-//	public void ServicioHorarioSaveOne() throws Exception {
-//		Long asignaturaId = new Long(1);
-//		Long profesorId = new Long(7);
-//		Asignatura asignatura=this.asignaturaService.findOne(asignaturaId);
-//		Profesor profesor=this.profesorService.findOne(profesorId);
-//		Espacio espacio = new Espacio();
-//		espacio.setAsignatura(asignatura);
-//		espacio.setProfesor(profesor);
-//		espacio.setPrecio(12.0);
-//		espacio.setDraftMode(0);
-//		Horario horario = new Horario();
-//		Date date = new Date();
-//		Date date2 = new Date();
-//		date=this.horarioService.sumarRestarDiasFecha(date, 1);
-//		date2=this.horarioService.sumarRestarDiasFecha(date, 28);
-//		date2.after(date);
-//		horario.setCapacidad(1L);
-//		horario.setDia(DiaSemana.Viernes);
-//		horario.setEspacio(espacio);
-//		horario.setHoraInicio(date);
-//		horario.setHoraFin(date2);
-//		horario.setFechaInicio(date);
-//		Horario res = horarioService.saveOne(horario);
-//		assertThat(res).isNotNull();
-//	}
+	@Test
+	public void ServicioHorarioSaveOne() throws Exception {
+		Asignatura asignatura=this.asignaturaService.findOne(1l);
+		Profesor profesor=this.profesorService.findOne(7l);
+		Espacio espacio = new Espacio();
+		espacio.setAsignatura(asignatura);
+		espacio.setProfesor(profesor);
+		espacio.setPrecio(12.0);
+		espacio.setDraftMode(0);
+		Horario horario = new Horario();
+		Date date = new Date();
+		Date date2 = new Date();
+		date=this.horarioService.sumarRestarDiasFecha(date, 1);
+		date2=this.horarioService.sumarRestarDiasFecha(date, 28);
+		date2.after(date);
+		horario.setCapacidad(1L);
+		horario.setDia(DiaSemana.Viernes);
+		horario.setEspacio(espacio);
+		horario.setHoraInicio(date);
+		horario.setHoraFin(date2);
+		horario.setFechaInicio(date);
+		Horario res = horarioService.saveOne(horario);
+		assertThat(res).isNotNull();
+	}
 	
 
 	// Profesor
