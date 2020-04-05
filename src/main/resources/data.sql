@@ -82,7 +82,7 @@ INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Historia del Arte
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Psicología', '6','4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Administración y dirección de empresas', '7','4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Grado en Ingeniería Aeroespacial', '8','4');
-INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Medicina', '9','4');
+INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Medicina', '9','6');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Grado en Relaciones Internacionales', '14','4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Ingenieria Industrial', '8','4');
 INSERT INTO grado (nombre, facultad_id, numerocursos) VALUES ('Trabajo Social', '10','4');
