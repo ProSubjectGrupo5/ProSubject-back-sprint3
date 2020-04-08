@@ -42,4 +42,21 @@ public class SendMailController {
 
 	}
 
+	@PostMapping("/enviarBroadcast")
+	public ResponseEntity<?> sendAlert(@RequestParam("subject") String subject, @RequestParam("body") String body) {
+
+		String res;
+		Map<String, Object> response = new HashMap<String, Object>();
+
+		try {
+			res = this.sendMailService.sendAlert(subject, body);
+		} catch (Exception e) {
+			response.put("mensaje", "Error al mandar el email");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<String>(res, HttpStatus.OK);
+
+	}
+
 }
