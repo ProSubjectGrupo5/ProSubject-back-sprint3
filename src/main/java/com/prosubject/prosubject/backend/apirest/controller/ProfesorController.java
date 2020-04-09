@@ -194,10 +194,6 @@ public class ProfesorController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			
-			else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(), new Date())>30) {
-				response.put("mensaje", "El plan premium del profesor ya expiró");
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-			}
 			
 			else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date())==30){
 				response.put("mensaje", "El plan premium del profesor acaba hoy");
@@ -233,11 +229,6 @@ public class ProfesorController {
 				if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date())<30) {
 					Integer diasPremium = 30 - (numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date()));
 					response.put("mensaje", "El profesor aun posee "+String.valueOf(diasPremium)+"dias de plan premium");
-					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-				
-				else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(), new Date())>30) {
-					response.put("mensaje", "El plan premium del profesor ya expiró");
 					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 				
