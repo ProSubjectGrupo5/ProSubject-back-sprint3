@@ -777,45 +777,40 @@ class ProsubjectBackendApirestApplicationTests {
 		}
 	
 	  //SELENIUM
-//	  @Test
-//	  public void testLoginProfesor() {
+	  @Test
+	  public void testLoginProfesor() {
 //		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
-//		ChromeDriver driver = new ChromeDriver();
-//		
-//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
-//	    driver.manage().window().setSize(new Dimension(1552, 840));
-//	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-//	    driver.findElement(By.linkText("Login")).click();
-//	    driver.findElement(By.name("username")).sendKeys("alejandrocano");
-//	    driver.findElement(By.name("password")).sendKeys("alejandrocano");
-//	    driver.findElement(By.cssSelector(".ng-dirty:nth-child(1)")).click();
-//	    driver.findElement(By.cssSelector(".btn")).click();
-//	    {
-//	      WebElement element = driver.findElement(By.cssSelector(".btn"));
-//	      Actions builder = new Actions(driver);
-//	      builder.moveToElement(element).perform();
-//	    }
-//	    
-//	    driver.quit();
-//		
-//	  }
+		ChromeDriver driver = new ChromeDriver();
+		
+		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+	    driver.manage().window().setSize(new Dimension(1552, 840));
+	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.name("username")).sendKeys("alejandrocano");
+	    driver.findElement(By.name("password")).sendKeys("alejandrocano");
+	    driver.findElement(By.cssSelector(".ng-dirty:nth-child(1)")).click();
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    
+	    driver.quit();
+		
+	  }
 //		
 //		
-//	  @Test
-//	  public void testLoginAlum() {
+	  @Test
+	  public void testLoginAlum() {
 //		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
-//		ChromeDriver driver = new ChromeDriver();
-//		    
-//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
-//	    driver.manage().window().setSize(new Dimension(1146, 663));
-//	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-//	    driver.findElement(By.linkText("Login")).click();
-//	    driver.findElement(By.name("username")).sendKeys("anaromcac");
-//	    driver.findElement(By.name("password")).sendKeys("anaromcac");
-//	    driver.findElement(By.cssSelector(".btn")).click();
-//	    
-//	    driver.quit();
-//	  }
+		ChromeDriver driver = new ChromeDriver();
+		    
+		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+	    driver.manage().window().setSize(new Dimension(1146, 663));
+	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+	    driver.findElement(By.cssSelector(".btn")).click();
+	    
+	    driver.quit();
+	  }
 //
 //	  @Test
 //	  public void testRegistroAlumRepetido() {
@@ -848,25 +843,25 @@ class ProsubjectBackendApirestApplicationTests {
 //	  }
 	  
 //	  MisClasesAlum
-	  @Test
-	  public void testAlumMisClases() {
-		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
-		ChromeDriver driver = new ChromeDriver();
-		
-		driver.get("https://prosubject-v3.herokuapp.com/inicio");
-	    driver.manage().window().setSize(new Dimension(1154, 674));
-	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-	    driver.findElement(By.linkText("Login")).click();
-	    driver.findElement(By.name("username")).click();
-	    driver.findElement(By.name("username")).sendKeys("anaromcac");
-	    driver.findElement(By.cssSelector(".card-body")).click();
-	    driver.findElement(By.name("password")).click();
-	    driver.findElement(By.name("password")).sendKeys("anaromcac");
-	    driver.findElement(By.cssSelector(".btn")).click();
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    driver.findElement(By.linkText("Mis clases")).click();
-			
-	  }
+//	  @Test
+//	  public void testAlumMisClases() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+//		ChromeDriver driver = new ChromeDriver();
+//		
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//	    driver.manage().window().setSize(new Dimension(1154, 674));
+//	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+//	    driver.findElement(By.linkText("Login")).click();
+//	    driver.findElement(By.name("username")).click();
+//	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".card-body")).click();
+//	    driver.findElement(By.name("password")).click();
+//	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".btn")).click();
+//	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	    driver.findElement(By.linkText("Mis clases")).click();
+//			
+//	  }
 	  
 	  //BusqAsigAlum
 //	  @Test
