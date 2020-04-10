@@ -60,11 +60,7 @@ public class AlumnoService {
 		alumn.setUniversidad(alumno.getUniversidad());
 		alumn.setFacultad(alumno.getFacultad());
 		alumn.setGrado(alumno.getGrado());
-		if(this.AlumnoTieneRango(alumn.getId())==true) {
-			alumn.setDerechoOlvidado(alumno.getDerechoOlvidado());
-		}
-		
-		
+	
 		
 		Alumno alumnoEditado = save(alumn);
 
@@ -91,14 +87,13 @@ public class AlumnoService {
 		return this.alumnoRepository.alumnosQueHanValoradoUnEspacio(espacioId);
 	}
 	
-	public boolean AlumnoTieneRango(Long alumnoId){
-		List<Rango> rangos= this.rangoService.rangosPorAlumno(alumnoId);
-		if(rangos.isEmpty()) {
-			return true;
-		}else {
-			return false;
-		}
+	public Alumno peticionBorrar(Alumno alumno) {
+	Alumno alum = this.findOne(alumno.getId());
+	alum.setDerechoOlvidado(true);
+	return this.save(alum);
 	}
+	
+
 	
 	
 }

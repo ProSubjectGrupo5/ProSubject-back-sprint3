@@ -11,6 +11,9 @@ import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.Espacio;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
+import com.prosubject.prosubject.backend.apirest.model.Respuesta;
+import com.prosubject.prosubject.backend.apirest.model.Valoracion;
 import com.prosubject.prosubject.backend.apirest.repository.AdministradorRepository;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 import com.prosubject.prosubject.backend.apirest.repository.ProfesorRepository;
@@ -43,6 +46,15 @@ public class AdministradorService {
 	
 	@Autowired
 	private EspacioService espacioService;
+	
+	@Autowired
+	private ValoracionService valoracionService;
+	
+	@Autowired
+	private RangoService rangoService;
+	
+	@Autowired
+	private RespuestaService respuestaService;
 
 	public Administrador create() {
 		final Administrador a = new Administrador();
@@ -128,8 +140,25 @@ public class AdministradorService {
 		
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
 		Carrito carro = this.carritoService.carritoPorAlumno(alumnoId);
+		List<Valoracion> valoraciones = this.valoracionService.valoracionesPorAlumnoId(alumnoId);
+		for (Valoracion valoracion : valoraciones) {
+			this.valoracionService.delete(valoracion);
+		}
+		List<Rango> rangos = this.rangoService.rangosPorAlumno(alumnoId);
+		
+		for (Rango rango : rangos) {
+			this.rangoService.delete(rango);
+		}
+		
+		
+		List<Respuesta> respuestas= this.respuestaService.respuestaPorUserAccount(alumno.getUserAccount().getId());
+		
+		for (Respuesta respuesta : respuestas) {
+			this.respuestaService.delete(respuesta);
+		}
 		this.carritoService.delete(carro);
 		this.alumnoRepository.delete(alumno);
+		
 		
 	
 		

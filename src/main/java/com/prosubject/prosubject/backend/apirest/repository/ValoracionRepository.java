@@ -21,5 +21,8 @@ public interface ValoracionRepository extends JpaRepository<Valoracion, Long>{
 	@Query("select AVG(v.puntuacion) from valoraciones v where v.profesor.id=?1")
 	Double valoracionMediaDeProfesor(Long profesorId);
 	
+	@Query("select v from valoraciones v where v.alumno.id=?1")
+	List<Valoracion> valoracionesDeUnAlumno(Long id);
+	
 
 }

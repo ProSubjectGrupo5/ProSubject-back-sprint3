@@ -17,6 +17,9 @@ public interface RespuestaRepository extends JpaRepository<Respuesta, Long>  {
 	@Query("select r from respuestas r where r.foro.id=?1")
 	List<Respuesta> respuestaPorForoId(Long id);
 	
+	@Query("select r from respuestas r where r.user.id=?1")
+	List<Respuesta> respuestasPorUserAccount(Long userAccountId);
+	
 
 
 }

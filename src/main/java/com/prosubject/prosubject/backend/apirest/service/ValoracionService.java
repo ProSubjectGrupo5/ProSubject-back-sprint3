@@ -62,6 +62,10 @@ public class ValoracionService {
 	public Double valoracionMediaDeProfesor(final Long profesorId) {
 		return this.valoracionRepository.valoracionMediaDeProfesor(profesorId);
 	}
+	
+	public List<Valoracion> valoracionesPorAlumnoId(final Long espacioId) {
+		return this.valoracionRepository.valoracionesDeUnAlumno(espacioId);
+	}
 
 
 

@@ -63,9 +63,7 @@ public class ProfesorService {
 		profe.setTarifaPremium(profesor.getTarifaPremium());
 		profe.getUserAccount().setUsername((profesor.getUserAccount().getUsername()));
 		profe.getUserAccount().setPassword((profesor.getUserAccount().getPassword()));
-		if(this.profesorTieneAlumno(profe.getId())==true) {
-			profe.setDerechoOlvidado(profesor.getDerechoOlvidado());
-		}
+	
 		Profesor profeEditado = save(profe);
 
 		return profeEditado;
@@ -106,5 +104,11 @@ public class ProfesorService {
 			return false;
 		}
 	}
+	
+	public Profesor peticionBorrar(Profesor profesor) {
+		Profesor prof = this.findOne(profesor.getId());
+		prof.setDerechoOlvidado(true);
+		return this.save(prof);
+		}
 
 }

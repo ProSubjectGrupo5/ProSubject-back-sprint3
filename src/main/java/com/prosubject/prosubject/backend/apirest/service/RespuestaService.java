@@ -47,6 +47,14 @@ public class RespuestaService {
 	public List<Respuesta> respuestaPorForoId(final Long foroId) { 
 		return  this.RespuestaRepository.respuestaPorForoId(foroId);
 	}
+	
+	public List<Respuesta> respuestaPorUserAccount(final Long userAccountId) { 
+		return  this.RespuestaRepository.respuestasPorUserAccount(userAccountId);
+	}
+	
+	public void delete(Respuesta respuesta) {
+		this.RespuestaRepository.delete(respuesta);
+	}
 
 	
 	

@@ -48,7 +48,7 @@ public class Alumno implements Serializable {
 	@Column(nullable = false)
 	private String apellido2;
 	
-	@NotBlank
+	@NotNull
 	@Column
 	private Integer contadorDescuento;
 
