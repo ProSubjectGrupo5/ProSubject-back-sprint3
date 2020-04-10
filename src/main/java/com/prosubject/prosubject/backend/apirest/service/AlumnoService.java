@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 
 @Service
 public class AlumnoService {
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	@Autowired
+	private RangoService rangoService;
 	
 	
 	public Alumno create() {
@@ -37,7 +40,6 @@ public class AlumnoService {
 	
 
 	public Alumno save(final Alumno a) {
-		
 	   Alumno saved = this.alumnoRepository.save(a);
 
 		return saved;
@@ -58,6 +60,11 @@ public class AlumnoService {
 		alumn.setUniversidad(alumno.getUniversidad());
 		alumn.setFacultad(alumno.getFacultad());
 		alumn.setGrado(alumno.getGrado());
+		if(this.AlumnoTieneRango(alumn.getId())==true) {
+			alumn.setDerechoOlvidado(alumno.getDerechoOlvidado());
+		}
+		
+		
 		
 		Alumno alumnoEditado = save(alumn);
 
@@ -82,6 +89,15 @@ public class AlumnoService {
 	
 	public List<Alumno> alumnosQueHanValoradoUnEspacio(Long espacioId) {
 		return this.alumnoRepository.alumnosQueHanValoradoUnEspacio(espacioId);
+	}
+	
+	public boolean AlumnoTieneRango(Long alumnoId){
+		List<Rango> rangos= this.rangoService.rangosPorAlumno(alumnoId);
+		if(rangos.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	

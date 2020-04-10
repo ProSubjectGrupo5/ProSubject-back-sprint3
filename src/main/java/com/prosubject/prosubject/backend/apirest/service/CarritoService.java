@@ -76,4 +76,12 @@ public class CarritoService {
 	    return save(carro);
 	}
 	
+	public Carrito carritoPorAlumno(final Long alumnoId) {
+		return this.carritoRepository.carritoAlumno(alumnoId);
+	}
+	
+	public void delete(final Carrito carro) {
+		this.carritoRepository.delete(carro);
+	}
+	
 }

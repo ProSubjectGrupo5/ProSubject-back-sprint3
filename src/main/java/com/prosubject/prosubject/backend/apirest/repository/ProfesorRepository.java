@@ -31,6 +31,9 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	@Query("select p from profesores p where p.tarifaPremium=1")
 	List<Profesor> profesoresTarifaPremium();
 	
+	@Query("select p from profesores p where p.derechoOlvidado=1")
+	List<Profesor> profesoresDerechoOlvidado();
+	
 	
 
 }

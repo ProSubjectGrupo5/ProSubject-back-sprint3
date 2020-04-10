@@ -97,6 +97,19 @@ public class Profesor implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private Date fechaPagoPremium;
+	
+	@Column(nullable = false)
+	private Boolean derechoOlvidado;	
+	
+
+
+	public Boolean getDerechoOlvidado() {
+		return derechoOlvidado;
+	}
+
+	public void setDerechoOlvidado(Boolean derechoOlvidado) {
+		this.derechoOlvidado = derechoOlvidado;
+	}
 
 	public Long getId() {
 		return id;
