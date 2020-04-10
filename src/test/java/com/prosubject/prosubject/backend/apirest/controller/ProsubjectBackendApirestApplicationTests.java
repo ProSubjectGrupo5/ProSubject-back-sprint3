@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.context.junit4.SpringRunner;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
@@ -47,9 +48,14 @@ import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.http.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -188,6 +194,18 @@ class ProsubjectBackendApirestApplicationTests {
 		administrador.setTelefono("955792206");
 		administrador.setUserAccount(userAccount);
 		administrador.setEmail("anaromcac@alum.us.es");
+		//
+		//POST
+		Administrador admin = new Administrador();
+	    admin.setId(400L);
+	    admin.setApellido1("Romero");
+	    admin.setApellido2("Caceres");
+	    admin.setNombre("Ana");
+	    admin.setDni("47546251F");
+	    admin.setTelefono("955792206");
+	    admin.setUserAccount(userAccount);
+	    admin.setEmail("anaromcac@alum.us.es");
+	    
 		//
 		universidad.setId(TEST_ID_POSITIVE);
 		universidad.setNombre("Universidad de prueba");	
@@ -404,32 +422,96 @@ class ProsubjectBackendApirestApplicationTests {
 	   	}
 	
 	   	//da un error
-	/*   	@Test
+	   	@Test
 		void testProcessAdministradorCreationFormSuccess() throws Exception {
-	   		this.administradorService.emailsAdministradores();
-			mockMvc.perform(post("/api/administradores")
-					.param("nombre", "Ana")
-					.param("apellido1", "Romero")
-					.param("apellido2", "Caceres")
-					.param("dni","47546251F" )
-					.param("telefono", "955792206")
-					.param("email", "anaromcac@alum.us.es"))
+	   		
+			mockMvc.perform(post("/api/administradores").contentType(MediaType.APPLICATION_JSON)
+                    .content(asJsonString(administrador)))
+					.andExpect(status().isCreated())
 					.andExpect(status().is2xxSuccessful());
 					
-		}*/
-	   	
-	  /*	@Test
-			void testProcessAdministradorCreationFormFailed() throws Exception {
-				mockMvc.perform(post("/api/administradores")
-						.queryParam("$.nombre", "Antonio")
-						.queryParam("$.apellido1", "Romero")
-						.queryParam("$.apellido2", "Caceres")
-						.queryParam("$.dni","47546251F" )
-						.queryParam("$.telefono", "955792207")
-						.queryParam("$.email", "antromcac1@gmail.com"))
-						.andExpect(status().is4xxClientError()).andDo(print());
-						
-			}*/
+		}
+	//FALLA PUT    
+	   /* @Test
+	    public void testUpdateAdministradorSuccess() throws Exception {
+	    	administrador.setApellido1("PABLO");
+
+	        //Administrador admin;
+			mockMvc.perform(put("/users/{id}", TEST_ID_POSITIVE)
+	                        .contentType(MediaType.APPLICATION_JSON)
+	                        .content(asJsonString(administrador)))                      		
+	                .andExpect(status().is4xxClientError());
+
+	        verify(administradorService, times(1)).findOne(administrador.getId());
+	        
+	    }*/
+
+	    //delete
+	    @Test
+	    public void testEliminarEspacioSuccess() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	
+	    	Espacio es = this.espacioService.findOne(TEST_ID_POSITIVE);
+	    	Profesor	p= this.profesorService.findOne(TEST_ID_POSITIVE);
+	    	p.setUserAccount(f);
+	    	es.setProfesor(p);
+	    	es.setDraftMode(1);
+	    	mockMvc.perform(delete("/api/espacios/{espacioId}",es.getId()).param("username",es.getProfesor().getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	es.setDraftMode(0);
+	    	
+	    	mockMvc.perform(delete("/api/espacios/{espacioId}",es.getId()).param("username",es.getProfesor().getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	
+	    	mockMvc.perform(delete("/api/espacios/{espacioId}",TEST_ID_NEGATIVE).param("username",es.getProfesor().getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	es.setDraftMode(1);
+	    	f.setUsername("f");
+	    	p.setUserAccount(f);
+	    	p.getUserAccount();
+	    	es.setProfesor(p);
+	    	
+	    	/*mockMvc.perform(delete("/api/espacios/{espacioId}",TEST_ID_POSITIVE).param("username",p.getUserAccount().getUsername()))
+	    	.andExpect(status().is(200));
+	    	
+	    	f.setAutoridad(Authority.PROFESOR);
+	    	f.setPassword("pass");
+	    	f.setId(TEST_ID_POSITIVE);
+	    	es.setProfesor(p);
+	    	universidad.getNombre();
+	    	facultad.setUniversidad(universidad);
+	    	grado.setFacultad(facultad);
+	    	
+	    	Collection<Grado> grados = new ArrayList<>();
+	    	grados.add(grado);
+			asignatura.setGrados(grados);
+	    	es.setAsignatura(asignatura);*///error Username
+	    	
+	    	
+	    	
+	    	
+	        
+	   /* 	mockMvc.perform(delete("/api/espacios/{espacioId}",es.getId()).param("username","prueba")
+	    			.param("nombreUni", universidad.getNombre()))
+			.andExpect(status().is2xxSuccessful());*///no entra
+	    	
+	        
+	    }
+	   /* @Test
+	    public void testDeleteForoSuccess() throws Exception {
+	  			
+	    	mockMvc.perform(delete("/api/foros/foros/{id}",foro.getId())))
+			.andExpect(status().isAccepted());
+	              
+	        
+	    }*/
+	    
 
 
 	   	//UNIVERSIDAD
@@ -451,7 +533,19 @@ class ProsubjectBackendApirestApplicationTests {
 	  		andExpect(status().is2xxSuccessful());
 		  }
 
-		
+		@Test
+	  	void testListUniversidadId() throws Exception {
+			
+	  		mockMvc.perform(get("/api/universidades/uniId").param("nombreUni", universidad.getNombre()))
+	  		.andExpect(status().isOk()).
+	  		andExpect(status().is2xxSuccessful());
+		  }
+		@Test
+	  	void testListUniversidadIdNegative() throws Exception {
+			Universidad p = new Universidad();
+	  		mockMvc.perform(get("/api/universidades/uniId").param("nombreUni", p.getNombre())).
+	  		andExpect(status().is4xxClientError());
+		  }
 		/*@Test
 	  	void testCatchUniversidad() throws Exception {
 			
@@ -719,4 +813,13 @@ class ProsubjectBackendApirestApplicationTests {
 	   		mockMvc.perform(get("/api/profesores/{id}",TEST_ID_POSITIVE))
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
+		
+		//Metodo para create
+		 public static String asJsonString(final Object obj) {
+		        try {
+		            return new ObjectMapper().writeValueAsString(obj);
+		        } catch (Exception e) {
+		            throw new RuntimeException(e);
+		        }
+		    }
 }
