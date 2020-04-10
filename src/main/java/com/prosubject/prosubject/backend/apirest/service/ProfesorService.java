@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prosubject.prosubject.backend.apirest.model.Administrador;
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.model.ValidacionExpediente;
+import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 import com.prosubject.prosubject.backend.apirest.repository.ProfesorRepository;
 
 @Service
@@ -16,6 +17,8 @@ public class ProfesorService {
 	
 	@Autowired
 	private ProfesorRepository profesorRepository;
+	@Autowired
+	private AlumnoRepository alumnoRepository;
 	@Autowired
 	private ValoracionService valoracionService;
 	
@@ -38,6 +41,7 @@ public class ProfesorService {
 
 	
 	public Profesor save(final Profesor p) { 
+		
 		return this.profesorRepository.save(p);	
 	}
 	
@@ -59,7 +63,9 @@ public class ProfesorService {
 		profe.setTarifaPremium(profesor.getTarifaPremium());
 		profe.getUserAccount().setUsername((profesor.getUserAccount().getUsername()));
 		profe.getUserAccount().setPassword((profesor.getUserAccount().getPassword()));
-		
+		if(this.profesorTieneAlumno(profe.getId())==true) {
+			profe.setDerechoOlvidado(profesor.getDerechoOlvidado());
+		}
 		Profesor profeEditado = save(profe);
 
 		return profeEditado;
@@ -90,6 +96,15 @@ public class ProfesorService {
 	this.profesorRepository.save(profesor);
 		
 		
+	}
+	
+	public boolean profesorTieneAlumno(Long profesorId){
+		List<Alumno> alumnos= this.alumnoRepository.alumnosDeProfesor(profesorId);
+		if(alumnos.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }
