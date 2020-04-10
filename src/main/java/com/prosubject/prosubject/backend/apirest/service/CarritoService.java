@@ -20,7 +20,7 @@ public class CarritoService {
 	private CarritoRepository carritoRepository;
 	
 	@Autowired
-	private HorarioService horarioService;
+	private AlumnoService alumnoService;
 	
 	public List<Carrito> findAll(){
 		return this.carritoRepository.findAll();
@@ -30,6 +30,13 @@ public class CarritoService {
 		return this.carritoRepository.findById(carritoId).orElse(null);
 	}
 	
+	public Alumno contadorHorarios(Long alumId) {
+		Alumno alum = alumnoService.findOne(alumId);
+		Integer contador = this.carritoRepository.contadorHorarios(alumId);
+		alum.setContadorDescuento(contador);
+		return alum;
+	}
+	
 	public Carrito precioMensualHorarios(Long alumnoId) {
 		Double precioHorario = this.carritoRepository.precioMensualHorarios(alumnoId);
 		Integer mensual = 4;
@@ -37,7 +44,13 @@ public class CarritoService {
 			precioHorario = 0.0;
 		}
 		Carrito c = findOne(alumnoId);
+		Alumno alum = alumnoService.findOne(alumnoId);
 		c.setPrecioMensual(precioHorario * mensual);
+		if(alum.getContadorDescuento()>4) {
+			Double precio = c.getPrecioMensual();
+			Double descuento = precio*0.9;
+			c.setPrecioMensual(descuento);
+		}
 		return c;
 	}
 	

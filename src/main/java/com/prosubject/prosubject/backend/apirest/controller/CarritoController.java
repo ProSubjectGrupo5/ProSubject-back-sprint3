@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.repository.CarritoRepository;
@@ -61,6 +62,22 @@ public class CarritoController {
 		return new ResponseEntity<Carrito>(carrito, HttpStatus.OK);
 	}
 	
+	@GetMapping("/contadorHorarios")
+	public ResponseEntity<?> countHorario(@RequestParam Long id) {
+		Alumno alum = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		try {
+			alum = this.carritoService.contadorHorarios(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Alumno>(alum, HttpStatus.OK);
+	}
+	
 	
 	@GetMapping("/precioMensual/{id}")
 	public ResponseEntity<?> precioMensualHorarios(@PathVariable Long id){
@@ -85,15 +102,21 @@ public class CarritoController {
 	
 	@PostMapping("/addHorario")
 	 public ResponseEntity<?> addHorarioCarrito(@RequestParam(value = "carritoId") Long 
-	    carritoId, @RequestParam Long horarioId) {
+	    carritoId, @RequestParam Long horarioId, @RequestParam Long alumId) throws Exception {
 	       Carrito carro = this.carritoService.findOne(carritoId);
 	       Horario horario = this.horarioService.findOne(horarioId);
+	       List<Horario> listaHorariosAlumno = this.horarioService.horariosDeAlumno(alumId);
 	       Map<String, Object> response = new HashMap<String, Object>();
 	       Carrito carrito = new Carrito();
 	       if(carro == null) {
 				response.put("mensaje",	 "El carrito con ID: ".concat(carritoId.toString()).concat(" no existe"));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 			}
+	       
+	       if(listaHorariosAlumno.contains(horario)) {
+	    	   response.put("mensaje",	 "El alumno ya tiene comprado este horario.");
+	    	   return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+	       }
 	       
 	       if(carro.getHorario().contains(horario)) {
 				response.put("mensaje",	 "El carrito ya tiene almacenado este horario.");

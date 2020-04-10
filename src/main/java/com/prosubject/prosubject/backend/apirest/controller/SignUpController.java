@@ -111,6 +111,7 @@ public class SignUpController {
 		} else {
 
 			try {
+				alumno.setContadorDescuento(0);
 				AlumnoNuevo = this.alumnoService.save(alumno);
 
 				Carrito car = new Carrito();

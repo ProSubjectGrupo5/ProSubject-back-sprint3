@@ -48,6 +48,10 @@ public class Alumno implements Serializable {
 	@Column(nullable = false)
 	private String apellido2;
 	
+	@NotBlank
+	@Column
+	private Integer contadorDescuento;
+
 	@Valid
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "universidad_nombre")
@@ -88,6 +92,16 @@ public class Alumno implements Serializable {
 		this.id = id;
 	}
 
+	
+	public Integer getContadorDescuento() {
+		return contadorDescuento;
+	}
+
+
+
+	public void setContadorDescuento(Integer contadorDescuento) {
+		this.contadorDescuento = contadorDescuento;
+	}
 
 
 	public UserAccount getUserAccount() {
