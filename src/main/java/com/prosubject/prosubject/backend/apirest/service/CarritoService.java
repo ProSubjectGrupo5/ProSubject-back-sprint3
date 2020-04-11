@@ -30,12 +30,14 @@ public class CarritoService {
 		return this.carritoRepository.findById(carritoId).orElse(null);
 	}
 	
-	public Alumno contadorHorarios(Long alumId) {
-		Alumno alum = alumnoService.findOne(alumId);
-		Integer contador = this.carritoRepository.contadorHorarios(alumId);
-		alum.setContadorDescuento(contador);
-		return alum;
-	}
+//	public Alumno contadorHorarios(Long alumId) {
+//		Alumno alum = alumnoService.findOne(alumId);
+//		Integer contador = this.carritoRepository.contadorHorarios(alumId);
+//		Integer contadorActual = alum.getContadorDescuento();
+//		alum.setContadorDescuento(contadorActual + contador);
+//		this.alumnoService.save(alum);
+//		return alum;
+//	}
 	
 	public Carrito precioMensualHorarios(Long alumnoId) {
 		Double precioHorario = this.carritoRepository.precioMensualHorarios(alumnoId);

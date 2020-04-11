@@ -22,6 +22,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.repository.CarritoRepository;
+import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.CarritoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 
@@ -35,6 +36,9 @@ public class CarritoController {
 	
 	@Autowired
 	private HorarioService horarioService;
+	
+	@Autowired
+	private AlumnoService alumnoService;
 	
 	@GetMapping("")
 	public List<Carrito> findAll(){
@@ -62,21 +66,21 @@ public class CarritoController {
 		return new ResponseEntity<Carrito>(carrito, HttpStatus.OK);
 	}
 	
-	@GetMapping("/contadorHorarios")
-	public ResponseEntity<?> countHorario(@RequestParam Long id) {
-		Alumno alum = null;
-		Map<String, Object> response = new HashMap<String, Object>();
-		
-		try {
-			alum = this.carritoService.contadorHorarios(id);
-		}catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return new ResponseEntity<Alumno>(alum, HttpStatus.OK);
-	}
+//	@GetMapping("/contadorHorarios")
+//	public ResponseEntity<?> countHorario(@RequestParam Long id) {
+//		Alumno alum = null;
+//		Map<String, Object> response = new HashMap<String, Object>();
+//		
+//		try {
+//			alum = this.carritoService.contadorHorarios(id);
+//		}catch(DataAccessException e) {
+//			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		
+//		return new ResponseEntity<Alumno>(alum, HttpStatus.OK);
+//	}
 	
 	
 	@GetMapping("/precioMensual/{id}")
@@ -105,6 +109,7 @@ public class CarritoController {
 	    carritoId, @RequestParam Long horarioId, @RequestParam Long alumId) throws Exception {
 	       Carrito carro = this.carritoService.findOne(carritoId);
 	       Horario horario = this.horarioService.findOne(horarioId);
+	       Alumno alum = this.alumnoService.findOne(alumId);
 	       List<Horario> listaHorariosAlumno = this.horarioService.horariosDeAlumno(alumId);
 	       Map<String, Object> response = new HashMap<String, Object>();
 	       Carrito carrito = new Carrito();
@@ -130,6 +135,9 @@ public class CarritoController {
 	       
 	       try {
 				carrito = this.carritoService.addHorario(carro, horario);
+				Integer contador = alum.getContadorDescuento();
+				alum.setContadorDescuento(contador + 1);
+				this.alumnoService.save(alum);
 			}catch(DataAccessException e) {
 				response.put("mensaje", "Error al realizar la consulta en la base de datos");
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -142,8 +150,9 @@ public class CarritoController {
 	
 	@PostMapping("/borrarHorario")
 	 public ResponseEntity<?> deleteHorarioCarrito(@RequestParam(value = "carritoId") Long 
-	    carritoId, @RequestParam Long horarioId) {
-		Carrito carro = this.carritoService.findOne(carritoId);
+	    carritoId, @RequestParam Long horarioId, @RequestParam Long alumnoId) {
+		   Carrito carro = this.carritoService.findOne(carritoId);
+		   Alumno alum = this.alumnoService.findOne(alumnoId);
 	       Horario horario = this.horarioService.findOne(horarioId);
 	       Map<String, Object> response = new HashMap<String, Object>();
 	       Carrito carrito = new Carrito();
@@ -159,6 +168,9 @@ public class CarritoController {
 	       
 	       try {
 				carrito = this.carritoService.removeHorario(carro, horario);
+				Integer contador = alum.getContadorDescuento();
+				alum.setContadorDescuento(contador - 1);
+				this.alumnoService.save(alum);
 			}catch(DataAccessException e) {
 				response.put("mensaje", "Error al realizar la consulta en la base de datos");
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
