@@ -294,43 +294,47 @@ public class HorarioController{
 		List<Horario> horariosAñadidos = new ArrayList<Horario>();
 		
 		for (Long horarioId : horariosId) {
-		Horario horario = this.horarioService.findOne(horarioId);
+			Horario horario = this.horarioService.findOne(horarioId);
+			Alumno alumno = this.alumnoService.findOne(alumnoId);
+			List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horario.getId());
+			
+			if(horario == null) {
+				response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no existe"));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+			
+			if(alumno == null) {
+				response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no existe"));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+			
+			
+			if(alumnos.contains(alumno)) {
+				response.put("mensaje",	 "El alumno ya se encuentra inscrito en el horario.");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+			
+			if(horario.getCapacidad().equals((long)alumnos.size())) {
+				response.put("mensaje",	 "El horario ya tiene aforo completo.");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+			}
+			
+			try {
+				horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);
+				carro = this.carritoService.removeAllHorario(alumno);
+			}catch(DataAccessException e) {
+				response.put("mensaje", "Error al realizar la consulta en la base de datos");
+				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+			}
+			
+			horariosAñadidos.add(horarioModificado);
+		
+		}
 		Alumno alumno = this.alumnoService.findOne(alumnoId);
-		List<Alumno> alumnos = this.alumnoService.alumnosDeUnHorario(horario.getId());
-		
-		if(horario == null) {
-			response.put("mensaje",	 "El horario con ID: ".concat(horario.getId().toString()).concat(" no existe"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		
-		if(alumno == null) {
-			response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no existe"));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		
-		
-		if(alumnos.contains(alumno)) {
-			response.put("mensaje",	 "El alumno ya se encuentra inscrito en el horario.");
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		
-		if(horario.getCapacidad().equals((long)alumnos.size())) {
-			response.put("mensaje",	 "El horario ya tiene aforo completo.");
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		
-		try {
-			horarioModificado = this.horarioService.añadirAlumno(horario.getId(), alumnoId);
-			carro = this.carritoService.removeAllHorario(alumno);
-		}catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
-		}
-		
-		horariosAñadidos.add(horarioModificado);
-		
-		
+		if(alumno.getContadorDescuento() > 4) {
+			alumno.setContadorDescuento(0);
+			this.alumnoService.save(alumno);
 		}
 		
 		return new ResponseEntity<List<Horario>>(horariosAñadidos, HttpStatus.OK);	

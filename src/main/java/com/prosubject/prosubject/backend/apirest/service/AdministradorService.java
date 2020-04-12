@@ -2,18 +2,59 @@ package com.prosubject.prosubject.backend.apirest.service;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.DBFile;
+import com.prosubject.prosubject.backend.apirest.model.Espacio;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
+import com.prosubject.prosubject.backend.apirest.model.Respuesta;
+import com.prosubject.prosubject.backend.apirest.model.Valoracion;
 import com.prosubject.prosubject.backend.apirest.repository.AdministradorRepository;
+import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
+import com.prosubject.prosubject.backend.apirest.repository.ProfesorRepository;
 
 @Service
 public class AdministradorService {
 	@Autowired
 	private AdministradorRepository administradorRepository;
+	
+	@Autowired
+	private ProfesorRepository profesorRepository;
+	
+	@Autowired
+	private ProfesorService profesorService;
+	
+	@Autowired
+	private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private CarritoService carritoService;
+	
+	@Autowired
+	private AlumnoService alumnoService;
+	
+	@Autowired
+	private UserAccountService userAccountService;
+	
+	@Autowired
+	private DBFileStorageService DBFileStorageService;
+	
+	@Autowired
+	private EspacioService espacioService;
+	
+	@Autowired
+	private ValoracionService valoracionService;
+	
+	@Autowired
+	private RangoService rangoService;
+	
+	@Autowired
+	private RespuestaService respuestaService;
 
 	public Administrador create() {
 		final Administrador a = new Administrador();
@@ -26,6 +67,11 @@ public class AdministradorService {
 
 	public Administrador findOne(final Long administradorId) {
 		return this.administradorRepository.findById(administradorId).orElse(null);
+	}
+	
+	public Administrador findByUsername(String username) {
+		return this.administradorRepository.findAdministradorByUsername(username);
+		
 	}
 
 	public Administrador findByUserAccount(final Long userAccountId) {
@@ -64,5 +110,61 @@ public class AdministradorService {
 	public List<String> dnisAdministradores() {
 		return this.administradorRepository.dnisAdministradores();
 	}
+	
+	public List<Profesor> profesoresOlvidados() {
+		return this.profesorRepository.profesoresDerechoOlvidado();
+	}
+	
+	public List<Alumno> alumnosOlvidados() {
+		return this.alumnoRepository.alumnosDerechoOlvidado();
+	}
+	
+	public void eliminarProfesor(Long profesorId) {
+		
+		Profesor profesor = this.profesorService.findOne(profesorId);
+		if(profesor.getExpendiente()!=null) {
+		DBFile expediente = this.DBFileStorageService.findOne(profesor.getExpendiente().getId());
+		this.DBFileStorageService.delete(expediente);
+		}
+		List<Espacio> espacios = this.espacioService.espaciosDeUnProfesor(profesorId);
+		
+		for (Espacio espacio : espacios) {
+			this.espacioService.delete(espacio);
+		}
+		this.profesorRepository.delete(profesor);
+	
+		
+	}
+	
+	public void eliminarAlumno(Long alumnoId) {
+		
+		Alumno alumno = this.alumnoService.findOne(alumnoId);
+		Carrito carro = this.carritoService.carritoPorAlumno(alumnoId);
+		List<Valoracion> valoraciones = this.valoracionService.valoracionesPorAlumnoId(alumnoId);
+		for (Valoracion valoracion : valoraciones) {
+			this.valoracionService.delete(valoracion);
+		}
+		List<Rango> rangos = this.rangoService.rangosPorAlumno(alumnoId);
+		
+		for (Rango rango : rangos) {
+			this.rangoService.delete(rango);
+		}
+		
+		
+		List<Respuesta> respuestas= this.respuestaService.respuestaPorUserAccount(alumno.getUserAccount().getId());
+		
+		for (Respuesta respuesta : respuestas) {
+			this.respuestaService.delete(respuesta);
+		}
+		this.carritoService.delete(carro);
+		this.alumnoRepository.delete(alumno);
+		
+		
+	
+		
+	}
+
+	
+	
 
 }

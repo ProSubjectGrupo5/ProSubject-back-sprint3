@@ -78,7 +78,7 @@ public class SignUpController {
 				DBFile dbFile = this.dBFileStorageService.storeFile(file);
 
 				prof.setExpendiente(dbFile);
-
+				prof.setDerechoOlvidado(false);
 				profesorNuevo = this.profesorService.save(prof);
 
 			} catch (DataAccessException e) {
@@ -111,6 +111,11 @@ public class SignUpController {
 		} else {
 
 			try {
+
+				alumno.setContadorDescuento(0);
+
+				alumno.setDerechoOlvidado(false);
+
 				AlumnoNuevo = this.alumnoService.save(alumno);
 
 				Carrito car = new Carrito();

@@ -19,6 +19,8 @@ public interface AdministradorRepository extends JpaRepository<Administrador, Lo
 	
 	@Query("select p.dni from administradores p")
 	List<String> dnisAdministradores();
+	@Query("select a from administradores a where a.useraccount.username=?1")
+	Administrador findAdministradorByUsername(String username);
 	
 	
 

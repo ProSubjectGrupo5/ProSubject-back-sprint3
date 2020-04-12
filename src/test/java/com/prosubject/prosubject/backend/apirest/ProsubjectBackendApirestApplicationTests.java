@@ -10,24 +10,28 @@ import java.util.HashMap;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import com.prosubject.prosubject.backend.apirest.controller.AdministradorController;
 import com.prosubject.prosubject.backend.apirest.controller.AlumnoController;
 import com.prosubject.prosubject.backend.apirest.model.Administrador;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
+import com.prosubject.prosubject.backend.apirest.model.Carrito;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -41,15 +45,20 @@ import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 import com.prosubject.prosubject.backend.apirest.model.Universidad;
 import com.prosubject.prosubject.backend.apirest.model.UserAccount;
+import com.prosubject.prosubject.backend.apirest.model.Valoracion;
 import com.prosubject.prosubject.backend.apirest.repository.AdministradorRepository;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 import com.prosubject.prosubject.backend.apirest.repository.AsignaturaRepository;
 import com.prosubject.prosubject.backend.apirest.repository.EspacioRepository;
+import com.prosubject.prosubject.backend.apirest.service.AdministradorService;
+import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.AsignaturaService;
+import com.prosubject.prosubject.backend.apirest.service.CarritoService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -76,16 +85,31 @@ class ProsubjectBackendApirestApplicationTests {
 	@Autowired
 	private EspacioService espacioServicio;
 	
+	@Autowired
+	private ValoracionService valoracionService;
 
 	@Autowired
 	private ForoService foroService;
 	
 	@Autowired
 	private HorarioService horarioService;
+	
 	@Autowired
 	private AsignaturaService asignaturaService;
+	
 	@Autowired
 	private ProfesorService profesorService;
+	
+	@Autowired
+	private CarritoService	carritoService;
+	
+	@Autowired
+	private AdministradorService	administradorService;
+
+	@Autowired
+	private AlumnoService	alumnoService;
+	
+	
 
 	@Test
 	public void adminControllerTest() {
@@ -124,6 +148,40 @@ class ProsubjectBackendApirestApplicationTests {
 		assertEquals(administrador.getEmail(), "anaromcac@alum.us.es");
 
 	}
+	@Test
+	public void ServicioAdministradorFindAll() throws Exception {
+		List<Administrador> res = administradorService.findAll();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAdministradorFindOne() throws Exception {
+		Administrador res = administradorService.findOne(1l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioAdministradorFindUserAccount() throws Exception {
+		Administrador res = administradorService.findByUserAccount(1l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioAdministradoremailsAdministradores() throws Exception {
+		List<String> res = administradorService.emailsAdministradores();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAdministradordnisAdministradores() throws Exception {
+		List<String> res = administradorService.dnisAdministradores();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAdministradorEdit() throws Exception {
+		Administrador admin = administradorService.findOne(1l);
+		Administrador res= this.administradorService.edit(1l, admin);
+		assertThat(res).isNotNull();
+	}
 
 	// Alumno
 	@Test
@@ -160,6 +218,63 @@ class ProsubjectBackendApirestApplicationTests {
 		Alumno aux = alumRep.findAlumnoByUserAccountId(id);
 		assertEquals(aux.getNombre(), nombre);
 	}
+	@Test
+	public void ServicioAlumnoFindAll() throws Exception {
+		List<Alumno> res = alumnoService.findAll();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnoFindOne() throws Exception {
+		Alumno res = alumnoService.findOne(1l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioAlumnoFindUserAccount() throws Exception {
+		Alumno res = alumnoService.findByUserAccount(15l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioAlumnoFindByUsername() throws Exception {
+		Alumno res = alumnoService.findByUsername("marioogonzalez");
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioAlumnoemailsAlumnos() throws Exception {
+		List<String> res = alumnoService.emailsAlumno();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnodnisAlumnoes() throws Exception {
+		List<String> res = alumnoService.DNIsAlumno();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnoEdit() throws Exception {
+		Alumno alum = alumnoService.findOne(1l);
+		Alumno res= this.alumnoService.edit(1l, alum);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnoDeUnHorario() throws Exception {
+		List<Alumno> res = alumnoService.alumnosDeUnHorario(1l);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnoQueHanValoradoUnEspacio() throws Exception {
+		List<Alumno> res = alumnoService.alumnosQueHanValoradoUnEspacio(1l);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAlumnoDeUnEspacio() throws Exception {
+		List<Alumno> res = alumnoService.alumnosDeUnEspacio(1l);
+		assertThat(res).isNotNull();
+	}
 
 	// Asignatura
 	@Test
@@ -180,6 +295,31 @@ class ProsubjectBackendApirestApplicationTests {
 		asignatura.setNombre("Fundamentos de la programación II");
 		assertEquals(asignatura.getNombre(), "Fundamentos de la programación II");
 
+	}
+	
+	@Test
+	public void ServicioAsignaturaFindAll() throws Exception {
+		List<Asignatura> res = asignaturaService.findAll();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAsignaturaFindOne() throws Exception {
+		Asignatura res = asignaturaService.findOne(1l);
+		this.asignaturaService.save(res);
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAsignaturaPorNombre() throws Exception {
+		Asignatura res = asignaturaService.getAsignaturaPorNombre("Fundamentos de programación");
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioAsignaturaListaAsignatura() throws Exception {
+		List<Asignatura> res = asignaturaService.findListaAsignaturas("Universidad de Sevilla","Escuela Técnica Superior de Ingeniería Informática","Ingeniería del Software","PRIMERO");
+		assertThat(res).isNotNull();
 	}
 
 	// Curso
@@ -274,6 +414,58 @@ class ProsubjectBackendApirestApplicationTests {
 		assertEquals(profesor.getExpendiente(), expediente);
 
 	}
+	@Test
+	public void ServicioProfesorFindAll() throws Exception {
+		List<Profesor> res = profesorService.findAll();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioProfesorFindOne() throws Exception {
+		Profesor res = profesorService.findOne(1l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioProfesorFindUserAccount() throws Exception {
+		Profesor res = profesorService.findByUserAccount(14l);
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioProfesorFindByUsername() throws Exception {
+		Profesor res = profesorService.findByUsername("marioogonzalez1");
+		assertThat(res).isNotNull();
+	}
+	@Test
+	public void ServicioProfesoremailsProfesors() throws Exception {
+		List<String> res = profesorService.emailsProfesor();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioProfesordnisProfesores() throws Exception {
+		List<String> res = profesorService.DNIsProfesor();
+		assertThat(res).isNotNull();
+	}
+	
+
+	
+	@Test
+	public void ServicioProfesorExpedientePendiete() throws Exception {
+		List<Profesor> res = profesorService.profesoresExpedientePendiete();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServicioProfesorTarifaPremium() throws Exception {
+		List<Profesor> res = profesorService.profesoresTarifaPremium();
+		assertThat(res).isNotNull();
+	}
+	
+	@Test
+	public void ServiciProfesorvaloracionMedia() throws Exception {
+		this.profesorService.valoracionMedia(1l);
+	}
+
 	
 
 	// Rango
@@ -510,6 +702,31 @@ class ProsubjectBackendApirestApplicationTests {
 			Horario res = horarioService.findOne(1);
 			assertThat(res).isNotNull();
 		}
+		
+		//Carrito
+		@Test
+		public void ServicioCarritoFindAll() throws Exception {
+			List<Carrito> res = carritoService.findAll();
+			assertThat(res).isNotNull();
+		}
+		@Test
+		public void ServicioCarritoFindOne() throws Exception {
+			Carrito res = carritoService.findOne(1l);
+			assertThat(res).isNotNull();
+		}
+		@Test
+		public void ServicioCarritoprecioMensualHorarios() throws Exception {
+			Carrito res = carritoService.precioMensualHorarios(1l);
+			assertThat(res).isNotNull();
+		}
+		@Test
+		public void ServicioCarritosave() throws Exception {
+			Carrito res = carritoService.findOne(1l);
+			this.carritoService.save(res);
+			assertThat(res).isNotNull();
+		}
+	
+		
 	/*	@Test
 		public void ServicioHorarioSaveOne() throws Exception {
 
@@ -538,6 +755,34 @@ class ProsubjectBackendApirestApplicationTests {
 			//assertThat(res.);
 		}
 	*/
+		
+		
+		
+		//Valoracion
+		@Test
+		public void ServicioValoracionFindOne() throws Exception {
+			Valoracion res = valoracionService.findOne(1l);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioValoracionPorEspacioId() throws Exception {
+			List<Valoracion> res = valoracionService.valoracionesPorEspacioId(1l);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioValoracionMediaDeEspacio() throws Exception {
+			Double res = valoracionService.valoracionMediaDeEspacio(1l);
+			assertThat(res).isNotNull();
+		}
+		
+		@Test
+		public void ServicioValoracionMediaDeProfesor() throws Exception {
+			Double res = valoracionService.valoracionMediaDeProfesor(1l);
+			assertThat(res).isNotNull();
+		
+		}
 	
 	  //SELENIUM
 	  @Test
@@ -546,7 +791,7 @@ class ProsubjectBackendApirestApplicationTests {
 		ChromeDriver driver = new ChromeDriver();
 
 		
-		driver.get("https://prosubject-v2.herokuapp.com/inicio");
+		driver.get("https://prosubject-v3.herokuapp.com/inicio");
 	    driver.manage().window().setSize(new Dimension(1552, 840));
 	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
 	    driver.findElement(By.linkText("Login")).click();
@@ -554,23 +799,18 @@ class ProsubjectBackendApirestApplicationTests {
 	    driver.findElement(By.name("password")).sendKeys("alejandrocano");
 	    driver.findElement(By.cssSelector(".ng-dirty:nth-child(1)")).click();
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    {
-	      WebElement element = driver.findElement(By.cssSelector(".btn"));
-	      Actions builder = new Actions(driver);
-	      builder.moveToElement(element).perform();
-	    }
 	    
 	    driver.quit();
 		
 	  }
-		
-		
+//		
+//		
 	  @Test
 	  public void testLoginAlum() {
 //		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
 		ChromeDriver driver = new ChromeDriver();
 		    
-		driver.get("https://prosubject-v2.herokuapp.com/inicio");
+		driver.get("https://prosubject-v3.herokuapp.com/inicio");
 	    driver.manage().window().setSize(new Dimension(1146, 663));
 	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
 	    driver.findElement(By.linkText("Login")).click();
@@ -580,35 +820,120 @@ class ProsubjectBackendApirestApplicationTests {
 	    
 	    driver.quit();
 	  }
-
-	  @Test
-	  public void testRegistroAlumRepetido() {
+//
+//	  @Test
+//	  public void testRegistroAlumRepetido() {
 //		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
-		ChromeDriver driver = new ChromeDriver();
-		  
-		driver.get("https://prosubject-v2.herokuapp.com/inicio");
-	    driver.manage().window().setSize(new Dimension(1146, 662));
-	    driver.findElement(By.cssSelector(".far")).click();
-	    driver.findElement(By.linkText("Registro")).click();
-	    driver.findElement(By.name("nombre")).click();
-	    driver.findElement(By.name("nombre")).sendKeys("Jesus");
-	    driver.findElement(By.name("apellido1")).sendKeys("Elias");
-	    driver.findElement(By.name("apellido2")).sendKeys("Rodriguez");
-	    driver.findElement(By.name("dni")).sendKeys("17842170N");
-	    driver.findElement(By.name("telefono")).click();
-	    driver.findElement(By.cssSelector("app-registro > .row")).click();
-	    driver.findElement(By.name("username")).sendKeys("jesu");
-	    driver.findElement(By.name("email")).click();
-	    driver.findElement(By.name("email")).sendKeys("jesuselias@gmail.com");
-	    driver.findElement(By.name("username")).click();
-	    driver.findElement(By.name("username")).sendKeys("jesuelia98");
-	    driver.findElement(By.cssSelector(".ng-invalid:nth-child(4) > .row:nth-child(1)")).click();
-	    driver.findElement(By.name("password")).sendKeys("jesuelia");
-	    driver.findElement(By.name("confirmPassword")).click();
-	    driver.findElement(By.name("confirmPassword")).sendKeys("jesuelia");
-	    driver.findElement(By.cssSelector("label:nth-child(6)")).click();
-	    driver.findElement(By.cssSelector(".btn")).click();
+//		ChromeDriver driver = new ChromeDriver();
+//		  
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//	    driver.manage().window().setSize(new Dimension(1146, 662));
+//	    driver.findElement(By.cssSelector(".far")).click();
+//	    driver.findElement(By.linkText("Registro")).click();
+//	    driver.findElement(By.name("nombre")).click();
+//	    driver.findElement(By.name("nombre")).sendKeys("Jesus");
+//	    driver.findElement(By.name("apellido1")).sendKeys("Elias");
+//	    driver.findElement(By.name("apellido2")).sendKeys("Rodriguez");
+//	    driver.findElement(By.name("dni")).sendKeys("17842170N");
+//	    driver.findElement(By.name("telefono")).click();
+//	    driver.findElement(By.cssSelector("app-registro > .row")).click();
+//	    driver.findElement(By.name("username")).sendKeys("jesu");
+//	    driver.findElement(By.name("email")).click();
+//	    driver.findElement(By.name("email")).sendKeys("jesuselias@gmail.com");
+//	    driver.findElement(By.name("username")).click();
+//	    driver.findElement(By.name("username")).sendKeys("jesuelia98");
+//	    driver.findElement(By.cssSelector(".ng-invalid:nth-child(4) > .row:nth-child(1)")).click();
+//	    driver.findElement(By.name("password")).sendKeys("jesuelia");
+//	    driver.findElement(By.name("confirmPassword")).click();
+//	    driver.findElement(By.name("confirmPassword")).sendKeys("jesuelia");
+//	    driver.findElement(By.cssSelector("label:nth-child(6)")).click();
+//	    driver.findElement(By.cssSelector(".btn")).click();
 	    
-	  }
+//	  }
+	  
+//	  MisClasesAlum
+//	  @Test
+//	  public void testAlumMisClases() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+//		ChromeDriver driver = new ChromeDriver();
+//		
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//	    driver.manage().window().setSize(new Dimension(1154, 674));
+//	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+//	    driver.findElement(By.linkText("Login")).click();
+//	    driver.findElement(By.name("username")).click();
+//	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".card-body")).click();
+//	    driver.findElement(By.name("password")).click();
+//	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".btn")).click();
+//	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	    driver.findElement(By.linkText("Mis clases")).click();
+//			
+//	  }
+	  
+	  //BusqAsigAlum
+//	  @Test
+//	  public void testAlumBusquedaAsig() {
+//		System.setProperty("webdriver.chrome.driver", "D:\\UNIVERSIDAD 2019-2020\\España\\4Curso\\ISPP\\sprint 1\\chromedriver.exe");
+//		ChromeDriver driver = new ChromeDriver();
+//		
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//	    driver.manage().window().setSize(new Dimension(1154, 674));
+//	    driver.findElement(By.cssSelector(".far")).click();
+//	    driver.findElement(By.linkText("Login")).click();
+//	    driver.findElement(By.cssSelector(".form-group:nth-child(1)")).click();
+//	    driver.findElement(By.name("username")).click();
+//	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".card-body")).click();
+//	    driver.findElement(By.name("password")).click();
+//	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+//	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	    driver.findElement(By.cssSelector(".btn")).click();
+//	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	    driver.findElement(By.linkText("Busqueda de espacios")).click();
+//	    {
+//	      WebElement element = driver.findElement(By.linkText("Busqueda de espacios"));
+//	      Actions builder = new Actions(driver);
+//	      builder.moveToElement(element).perform();
+//	    }
+//	    {
+//	      WebElement element = driver.findElement(By.tagName("body"));
+//	      Actions builder = new Actions(driver);
+//	      builder.moveToElement(element, 0, 0).perform();
+//	    }
+		
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//		driver.manage().window().setSize(new Dimension(1146, 663));
+//		driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+//		driver.findElement(By.linkText("Login")).click();
+//		driver.findElement(By.name("username")).sendKeys("anaromcac");
+//		driver.findElement(By.name("password")).sendKeys("anaromcac");
+//		driver.findElement(By.cssSelector(".btn")).click();
+//		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+//		driver.findElement(By.linkText("Busqueda de espacios")).click();
+//		driver.findElement(By.xpath("/html/body/app-root/app-pages/div/app-header/nav/div/div/ul/li[2]/a")).click();
+		
+	    
+//	    driver.findElement(By.xpath("/html/body/app-root/app-pages/div/div/app-busqueda-asignatura/div/div[1]/div/form/div[2]/div[2]/input")).sendKeys("PRIMERO");
+		
+//		driver.get("https://prosubject-v3.herokuapp.com/inicio");
+//	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+//	    driver.findElement(By.linkText("Login")).click();
+//	    driver.findElement(By.name("username")).click();
+//	    driver.findElement(By.name("username")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".card-body")).click();
+//	    driver.findElement(By.name("password")).click();
+//	    driver.findElement(By.name("password")).sendKeys("anaromcac");
+//	    driver.findElement(By.cssSelector(".btn")).click();
+//	    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//	    driver.findElement(By.linkText("Busqueda de espacios")).click();
+//	    driver.findElement(By.xpath("/html/body/app-root/app-pages/div/div/app-busqueda-asignatura/div/div[1]/div/form/div[2]/div[2]/input")).click();
+//	    driver.findElement(By.xpath("/html/body/app-root/app-pages/div/div/app-busqueda-asignatura/div/div[1]/div/form/div[2]/div[2]/input")).sendKeys("PRIMERO");
+//	    driver.findElement(By.cssSelector(".ng-invalid:nth-child(2)")).click();
+//	    driver.findElement(By.cssSelector(".col-md-4:nth-child(3) > .form-control")).sendKeys("Fundamentos de programación");
+//	    driver.findElement(By.cssSelector(".btn:nth-child(3)")).click();
+		
+//	  }
 	  
 }

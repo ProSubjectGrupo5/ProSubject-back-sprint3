@@ -20,7 +20,7 @@ public class CarritoService {
 	private CarritoRepository carritoRepository;
 	
 	@Autowired
-	private HorarioService horarioService;
+	private AlumnoService alumnoService;
 	
 	public List<Carrito> findAll(){
 		return this.carritoRepository.findAll();
@@ -30,6 +30,15 @@ public class CarritoService {
 		return this.carritoRepository.findById(carritoId).orElse(null);
 	}
 	
+//	public Alumno contadorHorarios(Long alumId) {
+//		Alumno alum = alumnoService.findOne(alumId);
+//		Integer contador = this.carritoRepository.contadorHorarios(alumId);
+//		Integer contadorActual = alum.getContadorDescuento();
+//		alum.setContadorDescuento(contadorActual + contador);
+//		this.alumnoService.save(alum);
+//		return alum;
+//	}
+	
 	public Carrito precioMensualHorarios(Long alumnoId) {
 		Double precioHorario = this.carritoRepository.precioMensualHorarios(alumnoId);
 		Integer mensual = 4;
@@ -37,7 +46,13 @@ public class CarritoService {
 			precioHorario = 0.0;
 		}
 		Carrito c = findOne(alumnoId);
+		Alumno alum = alumnoService.findOne(alumnoId);
 		c.setPrecioMensual(precioHorario * mensual);
+		if(alum.getContadorDescuento()>4) {
+			Double precio = c.getPrecioMensual();
+			Double descuento = precio*0.9;
+			c.setPrecioMensual(descuento);
+		}
 		return c;
 	}
 	
@@ -61,6 +76,14 @@ public class CarritoService {
 		List<Horario> listaHorario = new ArrayList<Horario>();
 		carro.setHorario(listaHorario);
 	    return save(carro);
+	}
+	
+	public Carrito carritoPorAlumno(final Long alumnoId) {
+		return this.carritoRepository.carritoAlumno(alumnoId);
+	}
+	
+	public void delete(final Carrito carro) {
+		this.carritoRepository.delete(carro);
 	}
 	
 }

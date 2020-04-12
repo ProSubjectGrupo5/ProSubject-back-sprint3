@@ -48,6 +48,10 @@ public class Alumno implements Serializable {
 	@Column(nullable = false)
 	private String apellido2;
 	
+	@NotNull
+	@Column
+	private Integer contadorDescuento;
+
 	@Valid
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "universidad_nombre")
@@ -77,6 +81,22 @@ public class Alumno implements Serializable {
 	@Pattern(regexp="^\\d{9}|^$",message = "Debe introducir un numero de telefono correcto")
 	private String telefono;
 	
+	@Column(nullable = false)
+	private Boolean derechoOlvidado;	
+	
+
+
+	public Boolean getDerechoOlvidado() {
+		return derechoOlvidado;
+	}
+
+
+
+	public void setDerechoOlvidado(Boolean derechoOlvidado) {
+		this.derechoOlvidado = derechoOlvidado;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -88,6 +108,16 @@ public class Alumno implements Serializable {
 		this.id = id;
 	}
 
+	
+	public Integer getContadorDescuento() {
+		return contadorDescuento;
+	}
+
+
+
+	public void setContadorDescuento(Integer contadorDescuento) {
+		this.contadorDescuento = contadorDescuento;
+	}
 
 
 	public UserAccount getUserAccount() {

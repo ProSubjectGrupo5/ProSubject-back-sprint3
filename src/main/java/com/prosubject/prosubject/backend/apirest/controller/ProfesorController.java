@@ -194,10 +194,6 @@ public class ProfesorController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			
-			else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(), new Date())>30) {
-				response.put("mensaje", "El plan premium del profesor ya expiró");
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-			}
 			
 			else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date())==30){
 				response.put("mensaje", "El plan premium del profesor acaba hoy");
@@ -233,11 +229,6 @@ public class ProfesorController {
 				if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date())<30) {
 					Integer diasPremium = 30 - (numeroDiasEntreDosFechas(prof.getFechaPagoPremium(),new Date()));
 					response.put("mensaje", "El profesor aun posee "+String.valueOf(diasPremium)+"dias de plan premium");
-					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-				
-				else if(numeroDiasEntreDosFechas(prof.getFechaPagoPremium(), new Date())>30) {
-					response.put("mensaje", "El plan premium del profesor ya expiró");
 					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 				
@@ -279,6 +270,41 @@ public class ProfesorController {
 		     long endTime = fecha2.getTime();
 		     long diffTime = endTime - startTime;
 		     return (int)TimeUnit.DAYS.convert(diffTime, TimeUnit.MILLISECONDS);
+		}
+		
+		
+		
+		@PutMapping("/peticionBorrar/{profesorId}")
+		public ResponseEntity<?> modificarHorario(@PathVariable Long profesorId) throws Exception {
+			Map<String, Object> response = new HashMap<String, Object>();
+			Profesor profesor = this.profesorService.findOne(profesorId);
+			
+			if(profesor==null) {
+				response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no existe"));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			if(profesor.getDerechoOlvidado()==true) {
+				response.put("mensaje",	 "El profesor ya ha solicitado  la peticion para ser olvidado ");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			if(this.profesorService.profesorTieneAlumno(profesor.getId())!=true) {
+				response.put("mensaje",	 "No se pudo realizar la petición porque aún tiene horarios activos.");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			
+			try {
+				profesor  =this.profesorService.peticionBorrar(profesor);
+			}catch(DataAccessException e) {
+				response.put("mensaje", "Error al realizar el insert en la base de datos");
+				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+					
+			}
+			
+			return new ResponseEntity<Profesor>(profesor,HttpStatus.CREATED); 
+			
+			
+			
 		}
 
 

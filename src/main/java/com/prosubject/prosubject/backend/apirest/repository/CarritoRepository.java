@@ -18,5 +18,11 @@ public interface CarritoRepository extends JpaRepository<Carrito, Long>{
 	@Query("select c from carrito c where c.alumno.id=?1")
 	Carrito carritoAlumno(Long id);
 	
+	@Query("select COUNT(h) from carrito c "
+			+ "inner join c.horario h "
+			+ "inner join h.espacio e "
+			+ "where c.alumno.id=?1") 
+	Integer contadorHorarios(Long id);
+	
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
@@ -150,6 +151,37 @@ public class AlumnoController {
 
 		return new ResponseEntity<List<Alumno>>(alumno, HttpStatus.OK);
 
+	
 	}
+	
+	
+	@PutMapping("/peticionBorrar/{alumnoId}")
+	public ResponseEntity<?> modificarHorario(@PathVariable Long alumnoId) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Alumno alumno = this.alumnoService.findOne(alumnoId);
+		
+		if(alumno==null) {
+			response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		if(alumno.getDerechoOlvidado()==true) {
+			response.put("mensaje",	 "El alumno ya ha solicitado  la peticion para ser olvidado ");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			alumno  =this.alumnoService.peticionBorrar(alumno);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+				
+		}
+		
+		return new ResponseEntity<Alumno>(alumno,HttpStatus.CREATED); 
+		
+		
+		
+	}
+	
 
 }
