@@ -164,6 +164,10 @@ public class AlumnoController {
 			response.put("mensaje",	 "El alumno con ID: ".concat(alumnoId.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
+		if(alumno.getDerechoOlvidado()==true) {
+			response.put("mensaje",	 "El alumno ya ha solicitado  la peticion para ser olvidado ");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
 		try {
 			alumno  =this.alumnoService.peticionBorrar(alumno);
 		}catch(DataAccessException e) {
