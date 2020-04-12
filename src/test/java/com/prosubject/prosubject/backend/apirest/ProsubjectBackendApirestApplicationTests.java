@@ -455,11 +455,11 @@ class ProsubjectBackendApirestApplicationTests {
 		assertThat(res).isNotNull();
 	}
 	
-	@Test
-	public void ServicioProfesorTarifaPremium() throws Exception {
-		List<Profesor> res = profesorService.profesoresTarifaPremium();
-		assertThat(res).isNotNull();
-	}
+	//@Test
+	//public void ServicioProfesorTarifaPremium() throws Exception {
+	//	List<Profesor> res = profesorService.profesoresTarifaPremium();
+	//	assertThat(res).isNotNull();
+	//}
 	
 	@Test
 	public void ServiciProfesorvaloracionMedia() throws Exception {
