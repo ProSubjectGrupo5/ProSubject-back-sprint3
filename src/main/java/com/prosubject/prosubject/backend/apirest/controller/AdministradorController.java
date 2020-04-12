@@ -159,11 +159,14 @@ public class AdministradorController {
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		/*
 
 		if (profesores.isEmpty()) {
 			response.put("mensaje", "No hay profesores ");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
+		*/
 
 		return new ResponseEntity<List<Profesor>>(profesores, HttpStatus.OK);
 
@@ -182,10 +185,12 @@ public class AdministradorController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+		/*
 		if (alumnos.isEmpty()) {
 			response.put("mensaje", "No hay alumnos");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
+		*/
 
 		return new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
 

@@ -288,7 +288,7 @@ public class ProfesorController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			}
 			if(this.profesorService.profesorTieneAlumno(profesor.getId())!=true) {
-				response.put("mensaje",	 "El profesor con ID: ".concat(profesorId.toString()).concat(" no puede ser borrado, porque tiene alumnos "));
+				response.put("mensaje",	 "No se pudo realizar la petición porque aún tiene horarios activos.");
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			}
 			
