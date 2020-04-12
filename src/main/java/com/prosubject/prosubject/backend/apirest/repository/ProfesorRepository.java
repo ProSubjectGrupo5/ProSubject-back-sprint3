@@ -25,13 +25,13 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long>{
 	@Query("select p.dni from profesores p")
 	List<String> DNIsProfesor();
 	
-	@Query("select p from profesores p where p.expedienteValidado=0")
+	@Query("select p from profesores p where p.expedienteValidado=false")
 	List<Profesor> profesoresExpedientePendiete();
 	
-	@Query("select p from profesores p where p.tarifaPremium=1")
+	@Query("select p from profesores p where p.tarifaPremium=true")
 	List<Profesor> profesoresTarifaPremium();
 	
-	@Query("select p from profesores p where p.derechoOlvidado=1")
+	@Query("select p from profesores p where p.derechoOlvidado=true")
 	List<Profesor> profesoresDerechoOlvidado();
 	
 	
