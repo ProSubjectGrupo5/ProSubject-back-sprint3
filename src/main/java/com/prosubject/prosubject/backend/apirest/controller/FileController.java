@@ -4,6 +4,7 @@ package com.prosubject.prosubject.backend.apirest.controller;
 
 
 
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -25,15 +27,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.payload.UploadFileResponse;
+import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
+import com.prosubject.prosubject.backend.apirest.service.EspacioService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfAlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 @RestController
 @RequestMapping("/api/files")
@@ -44,6 +52,13 @@ public class FileController {
 
     @Autowired
     private DBFileStorageService dbFileStorageService;
+    @Autowired
+    private AlumnoService aS;
+    
+    @Autowired
+    private GenerarPdfAlumnoService gP;
+	
+
 
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
@@ -97,5 +112,23 @@ public class FileController {
 		
 		return new ResponseEntity<DBFile>(file, HttpStatus.OK);
 	}
+    
+    @RequestMapping(value = "/pdfAlumno/{id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> citiesReport(@PathVariable Long id) {
+
+        Alumno a = aS.findOne(id);
+
+        ByteArrayInputStream bis = this.gP.alumnoReport(a);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
 
 }
