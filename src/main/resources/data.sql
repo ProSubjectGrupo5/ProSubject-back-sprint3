@@ -129,7 +129,6 @@ INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('2', '4');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('3', '1');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('4', '1');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('5', '1');
-INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('5', '1');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('6', '5');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('7', '5');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('8', '6');
