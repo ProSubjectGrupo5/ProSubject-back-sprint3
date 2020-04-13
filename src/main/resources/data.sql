@@ -143,6 +143,7 @@ INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('15', '12');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('16', '13');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('17', '14');
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('18', '15');
+INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('19', '1');
 
 INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium,valoracion_media,derecho_olvidado) VALUES ('Rojas', 'Cantos','86800079B','alvaro@gmail.com', 'Alvaro','123436385', '5', false, 2,null,1.5,false);
 INSERT INTO profesor (apellido1, apellido2, dni, email, nombre, telefono, useraccount_id,tarifa_premium,expediente_validado,fecha_pago_premium,valoracion_media,derecho_olvidado) VALUES ('Romero ', 'Organvidez','86558252Y','drorganvidez@gmail.com', 'David', '123436485', '6', false, 2,null,3,false);
