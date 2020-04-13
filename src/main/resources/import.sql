@@ -118,6 +118,7 @@ INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Bases de Derecho Admin
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Geografía General y Regional del Turismo', '1');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('La comunicación en entornos virtuales', '3');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Mecanica y ondas', '1');
+INSERT INTO `asignaturas` (`nombre`, `curso_id`)  VALUES ('Derecho Informatico ', '4');
 
 
 
@@ -142,6 +143,7 @@ INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('15', '
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('16', '13');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('17', '14');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('18', '15');
+INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('19', '1');
 
 
 
