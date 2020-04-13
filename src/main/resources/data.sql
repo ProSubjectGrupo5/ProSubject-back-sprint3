@@ -118,6 +118,7 @@ INSERT INTO asignatura (nombre, curso_id) VALUES ('Bases de Derecho Administrati
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Geografía General y Regional del Turismo', '1');
 INSERT INTO asignatura (nombre, curso_id) VALUES ('La comunicación en entornos virtuales', '3');
 INSERT INTO asignatura (nombre, curso_id) VALUES ('Mecanica y ondas', '1');
+INSERT INTO asignatura (nombre, curso_id) VALUES ('Derecho Informático ', '4');
 
 
 INSERT INTO asignatura_grados (asignatura_id, grados) VALUES ('1', '1');
