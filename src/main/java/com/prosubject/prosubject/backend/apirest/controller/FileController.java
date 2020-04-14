@@ -131,7 +131,7 @@ public class FileController {
         ByteArrayInputStream bis = this.gP.alumnoReport(a);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+        headers.add("Content-Disposition", "inline; filename=ReportAlumno.pdf");
 
         return ResponseEntity
                 .ok()

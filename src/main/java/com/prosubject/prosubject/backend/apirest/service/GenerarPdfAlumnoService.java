@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -69,17 +70,95 @@ public class GenerarPdfAlumnoService {
             // document.open();
              //document.add(table);
          	document.open();
-         	document.add(new Paragraph("Nombre: "+a.getNombre()));
-         	document.add(new Paragraph("Apellidos: "+a.getApellido1()+" "+a.getApellido2()));
-         	document.add(new Paragraph("DNI: "+a.getDni()));
-         	document.add(new Paragraph("Email: "+a.getEmail()));
-         	document.add(new Paragraph("Teléfono: "+a.getTelefono()));
-         	document.add(new Paragraph("Universidad: "+a.getUniversidad().getNombre()));
-         	document.add(new Paragraph("Facultad: "+a.getFacultad().getNombre()));
-         	document.add(new Paragraph("Grado: "+a.getGrado().getNombre()));
-         	document.add(new Paragraph("Espacios donde está inscrito: "+espacios));
-         	document.add(new Paragraph("Valoraciones dadas: "+valoraciones));
          	
+         	Paragraph paragraphHello = new Paragraph();
+         	
+         	
+         	document.add(new Paragraph("ProSubject",
+					FontFactory.getFont("arial",   // fuente
+							35,                            // tamaño
+							Font.ITALIC,                   // estilo
+							BaseColor.ORANGE)));             // color
+			
+			document.add(new Paragraph("\nDATOS PERSONALES\n",
+					FontFactory.getFont("arial",   // fuente
+							16,                            // tamaño
+							Font.ITALIC,                   // estilo
+							BaseColor.RED)));             // color
+         	
+			paragraphHello.add("\nNombre: " + a.getNombre().toString());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello
+					.add("Apellidos: " + a.getApellido1().toString() + " " + a.getApellido2().toString());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello.add("DNI: " + a.getDni().toString());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello.add("Email: " + a.getEmail().toString());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello.add("Telefono: " + a.getTelefono().toString());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+			
+			paragraphHello.add("Tarifa Premium: " + a.getUniversidad().getNombre());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello.add("Expediente validado: " +a.getFacultad().getNombre());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+
+			paragraphHello.add("Valoración media: " + a.getGrado().getNombre());
+			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+			document.add(paragraphHello);
+			paragraphHello.clear();
+			
+			Paragraph Espacio = new Paragraph();
+			document.add(new Paragraph("\nESPACIOS\n",
+					FontFactory.getFont("arial",   // fuente
+							16,                            // tamaño
+							Font.ITALIC,                   // estilo
+							BaseColor.RED)));             // color
+			Espacio.clear();
+			
+			
+			for(Espacio e :  es) {
+	        	Espacio.add(e.getAsignatura().getNombre());
+	        	Espacio.setAlignment(Element.ALIGN_JUSTIFIED);
+	        	document.add(Espacio);
+	        	Espacio.clear();
+	        }
+        
+			Paragraph Valoracion = new Paragraph();
+			document.add(new Paragraph("\nValoraciones\n",
+					FontFactory.getFont("arial",   // fuente
+							16,                            // tamaño
+							Font.ITALIC,                   // estilo
+							BaseColor.RED)));             // color
+			Valoracion.clear();
+			
+			
+			 for(Valoracion v :  val) {
+		        	Valoracion.add("Puntuación: "+v.getPuntuacion()+" / Comentario: "+v.getComentario());
+		        	Valoracion.setAlignment(Element.ALIGN_JUSTIFIED);
+		        	document.add(Valoracion);
+		        	Valoracion.clear();
+		        }
+         
 
             document.close();
 
