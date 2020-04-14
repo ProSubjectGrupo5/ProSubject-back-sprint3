@@ -36,11 +36,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.payload.UploadFileResponse;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.GenerarPdfAlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 @RestController
@@ -56,7 +59,13 @@ public class FileController {
     private AlumnoService aS;
     
     @Autowired
+    private ProfesorService profesorService;
+    
+    @Autowired
     private GenerarPdfAlumnoService gP;
+    
+    @Autowired
+    private GenerarPdfProfesorService gPP;
 	
 
 
@@ -123,6 +132,24 @@ public class FileController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+    
+    @RequestMapping(value = "/pdfProfesor/{id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> profesorReport(@PathVariable Long id) {
+
+        Profesor prof = this.profesorService.findOne(id);
+
+        ByteArrayInputStream bis = this.gPP.profesorReport(prof);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=ReportProfesor.pdf");
 
         return ResponseEntity
                 .ok()
