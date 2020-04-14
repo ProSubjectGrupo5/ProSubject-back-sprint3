@@ -20,12 +20,15 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
-        <groupId>com.itextpdf</groupId>
-        <artifactId>itext7-core</artifactId>
-        <version>${itext.version}</version>
-        <type>pom</type>
+        <groupId>itextpdf</groupId>
+        <artifactId>itextpdf</artifactId>
+        <scope>system</scope>
+        <version>1.0</version>
+        <systemPath>${basedir}/lib/itextpdf-5.4.0.jar</systemPath>
   	  </dependency>
+  	  
 		<dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>
