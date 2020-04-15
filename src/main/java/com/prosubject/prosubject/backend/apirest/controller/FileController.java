@@ -124,15 +124,27 @@ public class FileController {
     
     @RequestMapping(value = "/pdfAlumno/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> citiesReport(@PathVariable Long id) {
+    public ResponseEntity<?> alumnoReport(@PathVariable Long id) {
+    	Map<String, Object> response = new HashMap<String, Object>();
+    	ByteArrayInputStream bis = null;
+    	Alumno a = null;
+    	
+    	try {
+        a = aS.findOne(id);
 
-        Alumno a = aS.findOne(id);
-
-        ByteArrayInputStream bis = this.gP.alumnoReport(a);
-
+        bis = this.gP.alumnoReport(a);
+    	} catch(DataAccessException e){
+    		response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+    		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+    	}
+    	if(a == null) {
+			response.put("mensaje",	 "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=ReportAlumno.pdf");
-
+    
         return ResponseEntity
                 .ok()
                 .headers(headers)

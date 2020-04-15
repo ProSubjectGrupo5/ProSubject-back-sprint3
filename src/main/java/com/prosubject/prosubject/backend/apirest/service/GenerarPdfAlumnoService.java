@@ -43,11 +43,11 @@ public class GenerarPdfAlumnoService {
     
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        List<Espacio> es = this.eS.espaciosDeUnAlumno(a.getId());
-        List<String> espacios = new ArrayList<String>();
-        List<Valoracion> val = this.vS.valoracionesPorAlumnoId(a.getId());
-        List<String> valoraciones = new ArrayList<String>();
-        if(eS.espaciosDeUnAlumno(a.getId()).isEmpty()) {
+        List<Espacio> es = new ArrayList<Espacio>();
+     //  List<String> espacios = new ArrayList<String>();
+        List<Valoracion> val = new ArrayList<Valoracion>(); 
+      //  List<String> valoraciones = new ArrayList<String>();
+       /* if(eS.espaciosDeUnAlumno(a.getId()).isEmpty()) {
         	espacios.add("El alumno no esta inscrito en ningún espacio");
         }else {
         for(Espacio e :  es) {
@@ -63,9 +63,11 @@ public class GenerarPdfAlumnoService {
         }
         }
         
-        	
+        	*/
         	
         try {
+        	val = this.vS.valoracionesPorAlumnoId(a.getId());
+        	es = this.eS.espaciosDeUnAlumno(a.getId());
         	PdfWriter.getInstance(document, out);
             // document.open();
              //document.add(table);
