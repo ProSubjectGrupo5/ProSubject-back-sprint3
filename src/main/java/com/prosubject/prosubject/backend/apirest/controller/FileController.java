@@ -131,20 +131,22 @@ public class FileController {
     	
     	try {
         a = aS.findOne(id);
-
-        bis = this.gP.alumnoReport(a);
+        
+    	bis = this.gP.alumnoReport(a);
     	} catch(DataAccessException e){
     		response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-    		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     	if(a == null) {
 			response.put("mensaje",	 "El alumno con ID: ".concat(id.toString()).concat(" no existe"));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
 		}
+    
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=ReportAlumno.pdf");
-    
+        
+        
         return ResponseEntity
                 .ok()
                 .headers(headers)
