@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prosubject.prosubject.backend.apirest.model.Espacio;
-import com.prosubject.prosubject.backend.apirest.model.Horario;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.model.Valoracion;
 import com.prosubject.prosubject.backend.apirest.repository.ValoracionRepository;
 
@@ -44,8 +43,9 @@ public class ValoracionService {
 	
 	
 	public void delete(Valoracion valoracion) {
-		
+		Profesor profesor = valoracion.getProfesor();
 		this.valoracionRepository.delete(valoracion);
+		this.profesorService.valoracionMedia(profesor.getId());
 		
 	}
 	
