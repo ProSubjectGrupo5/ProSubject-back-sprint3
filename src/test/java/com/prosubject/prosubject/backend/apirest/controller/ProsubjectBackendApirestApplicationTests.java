@@ -490,20 +490,20 @@ class ProsubjectBackendApirestApplicationTests {
 	   		.andExpect(status().is(200));
 	   	}
 	
-	//FALLA PUT    
-	   /* @Test
+    
+	    @Test
 	    public void testUpdateAdministradorSuccess() throws Exception {
 	    	administrador.setApellido1("PABLO");
 
 	        //Administrador admin;
-			mockMvc.perform(put("/users/{id}", TEST_ID_POSITIVE)
+			mockMvc.perform(put("/api/administradores/edit/{id}", TEST_ID_POSITIVE).requestAttr("administrador", administrador)
 	                        .contentType(MediaType.APPLICATION_JSON)
 	                        .content(asJsonString(administrador)))                      		
-	                .andExpect(status().is4xxClientError());
+	                .andExpect(status().is2xxSuccessful());
 
-	        verify(administradorService, times(1)).findOne(administrador.getId());
+	        //verify(administradorService, times(1)).findOne(administrador.getId());
 	        
-	    }*/
+	    }
 
 	    //delete
 	    @Test
