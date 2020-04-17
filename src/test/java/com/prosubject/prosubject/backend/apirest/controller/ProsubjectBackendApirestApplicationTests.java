@@ -35,6 +35,8 @@ import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.FacultadService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfAlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.GradoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
@@ -124,6 +126,12 @@ class ProsubjectBackendApirestApplicationTests {
 	
 	@MockBean
 	private DBFileStorageService dbFileStorageService;
+	
+	@MockBean
+	private GenerarPdfAlumnoService generarPdfAlumnoService;
+	
+	@MockBean
+	private GenerarPdfProfesorService generarPdfProfesorService;
 	
 	@Mock 
 	private Administrador administrador;
