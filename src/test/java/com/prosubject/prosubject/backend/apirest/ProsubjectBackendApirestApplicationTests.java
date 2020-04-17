@@ -2,6 +2,7 @@ package com.prosubject.prosubject.backend.apirest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Date;
 
@@ -32,6 +33,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.City;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -479,12 +481,14 @@ class ProsubjectBackendApirestApplicationTests {
 		Date fechaInicio = new Date();
 		Date fechaFin = new Date();
 		fechaFin.after(fechaInicio);
-
+		rango.setId(300L);
 		rango.setAlumno(alumno);
 		rango.setHorario(horario);
 
+		assertEquals(rango.getId(), 300L);
 		assertEquals(rango.getAlumno(), alumno);
 		assertEquals(rango.getHorario(), horario);
+		
 
 	}
 
@@ -783,6 +787,23 @@ class ProsubjectBackendApirestApplicationTests {
 			assertThat(res).isNotNull();
 		
 		}
+		//CITY
+		@Test
+		public void GetterAndSetterCityTest() {
+
+			City city = new City();
+			city.setId(300L);
+			city.setName("Sevilla");
+			city.setPopulation(100000);
+			assertEquals(city.getId(), 300L);
+			assertEquals(city.getName(), "Sevilla");
+			assertEquals(city.getPopulation(), 100000);
+			City city2 = new City("Malaga", 300000);
+			assertEquals(city2.getName(), "Malaga");
+			assertEquals(city2.getPopulation(), 300000);
+
+		}
+		
 	
 	  //SELENIUM
 	  @Test
@@ -803,6 +824,26 @@ class ProsubjectBackendApirestApplicationTests {
 	    driver.quit();
 		
 	  }
+	  
+	  //DBFILE
+	  @Test
+		public void GetterAndSetterDBFileTest() {
+		  
+		  DBFile file = new DBFile();
+		  DBFile file2 = new DBFile("prueba","prueba",new byte[2]);
+		  
+		  file.setId(300L);
+		  file.setFileType(".pdf");
+		  file.setFileName("Notas");
+		  file.setData(new byte[1]);
+		  
+		  assertEquals(file.getId(), 300L);
+		  assertEquals(file.getFileType(), ".pdf");
+		  assertEquals(file.getFileName(), "Notas");
+		  assertEquals(file.getData(),file.getData());
+		  assertNotEquals(file, file2);
+
+		}
 //		
 //		
 	  @Test
