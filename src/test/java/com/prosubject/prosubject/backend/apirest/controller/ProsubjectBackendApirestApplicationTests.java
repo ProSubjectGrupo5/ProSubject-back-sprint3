@@ -56,11 +56,10 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.http.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 
@@ -468,7 +467,6 @@ class ProsubjectBackendApirestApplicationTests {
 	   		.andExpect(status().is(404));
 	   	}
 	
-	   	//da un error
 	   	@Test
 		void testProcessAdministradorCreationFormSuccess() throws Exception {
 	   		
@@ -478,6 +476,20 @@ class ProsubjectBackendApirestApplicationTests {
 					.andExpect(status().is2xxSuccessful());
 					
 		}
+	  	@Test
+	   	void testShowAdministradorProfesoresOlvidados() throws Exception {
+
+	   		mockMvc.perform(get("/api/administradores/profesores",TEST_ID_POSITIVE))
+	   		.andExpect(status().is(200));
+	   	}
+	  	
+		@Test
+	   	void testShowAdministradorAlumnosOlvidados() throws Exception {
+
+	   		mockMvc.perform(get("/api/administradores/alumnos",TEST_ID_POSITIVE))
+	   		.andExpect(status().is(200));
+	   	}
+	
 	//FALLA PUT    
 	   /* @Test
 	    public void testUpdateAdministradorSuccess() throws Exception {
@@ -547,6 +559,51 @@ class ProsubjectBackendApirestApplicationTests {
 	   /* 	mockMvc.perform(delete("/api/espacios/{espacioId}",es.getId()).param("username","prueba")
 	    			.param("nombreUni", universidad.getNombre()))
 			.andExpect(status().is2xxSuccessful());*///no entra
+	    	
+	        
+	    }
+	    @Test
+	    public void testEliminarProfesor() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	
+	    	
+	    	Profesor p= this.profesorService.findOne(TEST_ID_POSITIVE);
+	    	p.setUserAccount(f);
+	    	
+	    	mockMvc.perform(delete("/api/administradores/profesor/{profesorId}",p.getId()).param("username",p.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	p.setId(null);
+	    	mockMvc.perform(delete("/api/administradores/profesor/{profesorId}",TEST_ID_NEGATIVE).param("username",p.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	        
+	    }
+	    
+	    @Test
+	    public void testEliminarAlumno() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	f.setId(TEST_ID_POSITIVE);
+	    	f.setPassword("pass");
+	    	f.setAutoridad(Authority.ALUMNO);
+	    	
+	    	Alumno a= this.alumnoService.findOne(TEST_ID_POSITIVE);
+	    	a.setUserAccount(f);
+	    	
+	    	mockMvc.perform(delete("/api/administradores/alumno/{alumnoId}",a.getId()).param("username",a.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	a.setId(null);
+	    	mockMvc.perform(delete("/api/administradores/alumno/{alumnoId}",TEST_ID_NEGATIVE).param("username",a.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
 	    	
 	        
 	    }
@@ -690,6 +747,64 @@ class ProsubjectBackendApirestApplicationTests {
 	   		mockMvc.perform(get("/api/alumnos/{id}",TEST_ID_POSITIVE))
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
+
+		@Test
+	   	void testHorariosDeUnAlumno() throws Exception {
+	   		mockMvc.perform(get("/api/alumnos/horario/{id}",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+	   		
+
+	   	}
+
+		@Test
+	   	void testHorariosDeUnAlumnoN() throws Exception {
+	   		
+	   		
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_NEGATIVE).contentType(MediaType.APPLICATION_JSON)
+            .content(asJsonString(espacio))).andExpect(status().is4xxClientError());
+ 
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_POSITIVE).contentType(MediaType.APPLICATION_JSON)
+	   	            .content(asJsonString(espacio))).andExpect(status().is4xxClientError());
+	   		
+	   		
+	   		
+	   	}
+		
+
+
+
+	    @Test
+	    public void testModificarHorario() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	f.setId(TEST_ID_POSITIVE);
+	    	f.setPassword("pass");
+	    	f.setAutoridad(Authority.ALUMNO);
+	    	
+	    	Alumno a= this.alumnoService.findOne(TEST_ID_POSITIVE);
+	    	a.setUserAccount(f);
+	    	
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",a.getId()))
+			.andExpect(status().is2xxSuccessful());
+	    	
+	    	a.setDerechoOlvidado(true);
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",a.getId()))
+			.andExpect(status().is4xxClientError());
+	    	
+	    	
+	    	a.setId(null);
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",TEST_ID_NEGATIVE))
+			.andExpect(status().is(404));
+	    	
+	    	
+	        
+	    }
+		
+		
 		//ASIGNATURA
 		
 		@Test

@@ -34,17 +34,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
-import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
 import com.prosubject.prosubject.backend.apirest.payload.UploadFileResponse;
 import com.prosubject.prosubject.backend.apirest.service.AlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
-import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.GenerarPdfAlumnoService;
 import com.prosubject.prosubject.backend.apirest.service.GenerarPdfProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
-import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 
 @RestController
 @RequestMapping("/api/files")
