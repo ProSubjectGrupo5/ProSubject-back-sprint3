@@ -24,5 +24,9 @@ public class UserAccountService {
 		return this.userAccountRepository.todosUsername();
 	}
 	
+	public void delete(UserAccount userAccount) {
+		this.userAccountRepository.delete(userAccount);
+	}
+	
 	
 }

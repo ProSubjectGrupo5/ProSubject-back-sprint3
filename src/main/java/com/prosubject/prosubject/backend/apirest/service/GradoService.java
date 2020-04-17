@@ -32,6 +32,10 @@ public class GradoService{
 	public Grado findOne(final Long gradoId) {
 		return this.gradoRepository.findById(gradoId).orElse(null);
 	}
+	
+	public Long findGradoId(String nombreGrado) {
+		return this.gradoRepository.findGradoId(nombreGrado);
+	}
 
 	
 	public Grado save(final Grado c) { 

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -46,6 +47,25 @@ public class Alumno implements Serializable {
 	@Column(nullable = false)
 	private String apellido2;
 	
+	@NotNull
+	@Column
+	private Integer contadorDescuento;
+
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "universidad_nombre")
+	private Universidad universidad;
+	
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "facultad_nombre")
+	private Facultad facultad;
+	
+	@Valid
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "grado_nombre")
+	private Grado grado;
+	
 	@NotBlank
 	@Pattern(regexp = "^(\\d{8})([A-Z])$",message = "Debe tener 8 numeros y 1 letra")
 	@Column(unique = true , nullable = false)
@@ -60,6 +80,22 @@ public class Alumno implements Serializable {
 	@Pattern(regexp="^\\d{9}|^$",message = "Debe introducir un numero de telefono correcto")
 	private String telefono;
 	
+	@Column(nullable = false)
+	private Boolean derechoOlvidado;	
+	
+
+
+	public Boolean getDerechoOlvidado() {
+		return derechoOlvidado;
+	}
+
+
+
+	public void setDerechoOlvidado(Boolean derechoOlvidado) {
+		this.derechoOlvidado = derechoOlvidado;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -71,6 +107,16 @@ public class Alumno implements Serializable {
 		this.id = id;
 	}
 
+	
+	public Integer getContadorDescuento() {
+		return contadorDescuento;
+	}
+
+
+
+	public void setContadorDescuento(Integer contadorDescuento) {
+		this.contadorDescuento = contadorDescuento;
+	}
 
 
 	public UserAccount getUserAccount() {
@@ -159,7 +205,41 @@ public class Alumno implements Serializable {
 
 
 
+	public Universidad getUniversidad() {
+		return universidad;
+	}
 
+
+
+	public void setUniversidad(Universidad universidad) {
+		this.universidad = universidad;
+	}
+
+
+
+	public Facultad getFacultad() {
+		return facultad;
+	}
+
+
+
+	public void setFacultad(Facultad facultad) {
+		this.facultad = facultad;
+	}
+
+
+
+	public Grado getGrado() {
+		return grado;
+	}
+
+
+
+	public void setGrado(Grado grado) {
+		this.grado = grado;
+	}
+
+	
 
 
 

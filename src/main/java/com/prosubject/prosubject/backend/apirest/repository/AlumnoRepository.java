@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Profesor;
 
 @Repository
 public interface AlumnoRepository extends JpaRepository<Alumno, Long>  {
@@ -28,9 +29,19 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>  {
 	@Query("select p.dni from alumnos p")
 	List<String> DNIsAlumno();
 	
-
-
+	@Query("select r.alumno from rangos r where r.horario.espacio.id=?1")
+	List<Alumno> alumnosDeUnEspacio(Long id);
 	
+	@Query("select v.alumno from valoraciones v where v.espacio.id=?1")
+	List<Alumno> alumnosQueHanValoradoUnEspacio(Long id);
+
+	@Query("select a from alumnos a where a.derechoOlvidado=true")
+	List<Alumno> alumnosDerechoOlvidado();
+	
+	@Query("select r.alumno from rangos r where r.horario.espacio.profesor.id=?1")
+	List<Alumno> alumnosDeProfesor(Long profesorId);
+	
+
 	
 	
 

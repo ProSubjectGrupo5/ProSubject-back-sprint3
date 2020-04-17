@@ -71,7 +71,7 @@ public class EspacioService {
 		}
 		
 		
-		return this.espacioRepository.save(e);
+		return  this.espacioRepository.save(e);
 }
 		
 
@@ -103,6 +103,8 @@ public class EspacioService {
 		this.espacioRepository.delete(espacio);
 		
 	}
+	
+
 	
 	
 }

@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prosubject.prosubject.backend.apirest.model.Curso;
+import com.prosubject.prosubject.backend.apirest.model.Grado;
 import com.prosubject.prosubject.backend.apirest.service.CursoService;
+import com.prosubject.prosubject.backend.apirest.service.GradoService;
 
 @RestController
 @RequestMapping("/api/cursos")
@@ -25,6 +28,8 @@ public class CursoController {
 	
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private GradoService gradoService;
 	
 	
 	@GetMapping("")
@@ -54,6 +59,37 @@ public class CursoController {
 		return new ResponseEntity<Curso>(curso, HttpStatus.OK);
 	}
 	
+	/*
+	@GetMapping("/grado")
+	public ResponseEntity<?> findOne(@RequestParam(value="nombre") String nombre){
+		List<Curso> cursos = null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		Long gradoId = this.gradoService.findGradoId(nombre);
+		
+		
+		if(gradoId == null) {
+			response.put("mensaje",	 "No existe el nombre de ese grado");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		
+		try {
+			cursos = this.cursoService.cursosPorGrado(nombre);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		
+		
+		return new ResponseEntity<List<Curso>>(cursos, HttpStatus.OK);
+	}
+*/
+	
+	@GetMapping("/grado")
+	public List<Curso> findGradoFacu(@RequestParam(value="nombre") String nombre){
+		return this.cursoService.cursosPorGrado(nombre);
+	}
 	
 
 }

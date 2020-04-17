@@ -14,4 +14,8 @@ public interface RangoRepository extends JpaRepository<Rango, Long>{
 
 	@Query("select r from rangos r where r.horario.id=?1")
 	List<Rango> rangosPorHorario(Long id);
+	
+	@Query("select r from rangos r where r.alumno.id=?1")
+	List<Rango> rangosPorAlumno(Long alumnoId);
+	
 }

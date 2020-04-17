@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prosubject.prosubject.backend.apirest.model.Alumno;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.repository.AlumnoRepository;
 
 @Service
 public class AlumnoService {
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	@Autowired
+	private RangoService rangoService;
 	
 	
 	public Alumno create() {
@@ -37,7 +40,6 @@ public class AlumnoService {
 	
 
 	public Alumno save(final Alumno a) {
-		
 	   Alumno saved = this.alumnoRepository.save(a);
 
 		return saved;
@@ -55,6 +57,10 @@ public class AlumnoService {
 		alumn.setTelefono(alumno.getTelefono());
 		alumn.getUserAccount().setUsername((alumno.getUserAccount().getUsername()));
 		alumn.getUserAccount().setPassword((alumno.getUserAccount().getPassword()));
+		alumn.setUniversidad(alumno.getUniversidad());
+		alumn.setFacultad(alumno.getFacultad());
+		alumn.setGrado(alumno.getGrado());
+	
 		
 		Alumno alumnoEditado = save(alumn);
 
@@ -72,5 +78,22 @@ public class AlumnoService {
 	public List<String> DNIsAlumno() {
 		return this.alumnoRepository.DNIsAlumno();
 	}
+	
+	public List<Alumno> alumnosDeUnEspacio(Long id) {
+		return this.alumnoRepository.alumnosDeUnEspacio(id);
+	}
+	
+	public List<Alumno> alumnosQueHanValoradoUnEspacio(Long espacioId) {
+		return this.alumnoRepository.alumnosQueHanValoradoUnEspacio(espacioId);
+	}
+	
+	public Alumno peticionBorrar(Alumno alumno) {
+	Alumno alum = this.findOne(alumno.getId());
+	alum.setDerechoOlvidado(true);
+	return this.save(alum);
+	}
+	
+
+	
 	
 }
