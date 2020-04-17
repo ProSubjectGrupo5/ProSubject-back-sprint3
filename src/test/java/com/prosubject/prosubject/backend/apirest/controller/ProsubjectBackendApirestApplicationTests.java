@@ -13,6 +13,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.City;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -22,6 +23,7 @@ import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Grado;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 import com.prosubject.prosubject.backend.apirest.model.Universidad;
 import com.prosubject.prosubject.backend.apirest.model.UserAccount;
@@ -40,6 +42,7 @@ import com.prosubject.prosubject.backend.apirest.service.GenerarPdfProfesorServi
 import com.prosubject.prosubject.backend.apirest.service.GradoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.RangoService;
 import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
 import com.prosubject.prosubject.backend.apirest.service.SendMailService;
 import com.prosubject.prosubject.backend.apirest.service.UniversidadService;
@@ -133,6 +136,12 @@ class ProsubjectBackendApirestApplicationTests {
 	@MockBean
 	private GenerarPdfProfesorService generarPdfProfesorService;
 	
+
+	@MockBean
+	private RangoService rangoService;
+	
+
+	
 	@Mock 
 	private Administrador administrador;
 	
@@ -165,6 +174,13 @@ class ProsubjectBackendApirestApplicationTests {
 	private Horario horario;
 	
 	private Profesor profesor;
+	
+	@Mock
+	private City city;
+	
+	@Mock
+	private Rango rango;
+	
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -270,6 +286,8 @@ class ProsubjectBackendApirestApplicationTests {
 		alumno.setTelefono("954792204");
 		alumno.setUniversidad(null);
 		alumno.setUserAccount(null);
+		alumno.setDerechoOlvidado(false);
+		alumno.setContadorDescuento(10);
 		
 		alumno.getId();
 		alumno.getApellido1();
@@ -282,6 +300,8 @@ class ProsubjectBackendApirestApplicationTests {
 		alumno.getTelefono();
 		alumno.getUniversidad();
 		alumno.getUserAccount();
+		alumno.getDerechoOlvidado();
+		alumno.getContadorDescuento();
 		//
 		asignatura.setId(TEST_ID_POSITIVE);
 		asignatura.setNombre("Fundamentos de programacion");
@@ -355,6 +375,13 @@ class ProsubjectBackendApirestApplicationTests {
 		horario.getDia();
 		horario.getCapacidad();
 		//
+		rango.setId(TEST_ID_POSITIVE);
+		rango.setHorario(horario);
+		rango.setAlumno(alumno);
+		rango.getId();
+		rango.getAlumno();
+		rango.getHorario();
+		//
 		profesor.setId(TEST_ID_POSITIVE);
 		profesor.setApellido1("Romero");
 		profesor.setApellido2("Caceres");
@@ -367,6 +394,8 @@ class ProsubjectBackendApirestApplicationTests {
 		profesor.setTelefono("603552745");
 		profesor.setUserAccount(null);
 		profesor.setValoracionMedia(5.0);
+		profesor.setFechaPagoPremium(d);
+		profesor.setDerechoOlvidado(false);
 		profesor.getApellido1();
 		profesor.getApellido2();
 		profesor.getDni();
@@ -379,7 +408,17 @@ class ProsubjectBackendApirestApplicationTests {
 		profesor.getTelefono();
 		profesor.getUserAccount();
 		profesor.getValoracionMedia();
+		profesor.getFechaPagoPremium();
+		profesor.getDerechoOlvidado();
 		
+		//
+		city.setId(TEST_ID_POSITIVE);
+		city.setName("Sevilla");
+		city.setPopulation(100000);
+		
+		city.getId();
+		city.getName();
+		city.getPopulation();
 		//
 		given(this.administradorService.findOne(TEST_ID_POSITIVE)).willReturn(administrador);
 		given(this.userAccountService.findByUserAndPass(userAccount.getUsername(), userAccount.getPassword())).willReturn(userAccount);
