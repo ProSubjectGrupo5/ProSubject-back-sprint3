@@ -27,8 +27,8 @@ import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class GenerarPdfProfesorService {
@@ -37,7 +37,7 @@ public class GenerarPdfProfesorService {
 
 	@Autowired
 	private EspacioService espacioService;
-	
+
 	@Autowired
 	private HorarioService horarioService;
 
@@ -45,29 +45,25 @@ public class GenerarPdfProfesorService {
 
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		List<Espacio> espacios =this.espacioService.espaciosDeUnProfesor(profesor.getId());
-		
+		List<Espacio> espacios = this.espacioService.espaciosDeUnProfesor(profesor.getId());
 
 		try {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
-			
-			Paragraph paragraphHello = new Paragraph();
-			
-			document.add(new Paragraph("ProSubject",
-					FontFactory.getFont("arial",   // fuente
-							35,                            // tamaño
-							Font.ITALIC,                   // estilo
-							BaseColor.ORANGE)));             // color
-			
-			document.add(new Paragraph("\nDATOS PERSONALES\n",
-					FontFactory.getFont("arial",   // fuente
-							16,                            // tamaño
-							Font.ITALIC,                   // estilo
-							BaseColor.RED)));             // color
 
-			
+			Paragraph paragraphHello = new Paragraph();
+
+			document.add(new Paragraph("ProSubject", FontFactory.getFont("arial", // fuente
+					35, // tamaño
+					Font.ITALIC, // estilo
+					BaseColor.ORANGE))); // color
+
+			document.add(new Paragraph("\nDATOS PERSONALES\n", FontFactory.getFont("arial", // fuente
+					16, // tamaño
+					Font.ITALIC, // estilo
+					BaseColor.RED))); // color
+
 			paragraphHello.add("\nNombre: " + profesor.getNombre().toString());
 			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
 			document.add(paragraphHello);
@@ -89,10 +85,13 @@ public class GenerarPdfProfesorService {
 			document.add(paragraphHello);
 			paragraphHello.clear();
 
-			paragraphHello.add("Telefono: " + profesor.getTelefono().toString());
-			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
-			document.add(paragraphHello);
-			paragraphHello.clear();
+			if (profesor.getTelefono() != null) {
+
+				paragraphHello.add("Telefono: " + profesor.getTelefono().toString());
+				paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+				document.add(paragraphHello);
+				paragraphHello.clear();
+			}
 
 			paragraphHello.add("Tarifa Premium: " + profesor.getTarifaPremium().toString());
 			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
@@ -104,38 +103,42 @@ public class GenerarPdfProfesorService {
 			document.add(paragraphHello);
 			paragraphHello.clear();
 
-			paragraphHello.add("Valoración media: " + profesor.getValoracionMedia().toString());
-			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
-			document.add(paragraphHello);
-			paragraphHello.clear();
-			
-			
-			Paragraph Espacio = new Paragraph();
-			document.add(new Paragraph("\nESPACIOS\n",
-					FontFactory.getFont("arial",   // fuente
-							16,                            // tamaño
-							Font.ITALIC,                   // estilo
-							BaseColor.RED)));             // color
-			Espacio.clear();
-			for (int i = 0; i < espacios.size(); i++) {
-				Espacio.add("\n- " + espacios.get(i).getAsignatura().getNombre().toString());
-				Espacio.setAlignment(Element.ALIGN_JUSTIFIED);
-				document.add(Espacio);
-				Espacio.clear();
-			    Espacio e= this.espacioService.findOne(espacios.get(i).getId());
-				List<Horario> horarios=this.horarioService.horariosDeUnEspacio(e.getId());
-				for (int j = 0; j < horarios.size(); j++) {
-					Paragraph Horario = new Paragraph();
-					Horario.add("                   * Fecha inicio - fin: " + horarios.get(j).getFechaInicio().toString() +"  -  "+ horarios.get(j).getFechaFin().toString());
-					Horario.setAlignment(Element.ALIGN_MIDDLE);
-					document.add(Horario);
-					Horario.clear();
-					
-				}
-				
+			if (profesor.getValoracionMedia() != null) {
+				paragraphHello.add("Valoración media: " + profesor.getValoracionMedia().toString());
+				paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
+				document.add(paragraphHello);
+				paragraphHello.clear();
 			}
 			
 
+			if ( espacios.size()!=0) {
+
+				Paragraph Espacio = new Paragraph();
+				document.add(new Paragraph("\nESPACIOS\n", FontFactory.getFont("arial", // fuente
+						16, // tamaño
+						Font.ITALIC, // estilo
+						BaseColor.RED))); // color
+				Espacio.clear();
+				for (int i = 0; i < espacios.size(); i++) {
+					Espacio.add("\n- " + espacios.get(i).getAsignatura().getNombre().toString());
+					Espacio.setAlignment(Element.ALIGN_JUSTIFIED);
+					document.add(Espacio);
+					Espacio.clear();
+					Espacio e = this.espacioService.findOne(espacios.get(i).getId());
+					List<Horario> horarios = this.horarioService.horariosDeUnEspacio(e.getId());
+					for (int j = 0; j < horarios.size(); j++) {
+						Paragraph Horario = new Paragraph();
+						Horario.add("                   * Fecha inicio - fin: "
+								+ horarios.get(j).getFechaInicio().toString() + "  -  "
+								+ horarios.get(j).getFechaFin().toString());
+						Horario.setAlignment(Element.ALIGN_MIDDLE);
+						document.add(Horario);
+						Horario.clear();
+
+					}
+
+				}
+			}
 
 			document.close();
 
