@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,26 +69,43 @@ public class FileController {
 
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        DBFile dbFile = dbFileStorageService.storeFile(file);
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		DBFile dbFile = null;
+		
+    	if(file.getSize()>1000000) {
+    		response.put("mensaje",	 "El archivo que intenta subir es demasiado grande");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+    	}
+    	//try {
+    	     dbFile = dbFileStorageService.storeFile(file);
+    		//}catch(DataAccessException e) {
+    		/*	if(file.getSize()>1000000) {
+    	    		response.put("mensaje",	 "Es muy grande el archivo");
+    				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+    	    	}
+    		}*/
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(dbFile.getId().toString())
                 .toUriString();
+        
+		return new ResponseEntity<UploadFileResponse>(new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
+                file.getContentType(), file.getSize()), HttpStatus.OK);
 
-        return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+       /* return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
+                file.getContentType(), file.getSize());*/
     }
 
-    @PostMapping("/uploadMultipleFiles")
+   /* @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }
-
+*/
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable Long fileId) {
         // Load file from database
