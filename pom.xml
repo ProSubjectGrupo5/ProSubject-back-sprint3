@@ -18,15 +18,6 @@
 	   <itext.version>RELEASE</itext.version>
 		<java.version>1.8</java.version>
 	</properties>
-	
-	<repositories>
-    <!--other repositories if any-->
-    <repository>
-        <id>project.local</id>
-        <name>project</name>
-        <url>file:${project.basedir}/lib</url>
-    </repository>
-</repositories>
 
 	<dependencies>
 
@@ -35,7 +26,7 @@
         <artifactId>itextpdf</artifactId>
         <scope>system</scope>
         <version>1.0</version>
-        <!--<systemPath>${project.basedir}/lib/itextpdf-5.4.0.jar</systemPath>-->
+        <systemPath>${project.basedir}/lib/itextpdf-5.4.0.jar</systemPath>
   	  </dependency>
   	  
 		<dependency>
