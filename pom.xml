@@ -18,7 +18,7 @@
 	   <itext.version>RELEASE</itext.version>
 		<java.version>1.8</java.version>
 	</properties>
-
+	
 	<dependencies>
 
 		<dependency>
@@ -26,7 +26,7 @@
         <artifactId>itextpdf</artifactId>
         <scope>system</scope>
         <version>1.0</version>
-        <systemPath>${basedir}/lib/itextpdf-5.4.0.jar</systemPath>
+        <systemPath>file:${project.basedir}/lib/itextpdf-5.4.0.jar</systemPath>
   	  </dependency>
   	  
 		<dependency>
@@ -181,17 +181,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                     <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals><goal>copy-dependencies</goal></goals>
-                    </execution>
-                </executions>
-            </plugin>
 		</plugins>
 	</build>
 
