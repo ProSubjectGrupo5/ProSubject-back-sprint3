@@ -864,8 +864,8 @@ class ProsubjectBackendApirestApplicationTests {
 		ChromeDriver driver = new ChromeDriver();
 		    
 		driver.get("https://prosubject-v3.herokuapp.com/inicio");
-	    driver.manage().window().setSize(new Dimension(1146, 663));
-	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+	   // driver.manage().window().setSize(new Dimension(1146, 663));
+	    //driver.findElement(By.cssSelector(".dropdown-toggle")).click();
 	    driver.findElement(By.linkText("Iniciar sesión")).click();
 	    driver.findElement(By.name("username")).sendKeys("anaromcac");
 	    driver.findElement(By.name("password")).sendKeys("anaromcac");
