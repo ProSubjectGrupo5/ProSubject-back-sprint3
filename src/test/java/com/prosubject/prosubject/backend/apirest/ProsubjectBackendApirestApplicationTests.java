@@ -1,7 +1,10 @@
 package com.prosubject.prosubject.backend.apirest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -10,6 +13,7 @@ import java.util.HashMap;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -32,6 +36,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.City;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -479,12 +484,14 @@ class ProsubjectBackendApirestApplicationTests {
 		Date fechaInicio = new Date();
 		Date fechaFin = new Date();
 		fechaFin.after(fechaInicio);
-
+		rango.setId(300L);
 		rango.setAlumno(alumno);
 		rango.setHorario(horario);
 
+		assertEquals(rango.getId(), 300L);
 		assertEquals(rango.getAlumno(), alumno);
 		assertEquals(rango.getHorario(), horario);
+		
 
 	}
 
@@ -783,6 +790,32 @@ class ProsubjectBackendApirestApplicationTests {
 			assertThat(res).isNotNull();
 		
 		}
+		//CITY
+		@Test
+		public void GetterAndSetterCityTest() {
+
+			City city = new City();
+			City ciudad = new City(); 
+			ciudad.setId(301L);
+			city.setId(300L);
+			city.setName("Sevilla");
+			city.setPopulation(100000);
+			city.toString();
+			city.equals(ciudad);
+			city.getId().equals(city.getId());
+			city.hashCode();
+			assertEquals(city.getId(), 300L);
+			assertEquals(city.getName(), "Sevilla");
+			assertEquals(city.getPopulation(), 100000);
+			City city2 = new City("Malaga", 300000);
+			assertEquals(city2.getName(), "Malaga");
+			assertEquals(city2.getPopulation(), 300000);
+			assertNotEquals(city.getName(), city2.getName());
+			assertEquals(ciudad,ciudad);
+			assertNotEquals(ciudad.getId(),city.getId());
+			assertNotEquals(ciudad, null);
+		}
+		
 	
 	  //SELENIUM
 	  @Test
@@ -794,7 +827,7 @@ class ProsubjectBackendApirestApplicationTests {
 		driver.get("https://prosubject-v3.herokuapp.com/inicio");
 	    driver.manage().window().setSize(new Dimension(1552, 840));
 	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.linkText("Iniciar sesión")).click();
 	    driver.findElement(By.name("username")).sendKeys("alejandrocano");
 	    driver.findElement(By.name("password")).sendKeys("alejandrocano");
 	    driver.findElement(By.cssSelector(".ng-dirty:nth-child(1)")).click();
@@ -803,6 +836,26 @@ class ProsubjectBackendApirestApplicationTests {
 	    driver.quit();
 		
 	  }
+	  
+	  //DBFILE
+	  @Test
+		public void GetterAndSetterDBFileTest() {
+		  
+		  DBFile file = new DBFile();
+		  DBFile file2 = new DBFile("prueba","prueba",new byte[2]);
+		  
+		  file.setId(300L);
+		  file.setFileType(".pdf");
+		  file.setFileName("Notas");
+		  file.setData(new byte[1]);
+		  
+		  assertEquals(file.getId(), 300L);
+		  assertEquals(file.getFileType(), ".pdf");
+		  assertEquals(file.getFileName(), "Notas");
+		  assertEquals(file.getData(),file.getData());
+		  assertNotEquals(file, file2);
+
+		}
 //		
 //		
 	  @Test
@@ -813,7 +866,7 @@ class ProsubjectBackendApirestApplicationTests {
 		driver.get("https://prosubject-v3.herokuapp.com/inicio");
 	    driver.manage().window().setSize(new Dimension(1146, 663));
 	    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-	    driver.findElement(By.linkText("Login")).click();
+	    driver.findElement(By.linkText("Iniciar sesión")).click();
 	    driver.findElement(By.name("username")).sendKeys("anaromcac");
 	    driver.findElement(By.name("password")).sendKeys("anaromcac");
 	    driver.findElement(By.cssSelector(".btn")).click();

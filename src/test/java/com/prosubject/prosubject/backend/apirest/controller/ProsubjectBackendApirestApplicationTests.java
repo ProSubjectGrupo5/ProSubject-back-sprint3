@@ -13,6 +13,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
+import com.prosubject.prosubject.backend.apirest.model.City;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -22,6 +23,7 @@ import com.prosubject.prosubject.backend.apirest.model.Foro;
 import com.prosubject.prosubject.backend.apirest.model.Grado;
 import com.prosubject.prosubject.backend.apirest.model.Horario;
 import com.prosubject.prosubject.backend.apirest.model.Profesor;
+import com.prosubject.prosubject.backend.apirest.model.Rango;
 import com.prosubject.prosubject.backend.apirest.model.Respuesta;
 import com.prosubject.prosubject.backend.apirest.model.Universidad;
 import com.prosubject.prosubject.backend.apirest.model.UserAccount;
@@ -35,9 +37,12 @@ import com.prosubject.prosubject.backend.apirest.service.DBFileStorageService;
 import com.prosubject.prosubject.backend.apirest.service.EspacioService;
 import com.prosubject.prosubject.backend.apirest.service.FacultadService;
 import com.prosubject.prosubject.backend.apirest.service.ForoService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfAlumnoService;
+import com.prosubject.prosubject.backend.apirest.service.GenerarPdfProfesorService;
 import com.prosubject.prosubject.backend.apirest.service.GradoService;
 import com.prosubject.prosubject.backend.apirest.service.HorarioService;
 import com.prosubject.prosubject.backend.apirest.service.ProfesorService;
+import com.prosubject.prosubject.backend.apirest.service.RangoService;
 import com.prosubject.prosubject.backend.apirest.service.RespuestaService;
 import com.prosubject.prosubject.backend.apirest.service.SendMailService;
 import com.prosubject.prosubject.backend.apirest.service.UniversidadService;
@@ -46,17 +51,21 @@ import com.prosubject.prosubject.backend.apirest.service.ValoracionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.http.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @WebMvcTest 
@@ -125,6 +134,18 @@ class ProsubjectBackendApirestApplicationTests {
 	@MockBean
 	private DBFileStorageService dbFileStorageService;
 	
+	@MockBean
+	private GenerarPdfAlumnoService generarPdfAlumnoService;
+	
+	@MockBean
+	private GenerarPdfProfesorService generarPdfProfesorService;
+	
+
+	@MockBean
+	private RangoService rangoService;
+	
+
+	
 	@Mock 
 	private Administrador administrador;
 	
@@ -157,6 +178,13 @@ class ProsubjectBackendApirestApplicationTests {
 	private Horario horario;
 	
 	private Profesor profesor;
+	
+	@Mock
+	private City city;
+	
+	@Mock
+	private Rango rango;
+	
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -262,6 +290,8 @@ class ProsubjectBackendApirestApplicationTests {
 		alumno.setTelefono("954792204");
 		alumno.setUniversidad(null);
 		alumno.setUserAccount(null);
+		alumno.setDerechoOlvidado(false);
+		alumno.setContadorDescuento(10);
 		
 		alumno.getId();
 		alumno.getApellido1();
@@ -274,6 +304,8 @@ class ProsubjectBackendApirestApplicationTests {
 		alumno.getTelefono();
 		alumno.getUniversidad();
 		alumno.getUserAccount();
+		alumno.getDerechoOlvidado();
+		alumno.getContadorDescuento();
 		//
 		asignatura.setId(TEST_ID_POSITIVE);
 		asignatura.setNombre("Fundamentos de programacion");
@@ -347,6 +379,13 @@ class ProsubjectBackendApirestApplicationTests {
 		horario.getDia();
 		horario.getCapacidad();
 		//
+		rango.setId(TEST_ID_POSITIVE);
+		rango.setHorario(horario);
+		rango.setAlumno(alumno);
+		rango.getId();
+		rango.getAlumno();
+		rango.getHorario();
+		//
 		profesor.setId(TEST_ID_POSITIVE);
 		profesor.setApellido1("Romero");
 		profesor.setApellido2("Caceres");
@@ -359,6 +398,8 @@ class ProsubjectBackendApirestApplicationTests {
 		profesor.setTelefono("603552745");
 		profesor.setUserAccount(null);
 		profesor.setValoracionMedia(5.0);
+		profesor.setFechaPagoPremium(d);
+		profesor.setDerechoOlvidado(false);
 		profesor.getApellido1();
 		profesor.getApellido2();
 		profesor.getDni();
@@ -371,7 +412,17 @@ class ProsubjectBackendApirestApplicationTests {
 		profesor.getTelefono();
 		profesor.getUserAccount();
 		profesor.getValoracionMedia();
+		profesor.getFechaPagoPremium();
+		profesor.getDerechoOlvidado();
 		
+		//
+		city.setId(TEST_ID_POSITIVE);
+		city.setName("Sevilla");
+		city.setPopulation(100000);
+		
+		city.getId();
+		city.getName();
+		city.getPopulation();
 		//
 		given(this.administradorService.findOne(TEST_ID_POSITIVE)).willReturn(administrador);
 		given(this.userAccountService.findByUserAndPass(userAccount.getUsername(), userAccount.getPassword())).willReturn(userAccount);
@@ -421,7 +472,6 @@ class ProsubjectBackendApirestApplicationTests {
 	   		.andExpect(status().is(404));
 	   	}
 	
-	   	//da un error
 	   	@Test
 		void testProcessAdministradorCreationFormSuccess() throws Exception {
 	   		
@@ -431,20 +481,32 @@ class ProsubjectBackendApirestApplicationTests {
 					.andExpect(status().is2xxSuccessful());
 					
 		}
-	//FALLA PUT    
-	   /* @Test
+	  	@Test
+	   	void testShowAdministradorProfesoresOlvidados() throws Exception {
+
+	   		mockMvc.perform(get("/api/administradores/profesores",TEST_ID_POSITIVE))
+	   		.andExpect(status().is(200));
+	   	}
+	  	
+		@Test
+	   	void testShowAdministradorAlumnosOlvidados() throws Exception {
+
+	   		mockMvc.perform(get("/api/administradores/alumnos",TEST_ID_POSITIVE))
+	   		.andExpect(status().is(200));
+	   	}
+	
+    
+	    @Test
 	    public void testUpdateAdministradorSuccess() throws Exception {
 	    	administrador.setApellido1("PABLO");
 
 	        //Administrador admin;
-			mockMvc.perform(put("/users/{id}", TEST_ID_POSITIVE)
+			mockMvc.perform(put("/api/administradores/edit/{id}", TEST_ID_POSITIVE).requestAttr("administrador", administrador)
 	                        .contentType(MediaType.APPLICATION_JSON)
 	                        .content(asJsonString(administrador)))                      		
-	                .andExpect(status().is4xxClientError());
+	                .andExpect(status().is2xxSuccessful());
 
-	        verify(administradorService, times(1)).findOne(administrador.getId());
-	        
-	    }*/
+	    }
 
 	    //delete
 	    @Test
@@ -500,6 +562,51 @@ class ProsubjectBackendApirestApplicationTests {
 	   /* 	mockMvc.perform(delete("/api/espacios/{espacioId}",es.getId()).param("username","prueba")
 	    			.param("nombreUni", universidad.getNombre()))
 			.andExpect(status().is2xxSuccessful());*///no entra
+	    	
+	        
+	    }
+	    @Test
+	    public void testEliminarProfesor() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	
+	    	
+	    	Profesor p= this.profesorService.findOne(TEST_ID_POSITIVE);
+	    	p.setUserAccount(f);
+	    	
+	    	mockMvc.perform(delete("/api/administradores/profesor/{profesorId}",p.getId()).param("username",p.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	p.setId(null);
+	    	mockMvc.perform(delete("/api/administradores/profesor/{profesorId}",TEST_ID_NEGATIVE).param("username",p.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	        
+	    }
+	    
+	    @Test
+	    public void testEliminarAlumno() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	f.setId(TEST_ID_POSITIVE);
+	    	f.setPassword("pass");
+	    	f.setAutoridad(Authority.ALUMNO);
+	    	
+	    	Alumno a= this.alumnoService.findOne(TEST_ID_POSITIVE);
+	    	a.setUserAccount(f);
+	    	
+	    	mockMvc.perform(delete("/api/administradores/alumno/{alumnoId}",a.getId()).param("username",a.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
+	    	
+	    	a.setId(null);
+	    	mockMvc.perform(delete("/api/administradores/alumno/{alumnoId}",TEST_ID_NEGATIVE).param("username",a.getUserAccount().getUsername()))
+			.andExpect(status().is(404));
+	    	
 	    	
 	        
 	    }
@@ -603,7 +710,78 @@ class ProsubjectBackendApirestApplicationTests {
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
 		//ESPACIO
+		  @Test
+		    public void testModificarHorarioEspacio() throws Exception {
+		 
+			  mockMvc.perform(put("/api/espacios", TEST_ID_POSITIVE).contentType(MediaType.APPLICATION_JSON)
+	                    .content(asJsonString(espacio)))
+						.andExpect(status().isCreated());
+
+		    }
+		@Test
+		void testCrearEspacio() throws Exception {
+	   		
+			mockMvc.perform(post("/api/espacios").contentType(MediaType.APPLICATION_JSON)
+                    .content(asJsonString(administrador)))
+					.andExpect(status().is2xxSuccessful());
+					
+		}
+		@Test
+	   	void testEspaciosDisponibles() throws Exception {
+	   		
+	   		mockMvc.perform(get("/api/espacios/espaciosDisponibles",TEST_ID_POSITIVE)
+	   				.param("universidad", universidad.getNombre())
+	   				.param("facultad", facultad.getNombre())
+	   				.param("grado", grado.getNombre())
+	   				.param("curso", curso.getNombre())
+	   				.param("asignatura", asignatura.getNombre()))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
+		/*@Test
+	   	void testFindOne() throws Exception {
+	   		espacio.setId(TEST_ID_POSITIVE);
+	   		mockMvc.perform(get("/api/espacios/draftMode/{id}",espacio.getId())
+	   				.param("username", espacio.getProfesor().getUserAccount().getUsername()))
+	   		.andExpect(status().is2xxSuccessful());
+	   	
+	   	Null pointer hay que añadir todos sus atributos para que tire
+	   	}*/
+		@Test
+	   	void testEspacioProfesor() throws Exception {
+	   		mockMvc.perform(get("/api/espacios/espaciosProfesor/{id}",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		mockMvc.perform(get("/api/espacios/espaciosProfesor/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
+		@Test
+	   	void testEspacioAlumnos() throws Exception {
+	   		mockMvc.perform(get("/api/espacios/espaciosAlumno/{id}",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		mockMvc.perform(get("/api/espacios/espaciosAlumno/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
+		@Test
+	   	void testEspaciosDeUnProfesorEnDraftMode() throws Exception {
+	   		mockMvc.perform(get("/api/espacios/draftModeProfesor/{id}",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		mockMvc.perform(get("/api/espacios/draftModeProfesor/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
 		
+		@Test
+	   	void testEspaciosConCapacidad() throws Exception {
+	   		mockMvc.perform(get("/api/espacios/espaciosConCapacidad",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		
+	   	}
 		@Test
 	   	void testShowNegativeEspacio() throws Exception {
 	   		mockMvc.perform(get("/api/espacios/{id}",TEST_ID_NEGATIVE))
@@ -643,6 +821,80 @@ class ProsubjectBackendApirestApplicationTests {
 	   		mockMvc.perform(get("/api/alumnos/{id}",TEST_ID_POSITIVE))
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
+
+		@Test
+	   	void testHorariosDeUnAlumno() throws Exception {
+	   		mockMvc.perform(get("/api/alumnos/horario/{id}",TEST_ID_POSITIVE))
+	   		.andExpect(status().is2xxSuccessful());
+	   		
+
+	   	}
+
+		@Test
+	   	void testHorariosDeUnAlumnoN() throws Exception {
+	   		
+	   		
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_NEGATIVE).contentType(MediaType.APPLICATION_JSON)
+            .content(asJsonString(espacio))).andExpect(status().is4xxClientError());
+ 
+	   		mockMvc.perform(get("/api/alumnos/espacio/{id}",TEST_ID_POSITIVE).contentType(MediaType.APPLICATION_JSON)
+	   	            .content(asJsonString(espacio))).andExpect(status().is4xxClientError());
+	   		
+	   		
+	   		
+	   	}
+		
+		  @Test
+		    public void testUpdateAlumno() throws Exception {
+		    	alumno.setApellido1("nuevo apellido");
+		    	UserAccount f = new UserAccount();
+		    	f.setAutoridad(Authority.ALUMNO);
+		    	f.setId(TEST_ID_POSITIVE);
+		    	f.setPassword("pass");
+		    	f.setUsername("user");
+		    	alumno.setUserAccount(f);
+			  mockMvc.perform(put("/api/alumnos/edit/{id}", TEST_ID_POSITIVE).requestAttr("alumno", alumno)
+		              .contentType(MediaType.APPLICATION_JSON)
+		              .content(asJsonString(alumno)))                      		
+		              .andExpect(status().is2xxSuccessful());
+
+		    }
+		
+
+
+
+	    @Test
+	    public void testModificarHorario() throws Exception {
+	  			
+	    	UserAccount f = new UserAccount();
+	    	f.setUsername("prueba");
+	    	f.setId(TEST_ID_POSITIVE);
+	    	f.setPassword("pass");
+	    	f.setAutoridad(Authority.ALUMNO);
+	    	
+	    	Alumno a= this.alumnoService.findOne(TEST_ID_POSITIVE);
+	    	a.setUserAccount(f);
+	    	
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",a.getId()))
+			.andExpect(status().is2xxSuccessful());
+	    	
+	    	a.setDerechoOlvidado(true);
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",a.getId()))
+			.andExpect(status().is4xxClientError());
+	    	
+	    	
+	    	a.setId(null);
+	    	mockMvc.perform(put("/api/alumnos/peticionBorrar/{alumnoId}",TEST_ID_NEGATIVE))
+			.andExpect(status().is(404));
+	    	
+	    	
+	        
+	    }
+		
+		
 		//ASIGNATURA
 		
 		@Test
@@ -663,9 +915,54 @@ class ProsubjectBackendApirestApplicationTests {
 	   		mockMvc.perform(get("/api/asignaturas/{id}",TEST_ID_POSITIVE))
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
+		
+		@Test
+	   	void testAsignaturaPorNombre() throws Exception {
+	   		
+	   		mockMvc.perform(get("/api/asignaturas/nombre",TEST_ID_NEGATIVE).param("nombre", asignatura.getNombre()))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
 
+		@Test
+	   	void testListaAsignaturas() throws Exception {
+	   		
+	   		mockMvc.perform(get("/api/asignaturas/busquedaAsignaturas",TEST_ID_POSITIVE).param("universidad", universidad.getNombre())
+	   				.param("facultad", facultad.getNombre())
+	   				.param("grado", grado.getNombre())
+	   				.param("curso", curso.getNombre()))
+	   		.andExpect(status().is2xxSuccessful());
+	   		
+	   	}
+		//CHAT
+		
+		
 		//CARRITO
 		
+		/*@Test
+		void testProcessAnadirCarrito() throws Exception {
+			
+			mockMvc.perform(post("/api/carrito/addHorario").requestAttr("carritoId", carrito.getId())
+				.requestAttr("HorarioId", horario.getId())
+				.requestAttr("alumId", alumno.getId())
+				.contentType(MediaType.APPLICATION_JSON)
+                 .content(asJsonString(carrito)))
+				.andExpect(status().isCreated())
+				.andExpect(status().is2xxSuccessful());
+					
+		}*/
+		@Test
+	   	void testPrecioMensualHorarios() throws Exception {
+	   		carrito.setAlumno(alumno);
+	   		Set<Horario> horarios = new HashSet<>();
+	   		horarios.add(horario);
+	   		carrito.setHorario(horarios);
+	   		carrito.setPrecioMensual(12.0);
+	   		carrito.setId(TEST_ID_POSITIVE);
+	   		mockMvc.perform(get("/api/carrito/precioMensual/{id}",TEST_ID_NEGATIVE))
+	   		.andExpect(status().is4xxClientError());
+	   		
+	   	}
 		@Test
 	   	void testShowNegativeCarrito() throws Exception {
 	   		mockMvc.perform(get("/api/carrito/{id}",TEST_ID_NEGATIVE))
@@ -705,6 +1002,22 @@ class ProsubjectBackendApirestApplicationTests {
 	   		.andExpect(status().is2xxSuccessful());
 	   	}
 		//FACULTAD
+
+		@Test
+	   	void testBusquedaFacultad() throws Exception {
+	   		mockMvc.perform(get("/api/facultades/busquedaFacultades",TEST_ID_POSITIVE).param("universidad", universidad.getNombre()))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		
+	   	}
+		
+		@Test
+	   	void testBusquedaFacultadId() throws Exception {
+	   		mockMvc.perform(get("/api/facultades/facuId",TEST_ID_POSITIVE).param("nombreFacu", facultad.getNombre()))
+	   		.andExpect(status().is2xxSuccessful());
+
+	   		
+	   	}
 		@Test
 	   	void testShowNegativeFacultad() throws Exception {
 	   		mockMvc.perform(get("/api/facultades/{id}",TEST_ID_NEGATIVE))
@@ -756,6 +1069,13 @@ class ProsubjectBackendApirestApplicationTests {
 	   	}
 		
 		//GRADO
+		
+		@Test
+	   	void testGradoFacultad() throws Exception {
+	   		mockMvc.perform(get("/api/cursos/grado",TEST_ID_POSITIVE).param("nombre", grado.getNombre()))
+	   		.andExpect(status().is2xxSuccessful());
+	   	}
+	 	
 		@Test
 	   	void testShowNegativeGrado() throws Exception {
 	   		mockMvc.perform(get("/api/grados/{id}",TEST_ID_NEGATIVE))

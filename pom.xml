@@ -15,10 +15,20 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+	   <itext.version>RELEASE</itext.version>
 		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+        <groupId>itextpdf</groupId>
+        <artifactId>itextpdf</artifactId>
+        <scope>system</scope>
+        <version>1.0</version>
+        <systemPath>${basedir}/lib/itextpdf-5.4.0.jar</systemPath>
+  	  </dependency>
+  	  
 		<dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>

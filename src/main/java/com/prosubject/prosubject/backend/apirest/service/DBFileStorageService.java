@@ -21,26 +21,26 @@ public class DBFileStorageService {
     private DBFileRepository dbFileRepository;
 
     public DBFile storeFile(MultipartFile file) {
-        // Normalize file name
+     
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            // Check if the file's name contains invalid characters
+            
             if(fileName.contains("..")) {
-                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+                throw new FileStorageException("El archivo contiene una secuencia invalida " + fileName);
             }
 
             DBFile dbFile = new DBFile(fileName, file.getContentType(), file.getBytes());
 
             return dbFileRepository.save(dbFile);
         } catch (IOException ex) {
-            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+            throw new FileStorageException("No se puede guardar el archivo " + fileName + ". Por favor, inténtelo otra vez.", ex);
         }
     }
 
     public DBFile getFile(Long fileId) {
         return dbFileRepository.findById(fileId)
-                .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
+                .orElseThrow(() -> new MyFileNotFoundException("No se encontró el archivo con id " + fileId));
     }
     
 	public DBFile findOne(final Long fileId) {
