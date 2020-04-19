@@ -13,7 +13,7 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
-import com.prosubject.prosubject.backend.apirest.model.City;
+
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -179,8 +179,7 @@ class ProsubjectBackendApirestApplicationTests {
 	
 	private Profesor profesor;
 	
-	@Mock
-	private City city;
+
 	
 	@Mock
 	private Rango rango;
@@ -415,15 +414,7 @@ class ProsubjectBackendApirestApplicationTests {
 		profesor.getFechaPagoPremium();
 		profesor.getDerechoOlvidado();
 		
-		//
-		city.setId(TEST_ID_POSITIVE);
-		city.setName("Sevilla");
-		city.setPopulation(100000);
-		
-		city.getId();
-		city.getName();
-		city.getPopulation();
-		//
+
 		given(this.administradorService.findOne(TEST_ID_POSITIVE)).willReturn(administrador);
 		given(this.userAccountService.findByUserAndPass(userAccount.getUsername(), userAccount.getPassword())).willReturn(userAccount);
 		given(this.universidadService.findOne(TEST_ID_POSITIVE)).willReturn(universidad);

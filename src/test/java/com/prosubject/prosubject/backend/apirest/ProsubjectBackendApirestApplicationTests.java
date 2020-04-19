@@ -36,7 +36,6 @@ import com.prosubject.prosubject.backend.apirest.model.Alumno;
 import com.prosubject.prosubject.backend.apirest.model.Asignatura;
 import com.prosubject.prosubject.backend.apirest.model.Authority;
 import com.prosubject.prosubject.backend.apirest.model.Carrito;
-import com.prosubject.prosubject.backend.apirest.model.City;
 import com.prosubject.prosubject.backend.apirest.model.Curso;
 import com.prosubject.prosubject.backend.apirest.model.DBFile;
 import com.prosubject.prosubject.backend.apirest.model.DiaSemana;
@@ -790,31 +789,7 @@ class ProsubjectBackendApirestApplicationTests {
 			assertThat(res).isNotNull();
 		
 		}
-		//CITY
-		@Test
-		public void GetterAndSetterCityTest() {
 
-			City city = new City();
-			City ciudad = new City(); 
-			ciudad.setId(301L);
-			city.setId(300L);
-			city.setName("Sevilla");
-			city.setPopulation(100000);
-			city.toString();
-			city.equals(ciudad);
-			city.getId().equals(city.getId());
-			city.hashCode();
-			assertEquals(city.getId(), 300L);
-			assertEquals(city.getName(), "Sevilla");
-			assertEquals(city.getPopulation(), 100000);
-			City city2 = new City("Malaga", 300000);
-			assertEquals(city2.getName(), "Malaga");
-			assertEquals(city2.getPopulation(), 300000);
-			assertNotEquals(city.getName(), city2.getName());
-			assertEquals(ciudad,ciudad);
-			assertNotEquals(ciudad.getId(),city.getId());
-			assertNotEquals(ciudad, null);
-		}
 		
 	
 	  //SELENIUM
