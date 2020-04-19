@@ -103,8 +103,8 @@ public class ProfesorController {
 		} else {
 
 			try {
-				if(file.getSize()>1000000) {
-		    		response.put("mensaje",	 "El archivo que intenta subir es demasiado grande");
+				if(file != null && file.getSize()>1000000) {
+		    		response.put("mensaje",	 "El archivo debe tener un tamaño inferior a 1MB");
 					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
 		    	}
 				if (file != null) {
