@@ -71,7 +71,10 @@ public class SignUpController {
 		} else if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
 			response.put("mensaje", "El expediente no esta en formato pdf");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		} else {
+		} else if(file.getSize()>1000000) {
+    		response.put("mensaje",	 "El archivo que intenta subir es demasiado grande");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR); 
+    	}else {
 
 			try {
 
