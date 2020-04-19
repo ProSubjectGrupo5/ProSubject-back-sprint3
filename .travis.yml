@@ -5,7 +5,7 @@ jdk:
 services:
 - postgresql
 addons:
-  firefox: "60.0"
+  firefox: "70.0"
   sonarcloud:
     organization: "prosubjectgrupo5"
     token:
