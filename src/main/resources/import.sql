@@ -118,7 +118,7 @@ INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Bases de Derecho Admin
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Geografía General y Regional del Turismo', '1');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('La comunicación en entornos virtuales', '3');
 INSERT INTO `asignaturas` (`nombre`, `curso_id`) VALUES ('Mecanica y ondas', '1');
-INSERT INTO `asignaturas` (`nombre`, `curso_id`)  VALUES ('Derecho Informatico ', '4');
+
 
 
 
@@ -143,7 +143,7 @@ INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('15', '
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('16', '13');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('17', '14');
 INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('18', '15');
-INSERT INTO `asignaturas_grados` (`asignaturas_id`, `grados_id`) VALUES ('19', '1');
+
 
 
 
@@ -183,7 +183,7 @@ INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `e
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Del Valle', 'Lopez de Santa Maria', '0', '72338268W', 'javo13697@gmail.com', 'Javier','652314129', '1', '1', '1', '27',false);
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Carillo', 'Mirando', '0', '85694759W', 'fcarmir@gmail.com', 'Fernando', '652314129', '1', '1', '1', '28',false);
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Aguado', 'Delgado', '0', '45247283G', 'saraaguadodelgado@gmail.com', 'Sara', '643135129', '1', '2', '1', '30',false);
-INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Bay', '', '0', '62383749K', 'miriam.bay@gmail.com', 'Miriam', '643132547', '1', '1', '1', '32',false);
+INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Bay', 'Bay', '0', '62383749K', 'miriam.bay@gmail.com', 'Miriam', '643132547', '1', '1', '1', '32',false);
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Gonzales de la Peña', 'Garcia', '0', '15054975A', 'marioogonzalez2@gmail.com', 'Mario', '643831247', '1', '2', '1', '34',false);
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Jesus Sanchez', 'Cruz-Sagredo', '0', '02030477Z', 'juanje_chus@gmail.com', 'Mario', '678886247', '1', '2', '1', '36',false);
 INSERT INTO `alumnos` (`apellido1`, `apellido2`, `contador_descuento`, `dni`, `email`, `nombre`, `telefono`, `facultad_nombre`, `grado_nombre`, `universidad_nombre`, `useraccount_id`,`derecho_olvidado`) VALUES ('Ruiz', 'Castilla', '0', '98543603B', 'carmenrucasti@gmail.com', 'Carmen', '623816657', '1', '2', '1', '38',false);
