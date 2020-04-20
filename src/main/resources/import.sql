@@ -261,7 +261,7 @@ INSERT INTO `respuestas` (`contenido`, `creacion_respuesta`, `user_account_id`, 
 INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '1', '1', 1,'No me ha ayudado a aprobar la asignatura');
 INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('1', '2','1', 2,'Sus clases no valen la pena, solo te muestra ejercicios resueltos');
 INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('2', '3','2', 3,'He aprobado pero no explica muy bien');
-INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '3','5', 4,'Gracias a él he aprobado');
+INSERT INTO `valoraciones` (`profesor_id`, `alumno_id`,`espacio_id`,`puntuacion`,`comentario`) VALUES ('5', '3','5', 5,'Gracias a él he aprobado');
 
 
 
