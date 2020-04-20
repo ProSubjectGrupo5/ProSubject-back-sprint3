@@ -114,17 +114,17 @@ public class GenerarPdfAlumnoService {
 			document.add(paragraphHello);
 			paragraphHello.clear();
 			
-			paragraphHello.add("Tarifa Premium: " + a.getUniversidad().getNombre());
+			paragraphHello.add("Universidad: " + a.getUniversidad().getNombre());
 			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
 			document.add(paragraphHello);
 			paragraphHello.clear();
 
-			paragraphHello.add("Expediente validado: " +a.getFacultad().getNombre());
+			paragraphHello.add("Facultad: " +a.getFacultad().getNombre());
 			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
 			document.add(paragraphHello);
 			paragraphHello.clear();
 
-			paragraphHello.add("Valoración media: " + a.getGrado().getNombre());
+			paragraphHello.add("Grado: " + a.getGrado().getNombre());
 			paragraphHello.setAlignment(Element.ALIGN_JUSTIFIED);
 			document.add(paragraphHello);
 			paragraphHello.clear();
